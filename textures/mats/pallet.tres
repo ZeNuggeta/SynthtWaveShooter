@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cudsgkwaevwtc"]
+
+[ext_resource type="Texture2D" uid="uid://dt40n0whu7mlh" path="res://textures/pallet.png" id="1_l0h83"]
+[ext_resource type="Shader" uid="uid://c5qy5mulqcgoe" path="res://shaders/edge.gdshader" id="2_brsj8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_53m2r"]
+render_priority = 0
+shader = ExtResource("2_brsj8")
+shader_parameter/outline_color = Color(0, 1, 0.8359375, 1)
+shader_parameter/outline_threshold = 0.2
+
+[resource]
+next_pass = SubResource("ShaderMaterial_53m2r")
+albedo_texture = ExtResource("1_l0h83")
+emission_enabled = true
+emission_texture = ExtResource("1_l0h83")

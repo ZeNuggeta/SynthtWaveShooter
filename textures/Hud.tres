@@ -1,0 +1,54 @@
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://ctovemxdyxlqj"]
+
+[ext_resource type="Texture2D" uid="uid://b63c5heg73qk" path="res://textures/icons/gradient.png" id="1_dr6vg"]
+[ext_resource type="FontFile" uid="uid://4kitl8yvylrr" path="res://assets/fonts/Ubuntu-Regular.ttf" id="1_yjyd8"]
+[ext_resource type="Texture2D" uid="uid://clb0s03q2erbs" path="res://textures/icons/reverse_gradient.png" id="2_dr6vg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r5mhu"]
+bg_color = Color(0.078125, 0.078125, 0.078125, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yjyd8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2sejw"]
+texture = ExtResource("2_dr6vg")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(0, 0, 512, 512)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dr6vg"]
+texture = ExtResource("1_dr6vg")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(0, 0, 512, 512)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yjyd8"]
+load_path = "res://.godot/imported/gradient.png-6b50527b3ff7b67edb237d138b3f5f0a.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w6o3d"]
+texture = SubResource("CompressedTexture2D_yjyd8")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(0, 0, 512, 512)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yjyd8"]
+texture = ExtResource("1_dr6vg")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[resource]
+Button/styles/disabled = SubResource("StyleBoxFlat_r5mhu")
+Button/styles/focus = SubResource("StyleBoxEmpty_yjyd8")
+Button/styles/hover = SubResource("StyleBoxTexture_2sejw")
+Button/styles/normal = SubResource("StyleBoxTexture_dr6vg")
+Button/styles/pressed = SubResource("StyleBoxTexture_w6o3d")
+Label/font_sizes/font_size = 20
+Label/fonts/font = ExtResource("1_yjyd8")
+Panel/styles/panel = SubResource("StyleBoxTexture_yjyd8")

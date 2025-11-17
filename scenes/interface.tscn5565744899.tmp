@@ -1,0 +1,240 @@
+[gd_scene load_steps=11 format=3 uid="uid://d3f4d5lvcbvvk"]
+
+[ext_resource type="Script" uid="uid://d3bgt0t4x73f7" path="res://scripts/interface/interface.gd" id="1_t72xj"]
+[ext_resource type="Script" uid="uid://dmbo7s8gfxba4" path="res://scripts/interface/retical_draw.gd" id="1_tg63u"]
+[ext_resource type="Shader" uid="uid://cwuyv0alidwt1" path="res://shaders/VHS.gdshader" id="2_lw6my"]
+[ext_resource type="FontFile" uid="uid://dquy36gl2xnep" path="res://assets/fonts/windows-bold[1].ttf" id="4_s0di0"]
+[ext_resource type="Texture2D" uid="uid://dk17iypac8xw0" path="res://textures/indicator.svg" id="4_uidac"]
+[ext_resource type="PackedScene" uid="uid://36wq7mxjghx6" path="res://scenes/power_up_panel.tscn" id="5_mfcci"]
+
+[sub_resource type="Animation" id="Animation_mfcci"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_uidac"]
+resource_name = "fade_out"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mfcci"]
+_data = {
+&"RESET": SubResource("Animation_mfcci"),
+&"fade_out": SubResource("Animation_uidac")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t72xj"]
+shader = ExtResource("2_lw6my")
+shader_parameter/wiggle = 0.03
+shader_parameter/wiggle_speed = 25.0
+shader_parameter/smear = 0.50000002375
+shader_parameter/blur_samples = 15
+
+[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("damage_indicator", "animation_player", "panel_container")]
+process_mode = 3
+script = ExtResource("1_t72xj")
+damage_indicator = NodePath("HUD/DamageIndicator")
+animation_player = NodePath("HUD/DamageIndicator/AnimationPlayer")
+panel_container = NodePath("HUD/PowerPanel/MarginContainer/HBoxContainer")
+
+[node name="Crosshair" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ReticalDraw" type="Control" parent="Crosshair"]
+layout_mode = 2
+script = ExtResource("1_tg63u")
+radius = 13.415
+thickness = 13.755
+gap_angle = 80.0
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Health" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 84.0
+offset_top = -103.0
+offset_right = 343.0
+offset_bottom = -48.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_s0di0")
+theme_override_font_sizes/font_size = 40
+text = "Health : heel"
+
+[node name="Score" type="RichTextLabel" parent="HUD"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 227.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("4_s0di0")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20 freq =15] [rainbow] Starting Game...
+"
+horizontal_alignment = 1
+
+[node name="DamageIndicator" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="TextureRect" type="TextureRect" parent="HUD/DamageIndicator"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -39.0
+offset_top = -78.62903
+offset_right = 39.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("4_uidac")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/DamageIndicator"]
+libraries = {
+&"": SubResource("AnimationLibrary_mfcci")
+}
+
+[node name="PowerPanel" type="Panel" parent="HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -492.0
+offset_top = -276.0
+offset_right = 492.0
+offset_bottom = 276.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/PowerPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/PowerPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Panel" parent="HUD/PowerPanel/MarginContainer/HBoxContainer" instance=ExtResource("5_mfcci")]
+layout_mode = 2
+
+[node name="Panel2" parent="HUD/PowerPanel/MarginContainer/HBoxContainer" instance=ExtResource("5_mfcci")]
+layout_mode = 2
+
+[node name="Panel3" parent="HUD/PowerPanel/MarginContainer/HBoxContainer" instance=ExtResource("5_mfcci")]
+layout_mode = 2
+
+[node name="VFX" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VHS" type="ColorRect" parent="VFX"]
+visible = false
+material = SubResource("ShaderMaterial_t72xj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Pause" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Pause"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.0
+offset_top = -162.0
+offset_right = 159.0
+offset_bottom = 162.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -97.0
+offset_right = 100.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2

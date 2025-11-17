@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BaseUpgrade" load_steps=3 format=3 uid="uid://dxb5tilet2q8b"]
+
+[ext_resource type="Texture2D" uid="uid://p268feqrsder" path="res://textures/icons/damage.svg" id="1_11gtq"]
+[ext_resource type="Script" uid="uid://v8w608i0p1ty" path="res://resources/upgrades/base_upgrade.gd" id="1_lgso3"]
+
+[resource]
+script = ExtResource("1_lgso3")
+upgrade_name = "Damage UP"
+icon = ExtResource("1_11gtq")
+upgrade_type = 2
+amount = Array[float]([0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1])
+metadata/_custom_type_script = "uid://v8w608i0p1ty"

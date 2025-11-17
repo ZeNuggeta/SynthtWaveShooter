@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://dv83oc30rw574"]
+
+[ext_resource type="Script" uid="uid://b2bsym4r5yr41" path="res://scripts/weapons/weapon.gd" id="1_wlhjo"]
+[ext_resource type="PackedScene" uid="uid://cfq8dgnq17nkk" path="res://resources/G19/G190Scene.tscn" id="2_efbll"]
+
+[resource]
+script = ExtResource("1_wlhjo")
+weapon_name = "G19"
+weapon_model = ExtResource("2_efbll")
+metadata/_custom_type_script = "uid://b2bsym4r5yr41"

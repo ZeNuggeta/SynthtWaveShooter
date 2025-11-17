@@ -1,0 +1,142 @@
+[gd_scene load_steps=24 format=3 uid="uid://d3qg6rfdwp5kr"]
+
+[ext_resource type="PackedScene" uid="uid://dm3gqheyx1prf" path="res://scenes/test.tscn" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://bk8buroylsa04" path="res://scripts/game/game_manager.gd" id="1_sugp2"]
+[ext_resource type="Script" uid="uid://b5j4x7xtlwyf" path="res://scripts/game/wave_manager.gd" id="2_jyhfs"]
+[ext_resource type="AudioStream" uid="uid://btp60822po60p" path="res://assets/audio/Danya Vodovoz - Driven.mp3" id="3_tefeu"]
+[ext_resource type="Script" uid="uid://cscusk7vt5xeh" path="res://scripts/game/wave.gd" id="3_tipki"]
+[ext_resource type="PackedScene" uid="uid://ccrk55ebba6wa" path="res://scenes/base_enemy.tscn" id="4_85g3d"]
+[ext_resource type="AudioStream" uid="uid://crqypi24353n6" path="res://assets/audio/enemy_death.sfxr" id="5_choun"]
+[ext_resource type="PackedScene" uid="uid://d3f4d5lvcbvvk" path="res://scenes/interface.tscn" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://bhop26d66s581" path="res://scenes/player.tscn" id="5_tefeu"]
+[ext_resource type="Script" uid="uid://cuyglg53sr64x" path="res://scripts/game/audio_manager.gd" id="5_ya4ey"]
+[ext_resource type="AudioStream" uid="uid://4j3t1gw0t3dp" path="res://assets/audio/point.sfxr" id="6_ya4ey"]
+[ext_resource type="Script" uid="uid://v8w608i0p1ty" path="res://resources/upgrades/base_upgrade.gd" id="12_trceg"]
+[ext_resource type="Resource" uid="uid://dxb5tilet2q8b" path="res://resources/upgrades/damage.tres" id="13_a8y0u"]
+[ext_resource type="Resource" uid="uid://1tef1xrt0ytv" path="res://resources/upgrades/ammo.tres" id="13_muem4"]
+[ext_resource type="Resource" uid="uid://pgduafbj6q64" path="res://resources/upgrades/firerate.tres" id="15_dp3eg"]
+[ext_resource type="Resource" uid="uid://dotqcvxq0h8s4" path="res://resources/upgrades/health.tres" id="16_0ld40"]
+[ext_resource type="Resource" uid="uid://htnnm882u0nl" path="res://resources/upgrades/regen.tres" id="17_gqmmt"]
+
+[sub_resource type="Resource" id="Resource_choun"]
+script = ExtResource("3_tipki")
+num_of_enemys = 1
+enemy_variation = Array[PackedScene]([ExtResource("4_85g3d")])
+metadata/_custom_type_script = "uid://cscusk7vt5xeh"
+
+[sub_resource type="Resource" id="Resource_85g3d"]
+script = ExtResource("3_tipki")
+num_of_enemys = 1
+enemy_variation = Array[PackedScene]([ExtResource("4_85g3d")])
+metadata/_custom_type_script = "uid://cscusk7vt5xeh"
+
+[sub_resource type="Resource" id="Resource_ya4ey"]
+script = ExtResource("3_tipki")
+num_of_enemys = 1
+metadata/_custom_type_script = "uid://cscusk7vt5xeh"
+
+[sub_resource type="Resource" id="Resource_eb6dy"]
+script = ExtResource("3_tipki")
+num_of_enemys = 1
+metadata/_custom_type_script = "uid://cscusk7vt5xeh"
+
+[sub_resource type="Resource" id="Resource_trceg"]
+script = ExtResource("3_tipki")
+metadata/_custom_type_script = "uid://cscusk7vt5xeh"
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_eb6dy"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("5_choun")
+
+[node name="Main" type="Node"]
+
+[node name="Managers" type="Node" parent="."]
+
+[node name="GameManager" type="Node" parent="Managers"]
+script = ExtResource("1_sugp2")
+
+[node name="WaveManager" type="Node" parent="Managers" node_paths=PackedStringArray("spawns", "enemy_holder", "player", "interface")]
+script = ExtResource("2_jyhfs")
+spawns = NodePath("../../CurrentLevel/Spawner")
+enemy_holder = NodePath("../../CurrentLevel/EnemyHolder")
+player = NodePath("../../CurrentLevel/Player")
+interface = NodePath("../../Interface")
+waves = Array[ExtResource("3_tipki")]([SubResource("Resource_choun"), SubResource("Resource_85g3d"), SubResource("Resource_ya4ey"), SubResource("Resource_eb6dy"), SubResource("Resource_trceg")])
+
+[node name="SpawnTimer" type="Timer" parent="Managers/WaveManager"]
+wait_time = 0.8
+autostart = true
+
+[node name="IntermissionTimer" type="Timer" parent="Managers/WaveManager"]
+wait_time = 3.0
+one_shot = true
+
+[node name="AudioManager" type="Node" parent="Managers" node_paths=PackedStringArray("wave_manager")]
+script = ExtResource("5_ya4ey")
+wave_manager = NodePath("../WaveManager")
+
+[node name="Death" type="AudioStreamPlayer" parent="Managers/AudioManager"]
+stream = SubResource("AudioStreamRandomizer_eb6dy")
+max_polyphony = 3
+bus = &"SFX"
+
+[node name="Point" type="AudioStreamPlayer" parent="Managers/AudioManager"]
+stream = ExtResource("6_ya4ey")
+max_polyphony = 6
+bus = &"SFX"
+
+[node name="Music" type="AudioStreamPlayer" parent="Managers/AudioManager"]
+process_mode = 3
+stream = ExtResource("3_tefeu")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="ComboTimer" type="Timer" parent="Managers/AudioManager"]
+wait_time = 2.0
+one_shot = true
+
+[node name="CurrentLevel" type="Node3D" parent="."]
+
+[node name="Test" parent="CurrentLevel" instance=ExtResource("1_o5qli")]
+
+[node name="Spawner" type="Node3D" parent="CurrentLevel"]
+
+[node name="Spawn1" type="Marker3D" parent="CurrentLevel/Spawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 0)
+
+[node name="Spawn2" type="Marker3D" parent="CurrentLevel/Spawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
+
+[node name="Spawn3" type="Marker3D" parent="CurrentLevel/Spawner"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.0490733e-06, 0, 24)
+
+[node name="Spawn4" type="Marker3D" parent="CurrentLevel/Spawner"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.0490733e-06, 0, -24)
+
+[node name="Spawn5" type="Marker3D" parent="CurrentLevel/Spawner"]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -16.970562, 0, 16.970562)
+
+[node name="Spawn6" type="Marker3D" parent="CurrentLevel/Spawner"]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 16.970562, 0, -16.970562)
+
+[node name="Spawn7" type="Marker3D" parent="CurrentLevel/Spawner"]
+transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, 16.970562, 0, 16.970562)
+
+[node name="Spawn8" type="Marker3D" parent="CurrentLevel/Spawner"]
+transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, -16.970562, 0, -16.970562)
+
+[node name="Player" parent="CurrentLevel" instance=ExtResource("5_tefeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="EnemyHolder" type="Node3D" parent="CurrentLevel"]
+
+[node name="Interface" parent="." node_paths=PackedStringArray("player", "wave_manager") instance=ExtResource("5_tbgi4")]
+available_upgrades = Array[ExtResource("12_trceg")]([ExtResource("13_muem4"), ExtResource("13_a8y0u"), ExtResource("15_dp3eg"), ExtResource("16_0ld40"), ExtResource("17_gqmmt")])
+player = NodePath("../CurrentLevel/Player")
+wave_manager = NodePath("../Managers/WaveManager")
+
+[connection signal="timeout" from="Managers/WaveManager/SpawnTimer" to="Managers/WaveManager" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="Managers/WaveManager/IntermissionTimer" to="Managers/WaveManager" method="_on_intermission_timer_timeout"]
+[connection signal="timeout" from="Managers/AudioManager/ComboTimer" to="Managers/AudioManager" method="_on_combo_timer_timeout"]

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BaseUpgrade" load_steps=2 format=3 uid="uid://dotqcvxq0h8s4"]
+
+[ext_resource type="Script" uid="uid://v8w608i0p1ty" path="res://resources/upgrades/base_upgrade.gd" id="1_wili6"]
+
+[resource]
+script = ExtResource("1_wili6")
+metadata/_custom_type_script = "uid://v8w608i0p1ty"
