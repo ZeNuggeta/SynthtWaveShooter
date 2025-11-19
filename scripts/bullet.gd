@@ -1,7 +1,7 @@
 extends Node3D
 class_name Bullet
 
-const MAX_DISTANCE : float = 30
+const MAX_DISTANCE : float = 50
 
 var speed : float = 9.0
 var direction : Vector3

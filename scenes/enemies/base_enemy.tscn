@@ -12,7 +12,6 @@
 resource_local_to_scene = true
 script = ExtResource("2_2kb2m")
 max_health = 24.0
-health = 24.0
 metadata/_custom_type_script = "uid://d1eo3unyiu8dk"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t1as8"]

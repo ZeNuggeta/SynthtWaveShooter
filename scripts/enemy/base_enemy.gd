@@ -10,13 +10,17 @@ signal damaged
 @export var mesh : MeshInstance3D
 @export var anim : AnimationPlayer
 @export_group("Enemy Settings")
-@export var ranged : bool = false
-@export var attack_speed : float = 1.0
+@export_subgroup("Movement")
 @export var speed : float = 3.0
-@export var push_force : float = 10.0
 @export var turn_speed : float = 15.0
+@export var push_force : float = 10.0
+@export_subgroup("Attack")
+@export var ranged : bool = false
 @export var stop_range : float = 1.0
-@export var points : int = 150
+@export var bullet_speed : float = 12.0
+@export var attack_speed : float = 1.0
+@export var points : int = 100
+@export var xp : int = 10
 
 @onready var eyes: Node3D = $Eyes
 @onready var hit_box: HitBox = $HitBox
@@ -56,8 +60,6 @@ func _physics_process(delta: float) -> void:
 		tick_update()
 		time_elapsed = 0.0
 	
-	
-	
 	if player.global_position.y >= self.global_position.y:
 		velocity.y = 0.0
 	elif player.global_position.y <= self.global_position.y and not is_on_floor():
@@ -69,7 +71,7 @@ func _physics_process(delta: float) -> void:
 	
 	if global_position.distance_to(player.global_position) <= stop_range:
 		if ranged:
-			anim.play('stand_range')
+			anim.play('stand_range',-1,attack_speed)
 		else:
 			pass
 	else:
@@ -95,7 +97,7 @@ func climb()->void:
 
 func _attack_end(anim_name:String)->void:
 	if anim_name != "walk":
-		BulletPool.spawn_bullet(muzzle)
+		BulletPool.spawn_bullet(muzzle,bullet_speed)
 
 
 func take_damage(value:float)->void:
@@ -106,15 +108,16 @@ func take_damage(value:float)->void:
 	base_mat.set_shader_parameter("color_compression",-6)
 	_stun = true
 	
-	if !_is_dead:
-		Global.points += 10
-		damaged.emit()
+	Global.points += points
+	damaged.emit()
+	if not _is_dead:
 		await get_tree().create_timer(0.2).timeout
 		base_mat.set_shader_parameter("color_compression",6)
 		_stun = false
-	else:
-		Global.points += points
-		damaged.emit()
+
+func set_difficulty(difficulty:int)->void:
+	stats.max_health = stats.max_health + difficulty - 1
+	stats.health = stats.max_health
 
 func dead()->void:
 	_is_dead = true
@@ -123,5 +126,5 @@ func dead()->void:
 	no_health.emit()
 	hit_box.monitorable = false
 	base_mat.set_shader_parameter("color_compression",6)
-	Global.gain_experience(5)
+	Global.gain_experience(xp)
 	queue_free()

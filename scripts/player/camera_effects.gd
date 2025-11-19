@@ -43,6 +43,9 @@ var _step_timer : float = 0.0
 const MIN_SCREEN_SHAKE : float = 0.05
 const MAX_SCREEN_SHAKE : float = 0.5
 
+func _ready() -> void:
+	Global.shake_cam.connect(add_screen_shake)
+
 func _process(delta: float) -> void:
 	calculate_view_offset(delta)
 

@@ -30,7 +30,7 @@ func _ready() -> void:
 		damage_indicator.modulate = Color(255,255,255,0)
 		
 		stats_handler.health_changed.connect(_update_health)
-		wave_manager.update_info.connect(_update_info)
+		#wave_manager.update_info.connect(_update_info)
 		
 		_update_health(stats_handler.stats.health)
 	

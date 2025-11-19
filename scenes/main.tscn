@@ -1,11 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://d3qg6rfdwp5kr"]
+[gd_scene load_steps=19 format=3 uid="uid://d3qg6rfdwp5kr"]
 
 [ext_resource type="PackedScene" uid="uid://dm3gqheyx1prf" path="res://scenes/test.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://bk8buroylsa04" path="res://scripts/game/game_manager.gd" id="1_sugp2"]
 [ext_resource type="Script" uid="uid://b5j4x7xtlwyf" path="res://scripts/game/wave_manager.gd" id="2_jyhfs"]
 [ext_resource type="AudioStream" uid="uid://btp60822po60p" path="res://assets/audio/Danya Vodovoz - Driven.mp3" id="3_tefeu"]
-[ext_resource type="Script" uid="uid://cscusk7vt5xeh" path="res://scripts/game/wave.gd" id="3_tipki"]
 [ext_resource type="PackedScene" uid="uid://ccrk55ebba6wa" path="res://scenes/enemies/base_enemy.tscn" id="4_85g3d"]
+[ext_resource type="PackedScene" uid="uid://b02gq3arv2rth" path="res://scenes/enemies/ranger.tscn" id="4_muem4"]
 [ext_resource type="AudioStream" uid="uid://crqypi24353n6" path="res://assets/audio/enemy_death.sfxr" id="5_choun"]
 [ext_resource type="PackedScene" uid="uid://d3f4d5lvcbvvk" path="res://scenes/interface.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bhop26d66s581" path="res://scenes/player.tscn" id="5_tefeu"]
@@ -17,23 +17,6 @@
 [ext_resource type="Resource" uid="uid://pgduafbj6q64" path="res://resources/upgrades/firerate.tres" id="15_dp3eg"]
 [ext_resource type="Resource" uid="uid://dotqcvxq0h8s4" path="res://resources/upgrades/health.tres" id="16_0ld40"]
 [ext_resource type="Resource" uid="uid://htnnm882u0nl" path="res://resources/upgrades/regen.tres" id="17_gqmmt"]
-
-[sub_resource type="Resource" id="Resource_choun"]
-script = ExtResource("3_tipki")
-num_of_enemys = 1
-enemy_variation = Array[PackedScene]([ExtResource("4_85g3d")])
-metadata/_custom_type_script = "uid://cscusk7vt5xeh"
-
-[sub_resource type="Resource" id="Resource_85g3d"]
-script = ExtResource("3_tipki")
-num_of_enemys = 1
-enemy_variation = Array[PackedScene]([ExtResource("4_85g3d")])
-metadata/_custom_type_script = "uid://cscusk7vt5xeh"
-
-[sub_resource type="Resource" id="Resource_muem4"]
-script = ExtResource("3_tipki")
-enemy_variation = Array[PackedScene]([ExtResource("4_85g3d")])
-metadata/_custom_type_script = "uid://cscusk7vt5xeh"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_eb6dy"]
 random_pitch = 1.1
@@ -48,13 +31,12 @@ stream_0/stream = ExtResource("5_choun")
 script = ExtResource("1_sugp2")
 dev_mode = true
 
-[node name="WaveManager" type="Node" parent="Managers" node_paths=PackedStringArray("spawns", "enemy_holder", "player", "interface")]
+[node name="WaveManager" type="Node" parent="Managers" node_paths=PackedStringArray("player", "enemy_holder", "spawn_container")]
 script = ExtResource("2_jyhfs")
-spawns = NodePath("../../CurrentLevel/Spawner")
-enemy_holder = NodePath("../../CurrentLevel/EnemyHolder")
 player = NodePath("../../CurrentLevel/Player")
-interface = NodePath("../../Interface")
-waves = Array[ExtResource("3_tipki")]([SubResource("Resource_choun"), SubResource("Resource_85g3d"), SubResource("Resource_muem4")])
+enemy_holder = NodePath("../../CurrentLevel/EnemyHolder")
+spawn_container = NodePath("../../CurrentLevel/Spawner")
+enemies = Array[PackedScene]([ExtResource("4_85g3d"), ExtResource("4_muem4")])
 
 [node name="SpawnTimer" type="Timer" parent="Managers/WaveManager"]
 wait_time = 0.8

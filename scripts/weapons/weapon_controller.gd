@@ -71,7 +71,7 @@ func spawn_weapon_model()-> void:
 
 func shoot()->void:
 	anim_player.play("shoot")
-	weapon_holder.add_weapon_kick(1,1,1)
+	weapon_holder.add_weapon_kick(0.1,0.1,0.1)
 	weapon_sfx.play()
 	if raycast.is_colliding():
 		var target : Node3D = raycast.get_collider()

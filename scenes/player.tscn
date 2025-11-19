@@ -235,9 +235,7 @@ current_weapon = ExtResource("23_ujl30")
 weapon_holder = NodePath("../../Head/Camera")
 raycast = NodePath("../../Head/Camera/ShootCast")
 weapon_sfx = NodePath("../../SFX/WeaponSFX")
-weapon_sway_amount = null
 weapon_rotation_amount = 0.01
-invert_weapon_sway = null
 
 [node name="StairsAhead" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4512124, -0.89100194)
