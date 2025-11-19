@@ -12,7 +12,7 @@ class_name StepHandlerComponent
 var _snapped_to_stairs_last_frame := false
 var last_frame_on_floor : float = -INF
 
-var _saved_camera_global_pos = null
+var _saved_camera_global_pos : Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	stairs_ahead.target_position = Vector3(0,-max_step_height - 0.5,0)
@@ -21,8 +21,8 @@ func _ready() -> void:
 func is_surface_too_steep(normal:Vector3)->bool:
 	return normal.angle_to(Vector3.UP) > player.floor_max_angle
 
-func _run_body_test_motion(from:Transform3D,motion:Vector3,result=null)->bool:
-	if not result: result = PhysicsTestMotionParameters3D.new()
+func _run_body_test_motion(from:Transform3D,motion:Vector3,result : PhysicsTestMotionResult3D )->bool:
+	if not result: result = PhysicsTestMotionResult3D.new()
 	var params : PhysicsTestMotionParameters3D = PhysicsTestMotionParameters3D.new()
 	params.from = from
 	params.motion = motion
@@ -42,7 +42,7 @@ func snap_down_to_stairs_check() -> void:
 			did_snap = true
 	_snapped_to_stairs_last_frame = did_snap
 	
-func snap_up_stairs_check(delta) -> bool:
+func snap_up_stairs_check(delta:float) -> bool:
 	if not player.is_on_floor() and not _snapped_to_stairs_last_frame: return false
 	if player.velocity.y > 0 or (player.velocity * Vector3(1,0,1)).length() == 0: return false
 	var expected_move_motion : Vector3 = player.velocity * Vector3(1,0,1) * delta
@@ -50,7 +50,7 @@ func snap_up_stairs_check(delta) -> bool:
 	var down_check_result : KinematicCollision3D = KinematicCollision3D.new()
 	if (player.test_move(step_pos_with_clearance, Vector3(0,-max_step_height*2,0), down_check_result)
 	and (down_check_result.get_collider().is_class("StaticBody3D") or down_check_result.get_collider().is_class("CSGShape3D"))):
-		var step_height = ((step_pos_with_clearance.origin + down_check_result.get_travel()) - player.global_position).y
+		var step_height : float = ((step_pos_with_clearance.origin + down_check_result.get_travel()) - player.global_position).y
 		if step_height > max_step_height or step_height <= 0.01 or (down_check_result.get_position() - player.global_position).y > max_step_height: return false
 		stairs_ahead.global_position = down_check_result.get_position() + Vector3(0,max_step_height,0) + expected_move_motion.normalized() * 0.1
 		stairs_ahead.force_raycast_update()
@@ -74,5 +74,5 @@ func slide_camera_back_to_origin(delta:float)->void:
 	head.position.y = move_toward(head.position.y,0.0,move_amount)
 	_saved_camera_global_pos = head.global_position
 	if head.position.y == 0:
-		_saved_camera_global_pos = null
+		_saved_camera_global_pos = Vector3.ZERO
 	

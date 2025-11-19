@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfq8dgnq17nkk"]
+[gd_scene load_steps=5 format=3 uid="uid://cfq8dgnq17nkk"]
 
 [ext_resource type="PackedScene" uid="uid://cbdlkrok2didl" path="res://resources/G19/G190Model.blend" id="1_tnajr"]
-[ext_resource type="Material" uid="uid://cudsgkwaevwtc" path="res://textures/mats/pallet.tres" id="2_ogeds"]
 
 [sub_resource type="Animation" id="Animation_7qawh"]
 length = 0.001
@@ -99,11 +98,7 @@ libraries = {
 [node name="G190Model" parent="." instance=ExtResource("1_tnajr")]
 transform = Transform3D(0.95881975, -0.28401536, 0, 0.28401536, 0.95881975, 0, 0, 0, 1, 0.41, -0.43, -0.445)
 
-[node name="Base" parent="G190Model" index="0"]
-surface_material_override/0 = ExtResource("2_ogeds")
-
 [node name="Slide" parent="G190Model" index="1"]
 transform = Transform3D(-3.7252903e-09, 2.8871e-08, 1, 0, 1.0000001, -9.313226e-10, -1.0000001, 0, 3.7252903e-09, 0, 0, 0)
-surface_material_override/0 = ExtResource("2_ogeds")
 
 [editable path="G190Model"]

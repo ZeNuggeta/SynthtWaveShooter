@@ -4,4 +4,6 @@
 
 [resource]
 script = ExtResource("1_yad06")
+upgrade_name = "Ammo"
+upgrade_type = 4
 metadata/_custom_type_script = "uid://v8w608i0p1ty"

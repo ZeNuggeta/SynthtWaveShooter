@@ -1,30 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://36wq7mxjghx6"]
+[gd_scene load_steps=5 format=3 uid="uid://36wq7mxjghx6"]
 
 [ext_resource type="Script" uid="uid://bj0pibnh00og2" path="res://scripts/interface/power_up_panel.gd" id="1_4i2nj"]
+[ext_resource type="Resource" uid="uid://dxb5tilet2q8b" path="res://resources/upgrades/damage.tres" id="3_gbrfl"]
 [ext_resource type="Theme" uid="uid://ctovemxdyxlqj" path="res://textures/Hud.tres" id="4_gbrfl"]
 [ext_resource type="Texture2D" uid="uid://bu0gp2drh6ttq" path="res://icon.svg" id="4_pgi5h"]
 
-[sub_resource type="Gradient" id="Gradient_r5mhu"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.1254902, 0.11764706, 0.16862746, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_gbrfl"]
-gradient = SubResource("Gradient_r5mhu")
-
-[sub_resource type="Gradient" id="Gradient_4lbmw"]
-colors = PackedColorArray(1, 0.9609375, 0, 1, 0.9411765, 0, 0.85882354, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_pgi5h"]
-gradient = SubResource("Gradient_4lbmw")
-
 [node name="PowerUp" type="Control"]
-custom_minimum_size = Vector2(297, 89)
+custom_minimum_size = Vector2(384, 128)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 356.0
-offset_bottom = 89.0
+offset_right = 256.0
+offset_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("4_gbrfl")
 script = ExtResource("1_4i2nj")
+upgrade = ExtResource("3_gbrfl")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -33,15 +24,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 z_index = 1
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 8
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -63,15 +54,23 @@ text = "name"
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="ProgressBar" type="TextureProgressBar" parent="MarginContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
+[node name="UpgradeLevel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(181, 0)
 layout_mode = 2
+size_flags_horizontal = 2
 size_flags_vertical = 2
-max_value = 10.0
-value = 5.0
-nine_patch_stretch = true
-texture_under = SubResource("GradientTexture1D_gbrfl")
-texture_progress = SubResource("GradientTexture1D_pgi5h")
+text = "level"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="UpgradePercent" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(181, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "current stat"
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1

@@ -43,7 +43,6 @@ stats = SubResource("Resource_kegi0")
 visual = NodePath("Visuals")
 mesh = NodePath("Visuals/Bot/metarig/Skeleton3D/BASE_Low Poly Man")
 anim = NodePath("Visuals/Bot/AnimationPlayer")
-stop_range = 1.0
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_t1as8")
@@ -79,24 +78,26 @@ target_position = Vector3(0, 0, -0.6)
 transform = Transform3D(-0.9, 0, 1.3589622e-07, 0, 0.9, 0, -1.3589622e-07, 0, -0.9, 0, -1, 0)
 
 [node name="Skeleton3D" parent="Visuals/Bot/metarig" index="0"]
-bones/0/position = Vector3(6.217249e-15, 0.9308991, 0.048131976)
-bones/1/rotation = Quaternion(-0.02317115, -1.191773e-07, -2.7622225e-09, 0.9997316)
-bones/2/rotation = Quaternion(0.20689781, 1.1662991e-07, 2.466415e-08, 0.9783626)
-bones/3/rotation = Quaternion(-0.05682033, -0.026323678, -0.046182815, 0.99696827)
-bones/4/rotation = Quaternion(0.25635153, 0.042041656, 0.04784611, 0.9644829)
-bones/5/rotation = Quaternion(-0.3059518, -1.1335886e-07, -3.7001676e-08, 0.95204705)
-bones/6/rotation = Quaternion(-0.14386722, 2.3287283e-10, 3.2708994e-10, 0.9895971)
-bones/8/rotation = Quaternion(-0.23127788, 0.43466416, -0.6597247, 0.5677509)
-bones/9/rotation = Quaternion(0.3209516, 0.096826375, -0.35414705, 0.8730376)
-bones/12/rotation = Quaternion(-0.36347696, -0.7644244, 0.39271387, 0.35960484)
-bones/13/rotation = Quaternion(0.28570777, -0.19425938, 0.13337071, 0.92889535)
-bones/19/rotation = Quaternion(0.98448205, 0.026882853, -0.0064630145, -0.1732934)
-bones/20/rotation = Quaternion(0.15015666, 0.02065805, 0.048204295, 0.9872703)
-bones/21/rotation = Quaternion(-0.5061493, -0.047878448, -0.17873445, 0.8423625)
-bones/24/rotation = Quaternion(0.9297709, -0.025746431, 0.022232128, 0.36656368)
-bones/25/rotation = Quaternion(0.01216208, -0.020652607, -0.048950627, 0.9985136)
-bones/26/rotation = Quaternion(-0.50591624, 0.051997047, 0.17093529, 0.84387565)
-bones/27/rotation = Quaternion(0.13239981, 0.952087, -0.27305463, -0.037971623)
+bones/0/position = Vector3(7.1054274e-15, 1.0511632, 0.04813197)
+bones/0/rotation = Quaternion(0.19296324, 1.1696888e-07, 2.3003018e-08, 0.98120606)
+bones/1/rotation = Quaternion(-0.02317115, -1.191773e-07, -2.7622207e-09, 0.9997316)
+bones/2/rotation = Quaternion(0.20689778, 1.1662992e-07, 2.4664143e-08, 0.9783626)
+bones/3/rotation = Quaternion(-0.056820348, -0.026323678, -0.046182808, 0.99696827)
+bones/4/rotation = Quaternion(-0.064671725, 0.029649446, 0.05431561, 0.99598616)
+bones/5/rotation = Quaternion(0.07416293, -0.006217385, 0.0049232473, 0.9972146)
+bones/6/rotation = Quaternion(-0.2999921, 0.003292346, -0.00071709027, 0.9539358)
+bones/8/rotation = Quaternion(-0.14864744, 0.42637706, -0.49192864, 0.7443875)
+bones/9/rotation = Quaternion(0.16022675, 0.20267633, -0.23649201, 0.9366543)
+bones/12/rotation = Quaternion(0.4185182, 0.15379559, 0.34592885, 0.8255439)
+bones/13/rotation = Quaternion(0.27171782, -0.20277043, 0.1308601, 0.9316272)
+bones/14/rotation = Quaternion(-0.08494227, 0.016724808, -0.52549726, 0.8463792)
+bones/19/rotation = Quaternion(0.9473968, 0.020513458, -0.018537542, 0.31886482)
+bones/20/rotation = Quaternion(0.15015665, 0.02065805, 0.04820429, 0.9872703)
+bones/21/rotation = Quaternion(-0.43787527, -0.03761595, -0.18253982, 0.87950534)
+bones/24/rotation = Quaternion(0.98937756, -0.030194223, 0.015667249, 0.14133315)
+bones/25/rotation = Quaternion(0.012162069, -0.020652607, -0.048950635, 0.9985136)
+bones/26/rotation = Quaternion(-0.5404959, 0.05742956, 0.16858837, 0.8222798)
+bones/27/rotation = Quaternion(0.13239981, 0.952087, -0.27305463, -0.03797163)
 
 [node name="BASE_Low Poly Man" parent="Visuals/Bot/metarig/Skeleton3D" index="0"]
 cast_shadow = 0
@@ -106,7 +107,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_0gk8p")
 autoplay = "walk"
 
 [node name="Head" type="BoneAttachment3D" parent="Visuals"]
-transform = Transform3D(-0.8997995, 0.018946504, -0.001329945, 0.018993123, 0.8975904, -0.0630126, -1.3014827e-07, -0.063026816, -0.89779025, -0.014793812, 0.46431327, -0.322597)
+transform = Transform3D(-0.8997995, 0.018946515, -0.0013299026, 0.01899101, 0.8984323, -0.04958208, 0.0002838053, -0.049599163, -0.898632, -0.014793792, 0.5354978, -0.41257173)
 bone_name = "spine.006"
 bone_idx = 6
 use_external_skeleton = true
@@ -128,5 +129,8 @@ metadata/_custom_type_script = "uid://3tcow7oyiab4"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/BodyHurtBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28442383, 0)
 shape = SubResource("CapsuleShape3D_rffmh")
+
+[node name="Muzzle" type="Marker3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.30309248, 0.70615816, -0.89693755)
 
 [editable path="Visuals/Bot"]

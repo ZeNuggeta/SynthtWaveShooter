@@ -7,7 +7,6 @@ class_name Interface
 @export var wave_manager : WaveManager
 @export var damage_indicator: Control
 @export var animation_player: AnimationPlayer 
-@export var panel_container : Control
 @export var power_panel: Panel
 
 @export_group("VFX")
@@ -16,11 +15,13 @@ class_name Interface
 @onready var vhs: ColorRect = $VFX/VHS
 @onready var health: Label = $HUD/Health
 @onready var info: RichTextLabel = $HUD/Score
-@onready var block: Control = $Block
+@onready var xp_bar: TextureProgressBar = $HUD/XPBar
+@onready var xp_label: Label = $HUD/XPBar/XPLabel
 
 var stats_handler : StatsHandler
 
 func _ready() -> void:
+	Global.interface = self
 	if player:
 		stats_handler = player.stats_handler
 		
@@ -32,22 +33,13 @@ func _ready() -> void:
 		wave_manager.update_info.connect(_update_info)
 		
 		_update_health(stats_handler.stats.health)
-		
-	for p in panel_container.get_children():
-		p.my_upgrade.connect(upgrade)
-	power_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	shuffle_upgrades()
-	block.hide()
 	
-	
+	power_panel.hide()
+	update_exp()
 
-
-
-func upgrade(up:BaseUpgrade)-> void:
-	if stats_handler:
-		stats_handler.apply_stat_upgrade(up)
-	_choose_power_up_menu(false)
-	wave_manager.intermission()
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("upgrade_tab"):
+		_choose_power_up_menu()
 
 func _update_health(value:float,look_at:Node3D=null) -> void:
 	health.text = "Health : %s" %value
@@ -65,30 +57,21 @@ func _update_info(wave:int,enemy_count:int=0) -> void:
 				
 			-20:
 				info.text = "[rainbow] Wave Finished"
-				_choose_power_up_menu(true)
-				
+				await get_tree().create_timer(0.5).timeout
+				wave_manager.intermission()
 			-30:
 				info.text = "Next Wave in %s" %enemy_count + "..."
 
+func update_exp()->void:
+	xp_label.text = "level : %s" %Global.level
+	xp_bar.max_value = Global.experience_required
+	xp_bar.value = Global.experience
 
-func _choose_power_up_menu(value:bool)->void:
-	block.show()
-	power_panel.visible = value
-	get_tree().paused = value
+func _choose_power_up_menu()->void:
+	power_panel.visible = !power_panel.visible
+	get_tree().paused = power_panel.visible
 	
-	if value:
-		shuffle_upgrades()
+	if power_panel.visible:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		await get_tree().create_timer(0.5).timeout
-		power_panel.mouse_filter = Control.MOUSE_FILTER_STOP
-		block.hide()
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		block.hide()
-	
-
-
-func shuffle_upgrades()->void:
-	for p : UpgradeSlot in panel_container.get_children():
-		p.upgrade = available_upgrades.pick_random()
-		p.update_card()

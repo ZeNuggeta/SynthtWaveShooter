@@ -26,8 +26,8 @@ func update_camera_rotation(input:Vector2)->void:
 	_rotation.y += input.x
 	_rotation.x = clamp(_rotation.x,deg_to_rad(tilt_lower_limits),deg_to_rad(tilt_uper_limits))
 	
-	var _player_rotation = Vector3(0.0,_rotation.y,0.0)
-	var _camera_rotation = Vector3(_rotation.x,0.0,0.0)
+	var _player_rotation : Vector3 = Vector3(0.0,_rotation.y,0.0)
+	var _camera_rotation : Vector3 = Vector3(_rotation.x,0.0,0.0)
 	
 	transform.basis = Basis.from_euler(_camera_rotation)
 	get_parent().update_rotation(_player_rotation)

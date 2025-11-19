@@ -8,5 +8,5 @@ script = ExtResource("1_lgso3")
 upgrade_name = "Damage UP"
 icon = ExtResource("1_11gtq")
 upgrade_type = 2
-amount = Array[float]([0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1])
+amount = Array[float]([0.1])
 metadata/_custom_type_script = "uid://v8w608i0p1ty"

@@ -4,4 +4,7 @@
 
 [resource]
 script = ExtResource("1_dk5gs")
+upgrade_name = "FireRate"
+upgrade_type = 3
+amount = Array[float]([0.1, 0.1, 0.1, 0.1, 0.1])
 metadata/_custom_type_script = "uid://v8w608i0p1ty"

@@ -1,9 +1,16 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://d1acorughoqsm"]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://d1acorughoqsm"]
 
 [ext_resource type="Shader" uid="uid://c5qy5mulqcgoe" path="res://shaders/edge.gdshader" id="1_07li7"]
+[ext_resource type="Texture2D" uid="uid://576g6ey71kcy" path="res://textures/glow.png" id="1_8wl7o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_07li7"]
 albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.9140625, 0, 1)
+emission_operator = 1
+emission_texture = ExtResource("1_8wl7o")
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_triplanar = true
 
 [resource]
 render_priority = 0

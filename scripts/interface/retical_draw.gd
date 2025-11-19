@@ -11,7 +11,7 @@ extends Control
 func _draw() -> void:
 	draw_circle_crosshair()
 
-func draw_circle_crosshair():
+func draw_circle_crosshair()->void:
 	
 
 	var gap_rad : float = deg_to_rad(gap_angle)
@@ -23,12 +23,12 @@ func draw_circle_crosshair():
 		[3*PI/2 + gap_rad/2,2 * PI - gap_rad/2]
 		]
 	
-	for arc in arc_segments:
+	for arc : Array in arc_segments:
 		var start_angle : float = arc[0]
 		var end_angle : float = arc[1]
 		
 		var points : Array = []
-		var angle_step = (end_angle - start_angle) / segments
+		var angle_step : float = (end_angle - start_angle) / segments
 		
 		for i in range(segments + 1):
 			var angle : float = start_angle + i * angle_step
@@ -38,7 +38,7 @@ func draw_circle_crosshair():
 		if points.size() > 1:
 			draw_polyline(points,color,thickness,true)
 
-func update_crosshair():
+func update_crosshair()->void:
 	queue_redraw()
 
 func set_crosshair_radius(new_radius:float)->void:

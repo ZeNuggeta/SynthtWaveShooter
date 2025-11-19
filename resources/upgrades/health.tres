@@ -4,4 +4,6 @@
 
 [resource]
 script = ExtResource("1_wili6")
+upgrade_name = "Max health"
+amount = Array[float]([0.2])
 metadata/_custom_type_script = "uid://v8w608i0p1ty"

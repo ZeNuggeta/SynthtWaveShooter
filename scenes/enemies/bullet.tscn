@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bntb06f7xtal5"]
+
+[ext_resource type="Script" uid="uid://doa76srsmuent" path="res://scripts/hit_hurt/hit_box.gd" id="1_hl25f"]
+[ext_resource type="Script" uid="uid://c37rn5qetyhdv" path="res://scripts/bullet.gd" id="1_p5aa7"]
+[ext_resource type="Shader" uid="uid://bps4j05t72kiv" path="res://shaders/chrome.gdshader" id="2_15gq6"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_hl25f"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ncsv3"]
+render_priority = 0
+shader = ExtResource("2_15gq6")
+shader_parameter/normal_depth = 0.25
+shader_parameter/color_compression = 6.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_p5aa7"]
+radius = 0.25
+
+[node name="Bullet" type="Node3D"]
+top_level = true
+script = ExtResource("1_p5aa7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_hl25f")
+surface_material_override/0 = SubResource("ShaderMaterial_ncsv3")
+
+[node name="HitBox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_hl25f")
+metadata/_custom_type_script = "uid://doa76srsmuent"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+shape = SubResource("SphereShape3D_p5aa7")

@@ -46,7 +46,7 @@ const MAX_SCREEN_SHAKE : float = 0.5
 func _process(delta: float) -> void:
 	calculate_view_offset(delta)
 
-func calculate_view_offset(delta)-> void:
+func calculate_view_offset(delta:float)-> void:
 	if !player:return
 	
 	_fall_timer -= delta
@@ -67,15 +67,15 @@ func calculate_view_offset(delta)-> void:
 	var offset : Vector3 = Vector3.ZERO
 	
 	if enable_tilt:
-		var forward = global_transform.basis.z
-		var right = global_transform.basis.x
+		var forward : Vector3 = global_transform.basis.z
+		var right : Vector3  = global_transform.basis.x
 		
-		var forward_dot = velocity.dot(forward)
-		var forward_tilt = clampf(forward_dot * deg_to_rad(run_pitch),deg_to_rad(-max_pitch),deg_to_rad(max_pitch))
+		var forward_dot : float = velocity.dot(forward)
+		var forward_tilt : float = clampf(forward_dot * deg_to_rad(run_pitch),deg_to_rad(-max_pitch),deg_to_rad(max_pitch))
 		angles.x += forward_tilt
 	
-		var right_dot = velocity.dot(right)
-		var right_tilt = clampf(right_dot * deg_to_rad(run_roll),deg_to_rad(-max_roll),deg_to_rad(max_roll))
+		var right_dot : float = velocity.dot(right)
+		var right_tilt : float = clampf(right_dot * deg_to_rad(run_roll),deg_to_rad(-max_roll),deg_to_rad(max_roll))
 		angles.z -= right_tilt
 	
 	if enable_fall_kick:
@@ -95,13 +95,13 @@ func calculate_view_offset(delta)-> void:
 		angles += _weapon_kick_angles
 	
 	if enable_head_bob:
-		var pitch_delta = bob_sin * deg_to_rad(bob_pitch) * speed
+		var pitch_delta: float  = bob_sin * deg_to_rad(bob_pitch) * speed
 		angles.x -= pitch_delta
 		
-		var roll_delta = bob_sin * deg_to_rad(bob_roll) * speed
+		var roll_delta : float  = bob_sin * deg_to_rad(bob_roll) * speed
 		angles.z -= roll_delta
 		
-		var bob_height = bob_sin * speed * bob_up
+		var bob_height : float  = bob_sin * speed * bob_up
 		offset.y += bob_height
 	
 	position = offset

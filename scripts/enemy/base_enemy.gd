@@ -10,10 +10,12 @@ signal damaged
 @export var mesh : MeshInstance3D
 @export var anim : AnimationPlayer
 @export_group("Enemy Settings")
+@export var ranged : bool = false
+@export var attack_speed : float = 1.0
 @export var speed : float = 3.0
 @export var push_force : float = 10.0
 @export var turn_speed : float = 15.0
-@export var stop_range : float = 0.5
+@export var stop_range : float = 1.0
 @export var points : int = 150
 
 @onready var eyes: Node3D = $Eyes
@@ -23,6 +25,8 @@ signal damaged
 @onready var collision_shape: CollisionShape3D = $CollisionShape
 @onready var head_hurt_box: HurtBox = $Visuals/Head/HeadHurtBox
 @onready var body_hurt_box: HurtBox = $Visuals/BodyHurtBox
+@onready var muzzle: Marker3D = $Visuals/Muzzle
+
 
 var player : Player
 var base_mat : ShaderMaterial
@@ -33,12 +37,13 @@ var time_elapsed: float = 0.0
 var dir : Vector3 
 
 var _is_dead : bool = false
-var stun : bool = false
+var _stun : bool = false
 
 func _ready() -> void:
 	stats.no_health.connect(dead)
 	body_hurt_box.took_damage.connect(take_damage)
 	head_hurt_box.took_damage.connect(take_damage)
+	anim.animation_finished.connect(_attack_end)
 	
 	base_mat = mesh.get_surface_override_material(0)
 
@@ -62,9 +67,14 @@ func _physics_process(delta: float) -> void:
 		eyes.look_at(player.global_position,Vector3.UP)
 		visual.rotation.y = lerp_angle(visual.rotation.y,eyes.rotation.y,turn_speed * delta)
 	
-	if global_position.distance_to(player.global_position) <= stop_range:return
-	
-	move_and_slide()
+	if global_position.distance_to(player.global_position) <= stop_range:
+		if ranged:
+			anim.play('stand_range')
+		else:
+			pass
+	else:
+		anim.play('walk')
+		move_and_slide()
 	
 	if soft_collision.is_colliding():
 		velocity.x += soft_collision.get_push_vector().x * delta * push_force
@@ -83,22 +93,25 @@ func tick_update() -> void:
 func climb()->void:
 	velocity.y = 4.0
 
+func _attack_end(anim_name:String)->void:
+	if anim_name != "walk":
+		BulletPool.spawn_bullet(muzzle)
+
+
 func take_damage(value:float)->void:
-	print(value)
 	if _is_dead:return
 	
 	stats.health -= value
 	
 	base_mat.set_shader_parameter("color_compression",-6)
-	stun = true
+	_stun = true
 	
 	if !_is_dead:
 		Global.points += 10
-
 		damaged.emit()
 		await get_tree().create_timer(0.2).timeout
 		base_mat.set_shader_parameter("color_compression",6)
-		stun = false
+		_stun = false
 	else:
 		Global.points += points
 		damaged.emit()
@@ -110,4 +123,5 @@ func dead()->void:
 	no_health.emit()
 	hit_box.monitorable = false
 	base_mat.set_shader_parameter("color_compression",6)
+	Global.gain_experience(5)
 	queue_free()

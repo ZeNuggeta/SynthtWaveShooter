@@ -1,11 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://d3f4d5lvcbvvk"]
+[gd_scene load_steps=15 format=3 uid="uid://d3f4d5lvcbvvk"]
 
 [ext_resource type="Script" uid="uid://d3bgt0t4x73f7" path="res://scripts/interface/interface.gd" id="1_t72xj"]
 [ext_resource type="Script" uid="uid://dmbo7s8gfxba4" path="res://scripts/interface/retical_draw.gd" id="1_tg63u"]
 [ext_resource type="Shader" uid="uid://cwuyv0alidwt1" path="res://shaders/VHS.gdshader" id="2_lw6my"]
 [ext_resource type="FontFile" uid="uid://dquy36gl2xnep" path="res://assets/fonts/windows-bold[1].ttf" id="4_s0di0"]
 [ext_resource type="Texture2D" uid="uid://dk17iypac8xw0" path="res://textures/icons/indicator.svg" id="4_uidac"]
+[ext_resource type="Texture2D" uid="uid://b05gjp30xi7uq" path="res://textures/icons/bar_background.png" id="5_5tchh"]
 [ext_resource type="PackedScene" uid="uid://36wq7mxjghx6" path="res://scenes/power_up_panel.tscn" id="5_mfcci"]
+[ext_resource type="Texture2D" uid="uid://cms3unk7vpgp3" path="res://textures/icons/bar_fill.png" id="5_vceqh"]
+[ext_resource type="Theme" uid="uid://ctovemxdyxlqj" path="res://textures/Hud.tres" id="6_pr3t4"]
+[ext_resource type="Resource" uid="uid://dxb5tilet2q8b" path="res://resources/upgrades/damage.tres" id="8_t62tn"]
 
 [sub_resource type="Animation" id="Animation_mfcci"]
 length = 0.001
@@ -52,20 +56,11 @@ shader_parameter/wiggle_speed = 25.0
 shader_parameter/smear = 0.50000002375
 shader_parameter/blur_samples = 15
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfcci"]
-bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.9137255, 0.6117647, 0.20392157, 1)
-
-[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("damage_indicator", "animation_player", "panel_container", "power_panel")]
+[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("damage_indicator", "animation_player", "power_panel")]
 process_mode = 3
 script = ExtResource("1_t72xj")
 damage_indicator = NodePath("HUD/DamageIndicator")
 animation_player = NodePath("HUD/DamageIndicator/AnimationPlayer")
-panel_container = NodePath("PowerPanel/MarginContainer/VBoxContainer")
 power_panel = NodePath("PowerPanel")
 
 [node name="Crosshair" type="CenterContainer" parent="."]
@@ -108,12 +103,9 @@ text = "Health : heel"
 [node name="Score" type="RichTextLabel" parent="HUD"]
 process_mode = 3
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -576.0
-offset_right = 576.0
-offset_bottom = 227.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 84.0
 grow_horizontal = 2
 theme_override_fonts/normal_font = ExtResource("4_s0di0")
 theme_override_font_sizes/normal_font_size = 30
@@ -121,6 +113,8 @@ bbcode_enabled = true
 text = "[wave amp=20 freq =15] [rainbow] Starting Game...
 "
 horizontal_alignment = 1
+vertical_alignment = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="DamageIndicator" type="Control" parent="HUD"]
 layout_mode = 1
@@ -152,6 +146,30 @@ libraries = {
 &"": SubResource("AnimationLibrary_mfcci")
 }
 
+[node name="XPBar" type="TextureProgressBar" parent="HUD"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 26.0
+grow_horizontal = 2
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("5_5tchh")
+texture_progress = ExtResource("5_vceqh")
+
+[node name="XPLabel" type="Label" parent="HUD/XPBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_s0di0")
+theme_override_font_sizes/font_size = 20
+text = "my level"
+horizontal_alignment = 1
+
 [node name="VFX" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -179,13 +197,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -394.0
-offset_top = -276.0
-offset_right = 394.0
-offset_bottom = 276.0
+offset_left = -502.0
+offset_top = -186.5
+offset_right = 502.0
+offset_bottom = 186.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_mfcci")
+theme = ExtResource("6_pr3t4")
 
 [node name="MarginContainer" type="MarginContainer" parent="PowerPanel"]
 layout_mode = 1
@@ -199,26 +217,38 @@ theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PowerPanel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PowerPanel/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="Panel" parent="PowerPanel/MarginContainer/VBoxContainer" instance=ExtResource("5_mfcci")]
+[node name="Label" type="Label" parent="PowerPanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(221, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "asdasdasdasdasdasdadsasddasdasdasd"
+autowrap_mode = 3
+
+[node name="GridContainer" type="GridContainer" parent="PowerPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 2
+
+[node name="PowerUp1" parent="PowerPanel/MarginContainer/HBoxContainer/GridContainer" instance=ExtResource("5_mfcci")]
+layout_mode = 2
+upgrade = ExtResource("8_t62tn")
+
+[node name="PowerUp2" parent="PowerPanel/MarginContainer/HBoxContainer/GridContainer" instance=ExtResource("5_mfcci")]
 layout_mode = 2
 
-[node name="Panel2" parent="PowerPanel/MarginContainer/VBoxContainer" instance=ExtResource("5_mfcci")]
+[node name="PowerUp3" parent="PowerPanel/MarginContainer/HBoxContainer/GridContainer" instance=ExtResource("5_mfcci")]
 layout_mode = 2
 
-[node name="Panel3" parent="PowerPanel/MarginContainer/VBoxContainer" instance=ExtResource("5_mfcci")]
+[node name="PowerUp4" parent="PowerPanel/MarginContainer/HBoxContainer/GridContainer" instance=ExtResource("5_mfcci")]
 layout_mode = 2
 
-[node name="Block" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="PowerUp5" parent="PowerPanel/MarginContainer/HBoxContainer/GridContainer" instance=ExtResource("5_mfcci")]
+layout_mode = 2
 
 [node name="Pause" type="Control" parent="."]
 visible = false

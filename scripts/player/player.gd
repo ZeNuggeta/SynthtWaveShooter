@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y += get_gravity().y * delta
 	
 	var current_velocity : Vector2 = Vector2(_mouvement_velocity.x,_mouvement_velocity.z)
-	var speed_modifier = sprint_modifier + crouch_modifier
+	var speed_modifier : float = sprint_modifier + crouch_modifier
 	_speed = default_speed + speed_modifier
 	
 	_input_dir = Input.get_vector("left","right","front","back")
