@@ -6,21 +6,21 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iyx0m"]
 shader = ExtResource("1_bl13t")
-shader_parameter/sky_color = Color(0.107421875, 0, 0.21484375, 1)
-shader_parameter/sky_horizon_color = Color(0.703125, 0.28564453, 0.4911232, 1)
+shader_parameter/sky_color = Color(0.078431375, 0, 0.18431373, 1)
+shader_parameter/sky_horizon_color = Color(0.039215688, 0, 0.4509804, 1)
 shader_parameter/sky_horizon_decay = 3.0
 shader_parameter/ground_color = Color(0, 0, 0, 1)
-shader_parameter/ground_horizon_color = Color(0.1, 0, 0.07, 1)
-shader_parameter/ground_horizon_decay = 28.0000004172336
+shader_parameter/ground_horizon_color = Color(0.03137255, 0, 0.47058824, 1)
+shader_parameter/ground_horizon_decay = 1.0
 shader_parameter/stars_enabled = true
 shader_parameter/stars_below_horizon = false
-shader_parameter/star_color = Color(0.95, 0.9, 0.6, 1)
-shader_parameter/star_radius = 0.3
-shader_parameter/star_density = 5.0
+shader_parameter/star_color = Color(0.48235294, 0.13333334, 0.5019608, 1)
+shader_parameter/star_radius = 0.19999999925492
+shader_parameter/star_density = 20.0000002905734
 shader_parameter/star_randomness = 1.0
 shader_parameter/star_seed = Vector2(0, 0)
 shader_parameter/grid_enabled = true
-shader_parameter/grid_color = Color(1, 0.8203125, 0, 1)
+shader_parameter/grid_color = Color(0.8156863, 0.5568628, 0.91764706, 1)
 shader_parameter/grid_depth = 1.0
 shader_parameter/grid_spacing = 2.0000000298024
 shader_parameter/grid_thickness = 0.03
@@ -29,12 +29,12 @@ shader_parameter/grid_max_distance_fade = 0.60000000894072
 shader_parameter/grid_energy = 1.20000001788144
 shader_parameter/sun_radius = 10.0
 shader_parameter/sun_smoothing = 0.35
-shader_parameter/sun_glow_color = Color(0.96, 0.9, 0.35, 1)
+shader_parameter/sun_glow_color = Color(0.5176471, 0.39215687, 0.6, 1)
 shader_parameter/sun_glow_radius = 30.0
 shader_parameter/sun_glow_intensity = 0.5
 shader_parameter/sun_gradient_enabled = true
-shader_parameter/sun_color_1 = Color(0.96, 0.9, 0.35, 1)
-shader_parameter/sun_color_2 = Color(1, 0.1875, 0, 1)
+shader_parameter/sun_color_1 = Color(1, 1, 1, 1)
+shader_parameter/sun_color_2 = Color(1, 0, 0, 1)
 shader_parameter/sun_gradient_pos_frac = 0.6
 shader_parameter/sun_gradient_span_frac = 0.8
 shader_parameter/sun_banding_enabled = true
@@ -58,8 +58,8 @@ adjustment_color_correction = ExtResource("1_iyx0m")
 
 [node name="Test" type="Node3D"]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9882979, 0.15253736, 0, -0.15253732, 0.9882978, 0, 0, 0)
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9972527, 0.0740736, 0, -0.07407358, 0.99725276, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_iyx0m")

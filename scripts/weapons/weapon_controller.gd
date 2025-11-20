@@ -70,43 +70,19 @@ func spawn_weapon_model()-> void:
 
 
 func shoot()->void:
-	anim_player.play("shoot")
+	anim_player.play("shoot",-1,Global.stats["FireRate"])
 	weapon_holder.add_weapon_kick(0.1,0.1,0.1)
 	weapon_sfx.play()
 	if raycast.is_colliding():
 		var target : Node3D = raycast.get_collider()
 		var point : Vector3 = raycast.get_collision_point()
-		if target is Area3D and target.is_in_group("body"):
-			target.take_damage(current_weapon.damage)
+		if target is HurtBox and target.is_in_group("body"):
+			target.take_damage(current_weapon.damage * Global.stats["Damage"])
 			ParticalPool.spawn_partical(point,get_tree().current_scene.get_node_or_null("CurrentLevel"))
-		elif target is Area3D and target.is_in_group("head"):
-			target.take_damage(current_weapon.damage * head_shot_multiplier)
+		elif target is HurtBox and target.is_in_group("head"):
+			target.take_damage(current_weapon.damage * head_shot_multiplier* Global.stats["Damage"])
 			ParticalPool.spawn_partical(point,get_tree().current_scene.get_node_or_null("CurrentLevel"))
-		
-#func apply_clip_and_fov_shader_to_view_model(node3d : Node3D, fov_or_negative_for_unchanged : float = -1.0) ->void :
-	#var all_mesh_instances : Array[Node] = node3d.find_children("*", "MeshInstance3D")
-	#if node3d is MeshInstance3D:
-		#all_mesh_instances.push_back(node3d)
-	#for mesh_instance : MeshInstance3D in all_mesh_instances:
-		#var mesh : Mesh = mesh_instance.mesh
-		#mesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-		#for surface_idx : int in mesh.get_surface_count():
-			#var base_mat : Material = mesh.surface_get_material(surface_idx)
-			#if not base_mat is BaseMaterial3D: continue
-			#var weapon_shader_material : ShaderMaterial = ShaderMaterial.new()
-			#weapon_shader_material.shader = preload("uid://dd5k4yr6jim7p")
-			#weapon_shader_material.set_shader_parameter("texture_albedo", base_mat.albedo_texture)
-			#weapon_shader_material.set_shader_parameter("texture_metallic", base_mat.metallic_texture)
-			#weapon_shader_material.set_shader_parameter("texture_roughness", base_mat.roughness_texture)
-			#weapon_shader_material.set_shader_parameter("texture_normal", base_mat.normal_texture)
-			#weapon_shader_material.set_shader_parameter("albedo", base_mat.albedo_color)
-			#weapon_shader_material.set_shader_parameter("metallic", base_mat.metallic)
-			#weapon_shader_material.set_shader_parameter("specular", base_mat.metallic_specular)
-			#weapon_shader_material.set_shader_parameter("roughness", base_mat.roughness)
-			#weapon_shader_material.set_shader_parameter("viewmodel_fov", fov_or_negative_for_unchanged)
-			#var tex_channels : Dictionary = { 0: Vector4(1., 0., 0., 0.), 1: Vector4(0., 1., 0., 0.), 2: Vector4(0., 0., 1., 0.), 3: Vector4(1., 0., 0., 1.), 4: Vector4() }
-			#weapon_shader_material.set_shader_parameter("metallic_texture_channel", tex_channels[base_mat.metallic_texture_channel])
-			#mesh.surface_set_material(surface_idx, weapon_shader_material)
+
 
 func weapon_tilt(input_x:float, delta:float)->void:
 	if current_weapon_model:

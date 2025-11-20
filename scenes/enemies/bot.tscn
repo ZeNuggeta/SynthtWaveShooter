@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bh5744ekuh3sn"]
+
+[ext_resource type="PackedScene" uid="uid://ccrk55ebba6wa" path="res://scenes/enemies/base_enemy.tscn" id="1_gtugy"]
+[ext_resource type="Script" uid="uid://d1eo3unyiu8dk" path="res://scripts/stats.gd" id="2_p4124"]
+[ext_resource type="PackedScene" uid="uid://gmc87frw5xdr" path="res://assets/bot/Bot.blend" id="3_gtugy"]
+
+[sub_resource type="Resource" id="Resource_4dswm"]
+resource_local_to_scene = true
+script = ExtResource("2_p4124")
+max_health = 24.0
+metadata/_custom_type_script = "uid://d1eo3unyiu8dk"
+
+[node name="Bot" node_paths=PackedStringArray("mesh", "anim") instance=ExtResource("1_gtugy")]
+stats = SubResource("Resource_4dswm")
+mesh = NodePath("Visuals/Bot/metarig/Skeleton3D/BASE_Low Poly Man")
+anim = NodePath("Visuals/Bot/AnimationPlayer")
+
+[node name="Head" parent="Visuals" index="1"]
+transform = Transform3D(-0.8, -9.996209e-09, -6.922008e-08, -2.8759214e-15, 0.7917864, -0.1143435, 6.993818e-08, -0.11434346, -0.79178613, -3.9528283e-09, 0.4250399, -0.045215003)
+external_skeleton = NodePath("../Bot/metarig/Skeleton3D")
+
+[node name="Bot" parent="Visuals" index="4" instance=ExtResource("3_gtugy")]
+transform = Transform3D(-0.8, 0, -6.9938224e-08, 0, 0.8, 0, 6.9938224e-08, 0, -0.8, 0, -1, 0)
+
+[editable path="Visuals/Bot"]

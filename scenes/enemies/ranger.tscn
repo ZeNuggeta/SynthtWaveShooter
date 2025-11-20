@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b02gq3arv2rth"]
+[gd_scene load_steps=5 format=3 uid="uid://b02gq3arv2rth"]
 
 [ext_resource type="PackedScene" uid="uid://ccrk55ebba6wa" path="res://scenes/enemies/base_enemy.tscn" id="1_sp1ca"]
 [ext_resource type="Script" uid="uid://d1eo3unyiu8dk" path="res://scripts/stats.gd" id="2_2r13h"]
-[ext_resource type="Shader" uid="uid://bps4j05t72kiv" path="res://shaders/chrome.gdshader" id="3_eae5a"]
 [ext_resource type="PackedScene" uid="uid://gmc87frw5xdr" path="res://assets/bot/Bot.blend" id="4_2r13h"]
 
 [sub_resource type="Resource" id="Resource_drc0v"]
@@ -11,49 +10,18 @@ script = ExtResource("2_2r13h")
 max_health = 12.0
 metadata/_custom_type_script = "uid://d1eo3unyiu8dk"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bxwej"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("3_eae5a")
-shader_parameter/normal_depth = 0.25
-shader_parameter/color_compression = 6.0
-
-[node name="Ranger" instance=ExtResource("1_sp1ca")]
+[node name="Ranger" node_paths=PackedStringArray("mesh", "anim") instance=ExtResource("1_sp1ca")]
 stats = SubResource("Resource_drc0v")
+mesh = NodePath("Visuals/Ranger/metarig/Skeleton3D/BASE_Low Poly Man")
+anim = NodePath("Visuals/Ranger/AnimationPlayer")
 ranged = true
-stop_range = 15.0
+stop_range = 8.0
 attack_speed = 0.5
 
-[node name="Bot" parent="Visuals" index="1"]
-visible = false
+[node name="Head" parent="Visuals" index="1"]
+bone_idx = -1
 
-[node name="BASE_Low Poly Man" parent="Visuals/Bot/metarig/Skeleton3D" index="0"]
-surface_material_override/0 = SubResource("ShaderMaterial_bxwej")
-
-[node name="Bot2" parent="Visuals" index="5" instance=ExtResource("4_2r13h")]
+[node name="Ranger" parent="Visuals" index="4" instance=ExtResource("4_2r13h")]
 transform = Transform3D(-0.8, 0, -1.2079664e-07, 0, 0.8, 0, 1.2079664e-07, 0, -0.8, 0, -1, 0)
 
-[node name="Skeleton3D" parent="Visuals/Bot2/metarig" index="0"]
-bones/0/position = Vector3(7.1054274e-15, 1.0511632, 0.04813197)
-bones/0/rotation = Quaternion(0.19296324, 1.1696888e-07, 2.3003018e-08, 0.98120606)
-bones/1/rotation = Quaternion(-0.02317115, -1.191773e-07, -2.7622207e-09, 0.9997316)
-bones/2/rotation = Quaternion(0.20689778, 1.1662992e-07, 2.4664143e-08, 0.9783626)
-bones/3/rotation = Quaternion(-0.056820348, -0.026323678, -0.046182808, 0.99696827)
-bones/4/rotation = Quaternion(-0.064671725, 0.029649446, 0.05431561, 0.99598616)
-bones/5/rotation = Quaternion(0.07416293, -0.006217385, 0.0049232473, 0.9972146)
-bones/6/rotation = Quaternion(-0.2999921, 0.003292346, -0.00071709027, 0.9539358)
-bones/8/rotation = Quaternion(-0.14864744, 0.42637706, -0.49192864, 0.7443875)
-bones/9/rotation = Quaternion(0.16022675, 0.20267633, -0.23649201, 0.9366543)
-bones/12/rotation = Quaternion(0.4185182, 0.15379559, 0.34592885, 0.8255439)
-bones/13/rotation = Quaternion(0.27171782, -0.20277043, 0.1308601, 0.9316272)
-bones/14/rotation = Quaternion(-0.08494227, 0.016724808, -0.52549726, 0.8463792)
-bones/19/rotation = Quaternion(0.9473968, 0.020513458, -0.018537542, 0.31886482)
-bones/20/rotation = Quaternion(0.15015665, 0.02065805, 0.04820429, 0.9872703)
-bones/21/rotation = Quaternion(-0.43787527, -0.03761595, -0.18253982, 0.87950534)
-bones/24/rotation = Quaternion(0.98937756, -0.030194223, 0.015667249, 0.14133315)
-bones/25/rotation = Quaternion(0.012162069, -0.020652607, -0.048950635, 0.9985136)
-bones/26/rotation = Quaternion(-0.5404959, 0.05742956, 0.16858837, 0.8222798)
-bones/27/rotation = Quaternion(0.13239981, 0.952087, -0.27305463, -0.03797163)
-
-[editable path="Visuals/Bot"]
-[editable path="Visuals/Bot2"]
+[editable path="Visuals/Ranger"]

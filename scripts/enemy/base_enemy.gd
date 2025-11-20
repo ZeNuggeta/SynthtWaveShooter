@@ -4,6 +4,8 @@ class_name BaseEnemy
 signal no_health
 signal damaged
 
+const CHROME = preload("uid://bps4j05t72kiv")
+
 @export_group("References")
 @export var stats : Stats
 @export var visual : Node3D
@@ -17,9 +19,9 @@ signal damaged
 @export_subgroup("Attack")
 @export var ranged : bool = false
 @export var stop_range : float = 1.0
-@export var bullet_speed : float = 12.0
+@export var bullet_speed : float = 6.0
 @export var attack_speed : float = 1.0
-@export var points : int = 100
+@export_subgroup("Rewards")
 @export var xp : int = 10
 
 @onready var eyes: Node3D = $Eyes
@@ -30,10 +32,12 @@ signal damaged
 @onready var head_hurt_box: HurtBox = $Visuals/Head/HeadHurtBox
 @onready var body_hurt_box: HurtBox = $Visuals/BodyHurtBox
 @onready var muzzle: Marker3D = $Visuals/Muzzle
+@onready var attack_timer: Timer = $AttackTimer
 
+@onready var shader : ShaderMaterial = ShaderMaterial.new()
 
 var player : Player
-var base_mat : ShaderMaterial
+var base_mat : Material
 
 const UPDATE_INTERVAL: float = 0.25
 var time_elapsed: float = 0.0
@@ -47,8 +51,9 @@ func _ready() -> void:
 	stats.no_health.connect(dead)
 	body_hurt_box.took_damage.connect(take_damage)
 	head_hurt_box.took_damage.connect(take_damage)
-	anim.animation_finished.connect(_attack_end)
 	
+	shader.shader = CHROME
+	mesh.set_surface_override_material(0,shader)
 	base_mat = mesh.get_surface_override_material(0)
 
 func _physics_process(delta: float) -> void:
@@ -70,11 +75,11 @@ func _physics_process(delta: float) -> void:
 		visual.rotation.y = lerp_angle(visual.rotation.y,eyes.rotation.y,turn_speed * delta)
 	
 	if global_position.distance_to(player.global_position) <= stop_range:
-		if ranged:
-			anim.play('stand_range',-1,attack_speed)
-		else:
-			pass
+		if ranged and !attack_timer.time_left:
+			anim.play('stand_range')
+			attack_timer.start()
 	else:
+		attack_timer.stop()
 		anim.play('walk')
 		move_and_slide()
 	
@@ -95,20 +100,13 @@ func tick_update() -> void:
 func climb()->void:
 	velocity.y = 4.0
 
-func _attack_end(anim_name:String)->void:
-	if anim_name != "walk":
-		BulletPool.spawn_bullet(muzzle,bullet_speed)
-
-
 func take_damage(value:float)->void:
 	if _is_dead:return
-	
 	stats.health -= value
 	
 	base_mat.set_shader_parameter("color_compression",-6)
 	_stun = true
 	
-	Global.points += points
 	damaged.emit()
 	if not _is_dead:
 		await get_tree().create_timer(0.2).timeout
@@ -116,7 +114,7 @@ func take_damage(value:float)->void:
 		_stun = false
 
 func set_difficulty(difficulty:int)->void:
-	stats.max_health = stats.max_health + difficulty - 1
+	stats.max_health = stats.max_health * difficulty
 	stats.health = stats.max_health
 
 func dead()->void:
@@ -127,4 +125,11 @@ func dead()->void:
 	hit_box.monitorable = false
 	base_mat.set_shader_parameter("color_compression",6)
 	Global.gain_experience(xp)
+	await get_tree().create_timer(0.2).timeout
 	queue_free()
+
+func attack()->void:
+	BulletPool.spawn_bullet(get_tree().current_scene.get_node_or_null("CurrentLevel"),muzzle,bullet_speed)
+
+func _on_attack_timer_timeout() -> void:
+	attack()

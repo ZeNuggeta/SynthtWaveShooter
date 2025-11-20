@@ -1,5 +1,5 @@
 extends Control
-class_name UpgradeSlot
+class_name UpgradePanel
 
 @export var upgrade : BaseUpgrade
 @onready var icon: TextureRect = $MarginContainer/VBoxContainer/Icon
@@ -9,16 +9,19 @@ class_name UpgradeSlot
 const DURATION : float = 0.05
 
 func _ready() -> void:
-	update_card()
+	Global.update_powerups.connect(update_card)
 
 func update_card()->void:
 	if upgrade:
 		icon.texture = upgrade.icon
-		progress_bar.max_value = upgrade.max_ups
-		progress_bar.step = upgrade.max_ups / upgrade.amount
+		upgrade_name.text = upgrade.upgrade_name
+		progress_bar.max_value = upgrade.max_ups - 1
+		progress_bar.value = Global.stats[upgrade.upgrade_name] - 1
 
 func _on_button_pressed() -> void:
-	pass
+	if upgrade :
+		Global.upgrade_stats(upgrade,upgrade.amount)
+		
 
 func _on_button_mouse_entered() -> void:
 	_tween("scale",Vector2.ONE * 1.05,DURATION)

@@ -8,5 +8,6 @@ script = ExtResource("1_f5kyy")
 upgrade_name = "Regen"
 icon = ExtResource("1_44cnk")
 upgrade_type = 1
-amount = Array[float]([0.2])
+amount = 1.0
+max_ups = 20.0
 metadata/_custom_type_script = "uid://v8w608i0p1ty"

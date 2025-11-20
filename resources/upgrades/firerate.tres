@@ -1,10 +1,13 @@
-[gd_resource type="Resource" script_class="BaseUpgrade" load_steps=2 format=3 uid="uid://pgduafbj6q64"]
+[gd_resource type="Resource" script_class="BaseUpgrade" load_steps=3 format=3 uid="uid://pgduafbj6q64"]
 
 [ext_resource type="Script" uid="uid://v8w608i0p1ty" path="res://resources/upgrades/base_upgrade.gd" id="1_dk5gs"]
+[ext_resource type="Texture2D" uid="uid://bt2ufvw0x1dw2" path="res://textures/icons/firerate.svg" id="1_fxw0l"]
 
 [resource]
 script = ExtResource("1_dk5gs")
 upgrade_name = "FireRate"
+icon = ExtResource("1_fxw0l")
 upgrade_type = 3
-amount = Array[float]([0.1, 0.1, 0.1, 0.1, 0.1])
+amount = 0.05
+max_ups = 4.0
 metadata/_custom_type_script = "uid://v8w608i0p1ty"

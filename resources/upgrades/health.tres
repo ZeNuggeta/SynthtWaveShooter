@@ -1,9 +1,12 @@
-[gd_resource type="Resource" script_class="BaseUpgrade" load_steps=2 format=3 uid="uid://dotqcvxq0h8s4"]
+[gd_resource type="Resource" script_class="BaseUpgrade" load_steps=3 format=3 uid="uid://dotqcvxq0h8s4"]
 
+[ext_resource type="Texture2D" uid="uid://d4huf7agf3a7j" path="res://textures/icons/health.svg" id="1_71t3f"]
 [ext_resource type="Script" uid="uid://v8w608i0p1ty" path="res://resources/upgrades/base_upgrade.gd" id="1_wili6"]
 
 [resource]
 script = ExtResource("1_wili6")
-upgrade_name = "Max health"
-amount = Array[float]([0.2])
+upgrade_name = "Health"
+icon = ExtResource("1_71t3f")
+amount = 0.2
+max_ups = 4.0
 metadata/_custom_type_script = "uid://v8w608i0p1ty"

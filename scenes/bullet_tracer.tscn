@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7s1qv74n7g7r"]
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_qbpx6"]
+size = 0.015
+sections = 2
+section_length = 0.5
+section_segments = 1
+
+[sub_resource type="Gradient" id="Gradient_qbpx6"]
+offsets = PackedFloat32Array(0, 0.09565217, 0.83913046, 1)
+colors = PackedColorArray(0, 0.31666684, 1, 0, 0, 1, 0.953125, 1, 0, 0.3203125, 1, 1, 0, 1, 0.95000005, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dk6yj"]
+gradient = SubResource("Gradient_qbpx6")
+height = 256
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40sui"]
+transparency = 1
+cull_mode = 2
+albedo_texture = SubResource("GradientTexture2D_dk6yj")
+emission_enabled = true
+emission_texture = SubResource("GradientTexture2D_dk6yj")
+
+[node name="BulletTracer" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -0.5017173)
+mesh = SubResource("RibbonTrailMesh_qbpx6")
+surface_material_override/0 = SubResource("StandardMaterial3D_40sui")

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://gmc87frw5xdr"
-path="res://.godot/imported/Bot.blend-2c945193bde71bcb7763581b3834acc2.scn"
+uid="uid://c548glilahwe8"
+path="res://.godot/imported/Head.blend-299d3e6ab373845332809f23a1d4f508.scn"
 
 [deps]
 
-source_file="res://assets/bot/Bot.blend"
-dest_files=["res://.godot/imported/Bot.blend-2c945193bde71bcb7763581b3834acc2.scn"]
+source_file="res://assets/bot/Head.blend"
+dest_files=["res://.godot/imported/Head.blend-299d3e6ab373845332809f23a1d4f508.scn"]
 
 [params]
 
@@ -37,15 +37,7 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={
-"materials": {
-"BaseMat": {
-"use_external/enabled": false,
-"use_external/fallback_path": "res://textures/mats/Chrome.tres",
-"use_external/path": "uid://b6nahd56pmi6v"
-}
-}
-}
+_subresources={}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true

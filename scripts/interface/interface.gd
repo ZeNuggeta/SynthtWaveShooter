@@ -8,6 +8,7 @@ class_name Interface
 @export var damage_indicator: Control
 @export var animation_player: AnimationPlayer 
 @export var power_panel: Panel
+@export var power_up_container: GridContainer
 
 @export_group("VFX")
 @export var vhs_toggle : bool = true
@@ -17,11 +18,12 @@ class_name Interface
 @onready var info: RichTextLabel = $HUD/Score
 @onready var xp_bar: TextureProgressBar = $HUD/XPBar
 @onready var xp_label: Label = $HUD/XPBar/XPLabel
+@onready var description_label: Label = $PowerPanel/MarginContainer/HBoxContainer/DescriptionLabel
 
 var stats_handler : StatsHandler
 
 func _ready() -> void:
-	Global.interface = self
+	
 	if player:
 		stats_handler = player.stats_handler
 		
@@ -30,12 +32,19 @@ func _ready() -> void:
 		damage_indicator.modulate = Color(255,255,255,0)
 		
 		stats_handler.health_changed.connect(_update_health)
-		#wave_manager.update_info.connect(_update_info)
+		wave_manager.update_info.connect(_update_info)
 		
 		_update_health(stats_handler.stats.health)
 	
+	Global.update_xp.connect(_update_exp)
+	Global.update_powerups.connect(_update_power_ups)
+	_update_exp()
+	
+	for p : UpgradePanel in power_up_container.get_children():
+		p.upgrade = available_upgrades[p.get_index()]
+		p.update_card()
+
 	power_panel.hide()
-	update_exp()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("upgrade_tab"):
@@ -47,27 +56,17 @@ func _update_health(value:float,look_at:Node3D=null) -> void:
 		damage_indicator.rotation = -look_at.rotation.y
 		animation_player.play("fade_out")
 
-func _update_info(wave:int,enemy_count:int=0) -> void:
-	if wave >= 0:
-		info.text = "[wave amp=20 freq =15] wave : %s" %wave + " score : %s |" %Global.points + " enemys left : %s [/wave]" %enemy_count
-	else:
-		match wave:
-			-10:
-				info.text = "Well Done!!! Finished all waves !!"
-				
-			-20:
-				info.text = "[rainbow] Wave Finished"
-				await get_tree().create_timer(0.5).timeout
-				wave_manager.intermission()
-			-30:
-				info.text = "Next Wave in %s" %enemy_count + "..."
+func _update_info(stats:String,rainbow:bool=false) -> void:
+	var rainbow_text : String = "[rainbow]" if rainbow else ""
+	info.text = "[wave amp=20 freq =15]" + rainbow_text + stats 
 
-func update_exp()->void:
+func _update_exp()->void:
 	xp_label.text = "level : %s" %Global.level
 	xp_bar.max_value = Global.experience_required
 	xp_bar.value = Global.experience
 
 func _choose_power_up_menu()->void:
+	_update_power_ups()
 	power_panel.visible = !power_panel.visible
 	get_tree().paused = power_panel.visible
 	
@@ -75,3 +74,8 @@ func _choose_power_up_menu()->void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _update_power_ups()->void:
+	var to_say : String = "Skill points : %s\nLevel : %s\nHealth : x%s\nRegen : x%s\nDamage: x%s\nFirerate : x%s\nQuantity : +%s\n" 
+	var stats : Dictionary[String,float] = Global.stats
+	description_label.text = to_say % [Global.skill_points,Global.level,stats["Health"],stats["Regen"],stats["Damage"],stats["FireRate"],stats["Quantity"]]

@@ -1,14 +1,19 @@
-[gd_scene load_steps=15 format=3 uid="uid://d3f4d5lvcbvvk"]
+[gd_scene load_steps=20 format=3 uid="uid://d3f4d5lvcbvvk"]
 
 [ext_resource type="Script" uid="uid://d3bgt0t4x73f7" path="res://scripts/interface/interface.gd" id="1_t72xj"]
 [ext_resource type="Script" uid="uid://dmbo7s8gfxba4" path="res://scripts/interface/retical_draw.gd" id="1_tg63u"]
+[ext_resource type="Script" uid="uid://v8w608i0p1ty" path="res://resources/upgrades/base_upgrade.gd" id="2_0qpc3"]
 [ext_resource type="Shader" uid="uid://cwuyv0alidwt1" path="res://shaders/VHS.gdshader" id="2_lw6my"]
+[ext_resource type="Resource" uid="uid://pgduafbj6q64" path="res://resources/upgrades/firerate.tres" id="4_32vrv"]
 [ext_resource type="FontFile" uid="uid://dquy36gl2xnep" path="res://assets/fonts/windows-bold[1].ttf" id="4_s0di0"]
 [ext_resource type="Texture2D" uid="uid://dk17iypac8xw0" path="res://textures/icons/indicator.svg" id="4_uidac"]
 [ext_resource type="Texture2D" uid="uid://b05gjp30xi7uq" path="res://textures/icons/bar_background.png" id="5_5tchh"]
 [ext_resource type="PackedScene" uid="uid://36wq7mxjghx6" path="res://scenes/power_up_panel.tscn" id="5_mfcci"]
+[ext_resource type="Resource" uid="uid://dotqcvxq0h8s4" path="res://resources/upgrades/health.tres" id="5_ttflf"]
 [ext_resource type="Texture2D" uid="uid://cms3unk7vpgp3" path="res://textures/icons/bar_fill.png" id="5_vceqh"]
 [ext_resource type="Theme" uid="uid://ctovemxdyxlqj" path="res://textures/Hud.tres" id="6_pr3t4"]
+[ext_resource type="Resource" uid="uid://1tef1xrt0ytv" path="res://resources/upgrades/quantity.tres" id="6_prp0k"]
+[ext_resource type="Resource" uid="uid://htnnm882u0nl" path="res://resources/upgrades/regen.tres" id="7_dtbhd"]
 [ext_resource type="Resource" uid="uid://dxb5tilet2q8b" path="res://resources/upgrades/damage.tres" id="8_t62tn"]
 
 [sub_resource type="Animation" id="Animation_mfcci"]
@@ -56,12 +61,14 @@ shader_parameter/wiggle_speed = 25.0
 shader_parameter/smear = 0.50000002375
 shader_parameter/blur_samples = 15
 
-[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("damage_indicator", "animation_player", "power_panel")]
+[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("damage_indicator", "animation_player", "power_panel", "power_up_container")]
 process_mode = 3
 script = ExtResource("1_t72xj")
+available_upgrades = Array[ExtResource("2_0qpc3")]([ExtResource("5_ttflf"), ExtResource("7_dtbhd"), ExtResource("8_t62tn"), ExtResource("4_32vrv"), ExtResource("6_prp0k")])
 damage_indicator = NodePath("HUD/DamageIndicator")
 animation_player = NodePath("HUD/DamageIndicator/AnimationPlayer")
 power_panel = NodePath("PowerPanel")
+power_up_container = NodePath("PowerPanel/MarginContainer/HBoxContainer/GridContainer")
 
 [node name="Crosshair" type="CenterContainer" parent="."]
 anchors_preset = 15
@@ -171,6 +178,7 @@ text = "my level"
 horizontal_alignment = 1
 
 [node name="VFX" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -221,11 +229,13 @@ theme_override_constants/margin_bottom = 40
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="Label" type="Label" parent="PowerPanel/MarginContainer/HBoxContainer"]
+[node name="DescriptionLabel" type="Label" parent="PowerPanel/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(221, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "asdasdasdasdasdasdadsasddasdasdasd"
+text = "Skill points : l
+level
+"
 autowrap_mode = 3
 
 [node name="GridContainer" type="GridContainer" parent="PowerPanel/MarginContainer/HBoxContainer"]

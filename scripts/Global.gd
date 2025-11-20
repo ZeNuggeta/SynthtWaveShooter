@@ -1,17 +1,18 @@
 extends Node
 
 signal shake_cam(amount:float,seconds:float)
+signal update_xp
+signal update_powerups
 
-var points : int = 0
+var kills : int = 0
 
-var max_hp : float = 1.0
-var regen : float = 1.0
-var shield : float = 1.0
-var damage : float = 1.0
-var fire_rate : float = 1.0
-var mag_size : int = 1
-
-var interface : Interface
+var stats : Dictionary[String,float] = {
+	"Health" : 1.0,
+	"Regen" : 1.0,
+	"Damage" : 1.0,
+	"FireRate" : 1.0,
+	"Quantity" : 1.0,
+}
 
 var level : int = 1
 var experience : float = 0
@@ -29,12 +30,19 @@ func gain_experience(amount:float)->void:
 	while experience >= experience_required:
 		experience -= experience_required
 		level_up()
-	interface.update_exp()
+	update_xp.emit()
 
 func level_up()->void:
 	level += 1
 	skill_points += 1
 	experience_required = get_required_exp(level + 1)
+
+func upgrade_stats(upgrade:BaseUpgrade,amount:float)->void:
+	if skill_points > 0 and stats[upgrade.upgrade_name] < upgrade.max_ups:
+		stats[upgrade.upgrade_name] += amount
+		skill_points -= 1
+		stats[upgrade.upgrade_name] = clampf(stats[upgrade.upgrade_name],1.0,upgrade.max_ups)
+		update_powerups.emit()
 
 func shake_camera(amount:float,seconds:float)->void:
 	shake_cam.emit(amount,seconds)

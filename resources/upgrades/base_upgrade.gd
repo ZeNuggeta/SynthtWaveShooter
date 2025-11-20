@@ -1,7 +1,7 @@
 extends Resource
 class_name BaseUpgrade
 
-enum TYPES {HEALTH,REGEN,DAMAGE,FIRERATE,AMMO}
+enum TYPES {HEALTH,REGEN,DAMAGE,FIRERATE,QUANTITY}
 
 @export var upgrade_name : String
 @export var icon : Texture2D
