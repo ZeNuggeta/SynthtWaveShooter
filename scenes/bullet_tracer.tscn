@@ -1,10 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7s1qv74n7g7r"]
+[gd_scene load_steps=6 format=3 uid="uid://b7s1qv74n7g7r"]
 
-[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_qbpx6"]
-size = 0.015
-sections = 2
-section_length = 0.5
-section_segments = 1
+[ext_resource type="Script" uid="uid://brnixr0a3pd3e" path="res://scripts/bullet_tracer.gd" id="1_dk6yj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dk6yj"]
+size = Vector3(0.05, 1, 0.1)
 
 [sub_resource type="Gradient" id="Gradient_qbpx6"]
 offsets = PackedFloat32Array(0, 0.09565217, 0.83913046, 1)
@@ -24,8 +23,9 @@ emission_enabled = true
 emission_texture = SubResource("GradientTexture2D_dk6yj")
 
 [node name="BulletTracer" type="Node3D"]
+script = ExtResource("1_dk6yj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -0.5017173)
-mesh = SubResource("RibbonTrailMesh_qbpx6")
+mesh = SubResource("BoxMesh_dk6yj")
 surface_material_override/0 = SubResource("StandardMaterial3D_40sui")

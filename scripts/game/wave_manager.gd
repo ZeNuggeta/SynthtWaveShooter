@@ -14,10 +14,12 @@ const OFFSET : Vector3 = Vector3(0,1.0,0)
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var intermission_timer: Timer = $IntermissionTimer
 @export_group("Wave setup")
+@export var infinite_waves : bool = true
 @export var waves : Array[Wave]
 @export var between_round_time : float = 5.0
 @export var mob_wait_time : float = 1.0
 
+var wave_displayer : int 
 var current_wave : int
 
 var mobs_spawned_per_round : int 
@@ -29,6 +31,7 @@ var moving_to_next_wave : bool
 
 func _ready() -> void:
 	current_wave = 0
+	wave_displayer = current_wave
 	position_to_next_wave()
 	intermission_timer.wait_time = between_round_time
 	spawn_timer.wait_time = mob_wait_time
@@ -38,9 +41,13 @@ func position_to_next_wave()->void:
 	if enemies_left == 0:
 		update_info.emit("Wave finished !!! Starting new wave...",true)
 		current_wave +=1
+		wave_displayer += 1
 		if current_wave > waves.size():
-			update_info.emit("No more waves! Game ended")
-			return
+			if infinite_waves:
+				current_wave = 1
+			else:
+				update_info.emit("No more waves! Game ended")
+				return
 		intermission_timer.start()
 		await intermission_timer.timeout
 		update_info.emit("Wave started!!!")
@@ -61,7 +68,7 @@ func spawn_type()->void:
 			enemy.damaged.connect(_damaged_enemy)
 			enemy.no_health.connect(_dead_enemy)
 			enemy.player = player
-			enemy.set_difficulty(current_wave)
+			enemy.set_difficulty(wave_displayer)
 			
 			enemy_holder.add_child(enemy)
 			enemy.global_position = random_spawn.global_position + OFFSET
@@ -69,13 +76,13 @@ func spawn_type()->void:
 			mobs_spawned_per_round -= 1
 			spawn_timer.start()
 			await spawn_timer.timeout
-			update_info.emit("Enemies left : %s " %enemies_to_kill + "| Current wave : %s" %current_wave)
+			update_info.emit("Enemies left : %s | Current wave : %s" %[enemies_to_kill,wave_displayer])
 
 func _damaged_enemy()->void:
 	enemy_hit.emit(false)
 
 func _dead_enemy()->void:
 	enemies_to_kill -= 1
-	update_info.emit("Enemies left : %s | Current wave : %s" %[enemies_to_kill,current_wave])
+	update_info.emit("Enemies left : %s | Current wave : %s" %[enemies_to_kill,wave_displayer])
 	if enemies_to_kill == 0:
 		position_to_next_wave()

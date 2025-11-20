@@ -7,10 +7,26 @@ extends Node
 @onready var music: AudioStreamPlayer = $Music
 @onready var combo_timer: Timer = $ComboTimer
 
+@export var playlist : Array[AudioStream]
+
+var current_track : AudioStream
 var _in_combo : bool = false
 
 func _ready() -> void:
 	wave_manager.enemy_hit.connect(_enemy_hit)
+	music.finished.connect(shuffle_music)
+	randomize()
+	shuffle_music()
+	
+
+func shuffle_music()->void:
+	var new_track : AudioStream = playlist.pick_random()
+	if playlist.size() > 1 and new_track == current_track :
+		shuffle_music()
+	else:
+		current_track = new_track
+		music.stream = current_track
+		music.play()
 
 func _enemy_hit(dead : bool)->void:
 	if dead:

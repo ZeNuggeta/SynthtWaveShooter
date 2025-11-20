@@ -7,5 +7,4 @@
 script = ExtResource("1_wlhjo")
 weapon_name = "G19"
 weapon_model = ExtResource("2_efbll")
-weapon_type = 1
 metadata/_custom_type_script = "uid://b2bsym4r5yr41"

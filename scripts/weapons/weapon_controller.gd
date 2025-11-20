@@ -1,13 +1,14 @@
 extends Node
 class_name WeaponController
 
+signal update_ammo
 
+const BULLET_TRACER : PackedScene = preload("res://scenes/bullet_tracer.tscn")
 
 @export_group("Reference")
 @export var player : Player
 @export var current_weapon : Weapon
 @export var weapon_holder : Node3D
-@export var raycast : RayCast3D
 @export var weapon_sfx : AudioStreamPlayer
 
 @export_group("Weapon Effects")
@@ -18,23 +19,25 @@ class_name WeaponController
 
 var current_weapon_model : Node3D
 var anim_player : AnimationPlayer
-
+var muzzle : Node3D
 
 var def_weapon_holder_pos : Vector3
 var mouse_input : Vector2
 
 var _shot_hold : bool = false
+var raycast : RayCast3D
+var max_ammo : int = 0
+var ammo : int = 0
 var head_shot_multiplier : float = 2.0
 
 func _ready() -> void:
 	if current_weapon:
 		spawn_weapon_model()
-		
+		Global.update_powerups.connect(update_magsize)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		mouse_input = event.relative
-
 
 func _process(delta: float) -> void:
 	if !current_weapon:return
@@ -43,8 +46,7 @@ func _process(delta: float) -> void:
 	weapon_bob(player._mouvement_velocity.length(), delta)
 	
 	
-	if Input.is_action_pressed("fire") and !anim_player.is_playing():
-		
+	if Input.is_action_pressed("fire") and !anim_player.is_playing() and ammo > 0:
 		match current_weapon.weapon_type:
 			current_weapon.TYPES.SINGLE:
 				if !_shot_hold:
@@ -53,8 +55,12 @@ func _process(delta: float) -> void:
 			current_weapon.TYPES.AUTO:
 				shoot()
 	
-	if Input.is_action_just_released("fire"):
+	elif Input.is_action_just_released("fire"):
 		_shot_hold = false
+	
+	if Input.is_action_just_pressed("reload") and !anim_player.is_playing() and ammo < max_ammo:
+		reload()
+		
 
 func spawn_weapon_model()-> void:
 	if current_weapon_model:
@@ -66,23 +72,54 @@ func spawn_weapon_model()-> void:
 		weapon_holder.add_child(current_weapon_model)
 		current_weapon_model.name = current_weapon.weapon_name
 		anim_player = current_weapon_model.get_node_or_null("AnimationPlayer")
+		muzzle = current_weapon_model.get_node_or_null("Muzzle")
+		raycast = current_weapon_model.get_node_or_null("RayCast3D")
+		max_ammo = current_weapon.max_ammo
+		ammo = max_ammo
 		def_weapon_holder_pos = current_weapon_model.position
 
+func reload()->void:
+	anim_player.play("reload")
+	ammo = max_ammo
+	update_ammo.emit(ammo,max_ammo)
+
+
+func update_magsize()->void:
+	max_ammo = current_weapon.max_ammo + int(Global.stats["Quantity"])
+	ammo = current_weapon.max_ammo
+	update_ammo.emit(ammo,max_ammo)
 
 func shoot()->void:
 	anim_player.play("shoot",-1,Global.stats["FireRate"])
 	weapon_holder.add_weapon_kick(0.1,0.1,0.1)
 	weapon_sfx.play()
+	var bullet_target : Vector3 = raycast.global_transform * raycast.target_position
 	if raycast.is_colliding():
 		var target : Node3D = raycast.get_collider()
 		var point : Vector3 = raycast.get_collision_point()
+		bullet_target = point
 		if target is HurtBox and target.is_in_group("body"):
 			target.take_damage(current_weapon.damage * Global.stats["Damage"])
 			ParticalPool.spawn_partical(point,get_tree().current_scene.get_node_or_null("CurrentLevel"))
 		elif target is HurtBox and target.is_in_group("head"):
 			target.take_damage(current_weapon.damage * head_shot_multiplier* Global.stats["Damage"])
 			ParticalPool.spawn_partical(point,get_tree().current_scene.get_node_or_null("CurrentLevel"))
+	ammo -= 1
+	update_ammo.emit(ammo,max_ammo)
+	make_bullet_trail(bullet_target)
 
+func make_bullet_trail(target_pos:Vector3)->void:
+	if muzzle:
+		var bullet_dir : Vector3 = (target_pos-muzzle.global_position).normalized()
+		var start_pos : Vector3 = muzzle.global_position + bullet_dir * 0.25
+		if (target_pos-start_pos).length() > 3.0:
+			var bullet_tracer : Node3D = BULLET_TRACER.instantiate()
+			player.add_sibling(bullet_tracer)
+			bullet_tracer.global_position = start_pos
+			bullet_tracer.target_pos = target_pos
+			bullet_tracer.look_at(target_pos)
+			
+	
 
 func weapon_tilt(input_x:float, delta:float)->void:
 	if current_weapon_model:

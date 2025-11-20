@@ -4,6 +4,7 @@ signal shake_cam(amount:float,seconds:float)
 signal update_xp
 signal update_powerups
 
+
 var kills : int = 0
 
 var stats : Dictionary[String,float] = {
@@ -18,7 +19,7 @@ var level : int = 1
 var experience : float = 0
 var experience_total : float = 0
 var experience_required : float = get_required_exp(level + 1)
-var skill_points : int = 0
+var skill_points : int = 100
 
 func get_required_exp(my_level:int)->int:
 	return round(pow(my_level,1.8) + level + 4)

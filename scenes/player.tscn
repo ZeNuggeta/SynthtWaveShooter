@@ -67,13 +67,9 @@ component_mouse_capture = NodePath("../Components/MouseCaptureComponent")
 camera = NodePath("Camera")
 
 [node name="Camera" type="Camera3D" parent="Head" node_paths=PackedStringArray("player")]
+cull_mask = 1048573
 script = ExtResource("3_4r5pv")
 player = NodePath("../..")
-
-[node name="ShootCast" type="RayCast3D" parent="Head/Camera"]
-target_position = Vector3(0, 0, -200)
-collision_mask = 9
-collide_with_areas = true
 
 [node name="CrouchCheck" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_fulsm")
@@ -228,12 +224,15 @@ hurt_box = NodePath("../../HurtBox")
 hurt_sfx = NodePath("../../SFX/PlayerHurt")
 look_at_enemy = NodePath("../../LookAtEnemy")
 
-[node name="WeaponController" type="Node" parent="Components" node_paths=PackedStringArray("player", "weapon_holder", "raycast", "weapon_sfx")]
+[node name="RegenTimer" type="Timer" parent="Components/StatsHandler"]
+wait_time = 3.0
+one_shot = true
+
+[node name="WeaponController" type="Node" parent="Components" node_paths=PackedStringArray("player", "weapon_holder", "weapon_sfx")]
 script = ExtResource("22_ke2ow")
 player = NodePath("../..")
 current_weapon = ExtResource("23_ujl30")
 weapon_holder = NodePath("../../Head/Camera")
-raycast = NodePath("../../Head/Camera/ShootCast")
 weapon_sfx = NodePath("../../SFX/WeaponSFX")
 weapon_rotation_amount = 0.01
 
@@ -280,3 +279,4 @@ bus = &"SFX"
 [connection signal="state_physics_processing" from="StateChart/Root/Posture/Standing" to="StateMachine/Root/Posture/Standing" method="_on_standing_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Posture/Crouching" to="StateMachine/Root/Posture/Crouching" method="_on_crouching_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Posture/Crouching" to="StateMachine/Root/Posture/Crouching" method="_on_crouching_state_physics_processing"]
+[connection signal="timeout" from="Components/StatsHandler/RegenTimer" to="Components/StatsHandler" method="_on_regen_timer_timeout"]

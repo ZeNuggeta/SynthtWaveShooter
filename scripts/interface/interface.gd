@@ -14,18 +14,20 @@ class_name Interface
 @export var vhs_toggle : bool = true
 
 @onready var vhs: ColorRect = $VFX/VHS
-@onready var health: Label = $HUD/Health
+@onready var health_bar: ProgressBar = $HUD/HealthBar
 @onready var info: RichTextLabel = $HUD/Score
 @onready var xp_bar: TextureProgressBar = $HUD/XPBar
 @onready var xp_label: Label = $HUD/XPBar/XPLabel
+@onready var ammo_label: Label = $HUD/AmmoLabel
 @onready var description_label: Label = $PowerPanel/MarginContainer/HBoxContainer/DescriptionLabel
 
+var weapon_controller : WeaponController
 var stats_handler : StatsHandler
 
 func _ready() -> void:
-	
 	if player:
 		stats_handler = player.stats_handler
+		weapon_controller = player.weapon_controller
 		
 		vhs.visible = vhs_toggle
 		power_panel.visible = false
@@ -33,8 +35,10 @@ func _ready() -> void:
 		
 		stats_handler.health_changed.connect(_update_health)
 		wave_manager.update_info.connect(_update_info)
+		weapon_controller.update_ammo.connect(_update_ammo)
 		
-		_update_health(stats_handler.stats.health)
+		_update_health(stats_handler.stats.health,stats_handler.stats.max_health)
+		_update_ammo(weapon_controller.ammo,weapon_controller.max_ammo)
 	
 	Global.update_xp.connect(_update_exp)
 	Global.update_powerups.connect(_update_power_ups)
@@ -50,11 +54,15 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("upgrade_tab"):
 		_choose_power_up_menu()
 
-func _update_health(value:float,look_at:Node3D=null) -> void:
-	health.text = "Health : %s" %value
+func _update_health(value:float,max_value:float,look_at:Node3D=null) -> void:
+	health_bar.max_value = max_value
+	health_bar.value = value
 	if look_at:
 		damage_indicator.rotation = -look_at.rotation.y
 		animation_player.play("fade_out")
+
+func _update_ammo(value:int,max_value:int) -> void:
+	ammo_label.text = "Ammo : %s/%s" %[value,max_value]
 
 func _update_info(stats:String,rainbow:bool=false) -> void:
 	var rainbow_text : String = "[rainbow]" if rainbow else ""

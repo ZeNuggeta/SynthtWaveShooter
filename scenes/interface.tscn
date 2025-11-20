@@ -93,20 +93,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="Health" type="Label" parent="HUD"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 84.0
-offset_top = -103.0
-offset_right = 343.0
-offset_bottom = -48.0
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("4_s0di0")
-theme_override_font_sizes/font_size = 40
-text = "Health : heel"
-
 [node name="Score" type="RichTextLabel" parent="HUD"]
 process_mode = 3
 layout_mode = 1
@@ -176,6 +162,37 @@ theme_override_fonts/font = ExtResource("4_s0di0")
 theme_override_font_sizes/font_size = 20
 text = "my level"
 horizontal_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -77.0
+offset_right = 372.0
+offset_bottom = -47.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_s0di0")
+theme_override_font_sizes/font_size = 40
+value = 50.0
+show_percentage = false
+
+[node name="AmmoLabel" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -274.0
+offset_top = -77.0
+offset_bottom = -33.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_s0di0")
+theme_override_font_sizes/font_size = 35
+text = "ammo ads/asdas"
+horizontal_alignment = 2
 
 [node name="VFX" type="Control" parent="."]
 visible = false

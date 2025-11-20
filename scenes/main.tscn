@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://d3qg6rfdwp5kr"]
+[gd_scene load_steps=21 format=3 uid="uid://d3qg6rfdwp5kr"]
 
 [ext_resource type="PackedScene" uid="uid://dm3gqheyx1prf" path="res://scenes/test.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://bk8buroylsa04" path="res://scripts/game/game_manager.gd" id="1_sugp2"]
 [ext_resource type="Script" uid="uid://b5j4x7xtlwyf" path="res://scripts/game/wave_manager.gd" id="2_jyhfs"]
 [ext_resource type="Script" uid="uid://cscusk7vt5xeh" path="res://scripts/game/wave.gd" id="3_muem4"]
-[ext_resource type="AudioStream" uid="uid://btp60822po60p" path="res://assets/audio/Danya Vodovoz - Driven.mp3" id="3_tefeu"]
-[ext_resource type="PackedScene" uid="uid://b02gq3arv2rth" path="res://scenes/enemies/ranger.tscn" id="4_muem4"]
+[ext_resource type="AudioStream" uid="uid://btp60822po60p" path="res://assets/audio/music/Danya Vodovoz - Driven.mp3" id="3_tefeu"]
 [ext_resource type="AudioStream" uid="uid://crqypi24353n6" path="res://assets/audio/enemy_death.sfxr" id="5_choun"]
 [ext_resource type="PackedScene" uid="uid://bh5744ekuh3sn" path="res://scenes/enemies/bot.tscn" id="5_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://d3f4d5lvcbvvk" path="res://scenes/interface.tscn" id="5_tbgi4"]
@@ -13,21 +12,30 @@
 [ext_resource type="Script" uid="uid://cuyglg53sr64x" path="res://scripts/game/audio_manager.gd" id="5_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://7upg6bf0gbki" path="res://scenes/enemies/head.tscn" id="6_trceg"]
 [ext_resource type="AudioStream" uid="uid://4j3t1gw0t3dp" path="res://assets/audio/point.sfxr" id="6_ya4ey"]
+[ext_resource type="AudioStream" uid="uid://b0jmpamujug26" path="res://assets/audio/music/neon-odyssey-399913.mp3" id="8_jkv2x"]
+[ext_resource type="AudioStream" uid="uid://co3mdj5vj678s" path="res://assets/audio/music/fighter-269805.mp3" id="9_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://cbqwp7hdqvfuc" path="res://scenes/audio_visualiser.tscn" id="10_trceg"]
+[ext_resource type="PackedScene" uid="uid://bmm83x7sachaj" path="res://assets/props/Arcade.blend" id="13_a8y0u"]
 
 [sub_resource type="Resource" id="Resource_dp3eg"]
 script = ExtResource("3_muem4")
 enemies = Array[PackedScene]([ExtResource("5_dp3eg"), ExtResource("6_trceg")])
 metadata/_custom_type_script = "uid://cscusk7vt5xeh"
 
-[sub_resource type="Resource" id="Resource_trceg"]
-script = ExtResource("3_muem4")
-enemies = Array[PackedScene]([ExtResource("4_muem4"), ExtResource("5_dp3eg"), ExtResource("6_trceg")])
-metadata/_custom_type_script = "uid://cscusk7vt5xeh"
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_eb6dy"]
 random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("5_choun")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_a8y0u"]
+viewport_path = NodePath("Managers/AudioManager/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a8y0u"]
+resource_local_to_scene = true
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission_energy_multiplier = 3.0
+emission_texture = SubResource("ViewportTexture_a8y0u")
 
 [node name="Main" type="Node"]
 
@@ -42,7 +50,7 @@ script = ExtResource("2_jyhfs")
 player = NodePath("../../CurrentLevel/Player")
 enemy_holder = NodePath("../../CurrentLevel/EnemyHolder")
 spawn_container = NodePath("../../CurrentLevel/Spawner")
-waves = Array[ExtResource("3_muem4")]([SubResource("Resource_dp3eg"), SubResource("Resource_trceg")])
+waves = Array[ExtResource("3_muem4")]([SubResource("Resource_dp3eg"), SubResource("Resource_dp3eg")])
 
 [node name="SpawnTimer" type="Timer" parent="Managers/WaveManager"]
 one_shot = true
@@ -53,6 +61,7 @@ one_shot = true
 [node name="AudioManager" type="Node" parent="Managers" node_paths=PackedStringArray("wave_manager")]
 script = ExtResource("5_ya4ey")
 wave_manager = NodePath("../WaveManager")
+playlist = Array[AudioStream]([ExtResource("3_tefeu"), ExtResource("8_jkv2x"), ExtResource("9_jbj1t")])
 
 [node name="Death" type="AudioStreamPlayer" parent="Managers/AudioManager"]
 stream = SubResource("AudioStreamRandomizer_eb6dy")
@@ -66,21 +75,34 @@ bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="Managers/AudioManager"]
 process_mode = 3
-stream = ExtResource("3_tefeu")
 autoplay = true
 bus = &"Music"
-parameters/looping = true
 
 [node name="ComboTimer" type="Timer" parent="Managers/AudioManager"]
 wait_time = 2.0
 one_shot = true
+
+[node name="SubViewport" type="SubViewport" parent="Managers/AudioManager"]
+canvas_cull_mask = 4294967293
+size = Vector2i(1280, 720)
+
+[node name="ColorRect" type="ColorRect" parent="Managers/AudioManager/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AudioVisualiser" parent="Managers/AudioManager/SubViewport" node_paths=PackedStringArray("audio_player") instance=ExtResource("10_trceg")]
+audio_player = NodePath("../../Music")
 
 [node name="CurrentLevel" type="Node3D" parent="."]
 
 [node name="Test" parent="CurrentLevel" instance=ExtResource("1_o5qli")]
 
 [node name="Spawner" type="Node3D" parent="CurrentLevel"]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 
 [node name="Spawn1" type="Marker3D" parent="CurrentLevel/Spawner"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 0)
@@ -111,6 +133,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="EnemyHolder" type="Node3D" parent="CurrentLevel"]
 
+[node name="Arcade" parent="CurrentLevel" instance=ExtResource("13_a8y0u")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -54, -20, 0)
+
+[node name="Cube" parent="CurrentLevel/Arcade" index="0"]
+surface_material_override/1 = SubResource("StandardMaterial3D_a8y0u")
+
 [node name="Interface" parent="." node_paths=PackedStringArray("player", "wave_manager") instance=ExtResource("5_tbgi4")]
 player = NodePath("../CurrentLevel/Player")
 wave_manager = NodePath("../Managers/WaveManager")
@@ -118,3 +146,5 @@ wave_manager = NodePath("../Managers/WaveManager")
 [connection signal="timeout" from="Managers/WaveManager/SpawnTimer" to="Managers/WaveManager" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Managers/WaveManager/IntermissionTimer" to="Managers/WaveManager" method="_on_intermission_timer_timeout"]
 [connection signal="timeout" from="Managers/AudioManager/ComboTimer" to="Managers/AudioManager" method="_on_combo_timer_timeout"]
+
+[editable path="CurrentLevel/Arcade"]
