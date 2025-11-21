@@ -4,13 +4,14 @@ class_name WaveManager
 signal update_info(text:String)
 signal enemy_hit(dead:bool)
 
-const MAX_ENEMYS : int = 1
+const MAX_ENEMYS : int = 45
 const OFFSET : Vector3 = Vector3(0,1.0,0)
 
-@export_group("Reference")
+
 @export var player : Player
-@export var enemy_holder  : Node3D
-@export var spawn_container : Node3D
+@export_group("Reference")
+@onready var enemy_holder: Node3D = $"3DSpace/EnemyHolder"
+@onready var spawn_container: Node3D = $"3DSpace/SpawnContainer"
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var intermission_timer: Timer = $IntermissionTimer
 @export_group("Wave setup")
@@ -18,6 +19,8 @@ const OFFSET : Vector3 = Vector3(0,1.0,0)
 @export var waves : Array[Wave]
 @export var between_round_time : float = 5.0
 @export var mob_wait_time : float = 1.0
+
+
 
 var wave_displayer : int 
 var current_wave : int
@@ -30,13 +33,16 @@ var wave_spawn_ended : bool
 var moving_to_next_wave : bool
 
 func _ready() -> void:
+	start_waving()
+
+
+func start_waving()->void:
 	current_wave = 0
 	wave_displayer = current_wave
 	position_to_next_wave()
 	intermission_timer.wait_time = between_round_time
 	spawn_timer.wait_time = mob_wait_time
 	mobs_spawned_per_round = MAX_ENEMYS
-
 
 func _process(_delta: float) -> void:
 	if moving_to_next_wave:

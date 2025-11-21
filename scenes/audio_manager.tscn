@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://cb0lyoi4q0ry3"]
+
+[ext_resource type="Script" uid="uid://cuyglg53sr64x" path="res://scripts/game/audio_manager.gd" id="1_njtn3"]
+[ext_resource type="AudioStream" uid="uid://btp60822po60p" path="res://assets/audio/music/Danya Vodovoz - Driven.mp3" id="2_kq7b2"]
+[ext_resource type="AudioStream" uid="uid://co3mdj5vj678s" path="res://assets/audio/music/fighter-269805.mp3" id="3_02gw7"]
+[ext_resource type="AudioStream" uid="uid://b0jmpamujug26" path="res://assets/audio/music/neon-odyssey-399913.mp3" id="4_ujhup"]
+[ext_resource type="AudioStream" uid="uid://crqypi24353n6" path="res://assets/audio/enemy_death.sfxr" id="5_064dn"]
+[ext_resource type="AudioStream" uid="uid://4j3t1gw0t3dp" path="res://assets/audio/point.sfxr" id="6_ic5jq"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_eb6dy"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("5_064dn")
+
+[node name="AudioManager" type="Node" node_paths=PackedStringArray("wave_manager")]
+script = ExtResource("1_njtn3")
+wave_manager = NodePath("")
+playlist = Array[AudioStream]([ExtResource("2_kq7b2"), ExtResource("3_02gw7"), ExtResource("4_ujhup")])
+
+[node name="Death" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_eb6dy")
+max_polyphony = 3
+bus = &"SFX"
+
+[node name="Point" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ic5jq")
+max_polyphony = 6
+bus = &"SFX"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+autoplay = true
+bus = &"Music"
+
+[node name="ComboTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="ComboTimer" to="." method="_on_combo_timer_timeout"]

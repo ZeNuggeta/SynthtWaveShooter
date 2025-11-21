@@ -18,7 +18,6 @@ func _ready() -> void:
 	randomize()
 	playlist.shuffle()
 	playlist_next()
-	
 
 func playlist_next()->void:
 	current_track_index += 1

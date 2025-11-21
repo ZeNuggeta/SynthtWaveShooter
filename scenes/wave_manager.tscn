@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://12p40tnpon77"]
+
+[ext_resource type="Script" uid="uid://b5j4x7xtlwyf" path="res://scripts/game/wave_manager.gd" id="1_68qdn"]
+[ext_resource type="Script" uid="uid://cscusk7vt5xeh" path="res://scripts/game/wave.gd" id="2_k3by3"]
+[ext_resource type="PackedScene" uid="uid://bh5744ekuh3sn" path="res://scenes/enemies/bot.tscn" id="3_gsp50"]
+[ext_resource type="PackedScene" uid="uid://7upg6bf0gbki" path="res://scenes/enemies/head.tscn" id="4_x3ylx"]
+[ext_resource type="PackedScene" uid="uid://b02gq3arv2rth" path="res://scenes/enemies/ranger.tscn" id="5_ountb"]
+
+[sub_resource type="Resource" id="Resource_dp3eg"]
+script = ExtResource("2_k3by3")
+enemies = Array[PackedScene]([ExtResource("3_gsp50"), ExtResource("4_x3ylx")])
+metadata/_custom_type_script = "uid://cscusk7vt5xeh"
+
+[sub_resource type="Resource" id="Resource_muem4"]
+script = ExtResource("2_k3by3")
+enemies = Array[PackedScene]([ExtResource("3_gsp50"), ExtResource("4_x3ylx"), ExtResource("5_ountb")])
+metadata/_custom_type_script = "uid://cscusk7vt5xeh"
+
+[node name="WaveManager" type="Node"]
+script = ExtResource("1_68qdn")
+waves = Array[ExtResource("2_k3by3")]([SubResource("Resource_dp3eg"), SubResource("Resource_muem4")])
+
+[node name="SpawnTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="IntermissionTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="3DSpace" type="Node3D" parent="."]
+
+[node name="SpawnContainer" type="Node3D" parent="3DSpace"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+
+[node name="Spawn1" type="Marker3D" parent="3DSpace/SpawnContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 0)
+
+[node name="Spawn2" type="Marker3D" parent="3DSpace/SpawnContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+
+[node name="Spawn3" type="Marker3D" parent="3DSpace/SpawnContainer"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8.742278e-07, 0, -20)
+
+[node name="Spawn4" type="Marker3D" parent="3DSpace/SpawnContainer"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8.742278e-07, 0, 20)
+
+[node name="Spawn5" type="Marker3D" parent="3DSpace/SpawnContainer"]
+transform = Transform3D(0.70710677, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.70710677, -14.142135, 0, -14.142138)
+
+[node name="Spawn6" type="Marker3D" parent="3DSpace/SpawnContainer"]
+transform = Transform3D(0.70710677, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.70710677, 14.142135, 0, 14.142138)
+
+[node name="Spawn7" type="Marker3D" parent="3DSpace/SpawnContainer"]
+transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, 14.142138, 0, -14.142134)
+
+[node name="Spawn8" type="Marker3D" parent="3DSpace/SpawnContainer"]
+transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, -14.142138, 0, 14.142134)
+
+[node name="EnemyHolder" type="Node3D" parent="3DSpace"]
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="IntermissionTimer" to="." method="_on_intermission_timer_timeout"]

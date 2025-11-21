@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://ctovemxdyxlqj"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://ctovemxdyxlqj"]
 
 [ext_resource type="Texture2D" uid="uid://b63c5heg73qk" path="res://textures/icons/gradient.png" id="1_dr6vg"]
 [ext_resource type="FontFile" uid="uid://4kitl8yvylrr" path="res://assets/fonts/Ubuntu-Regular.ttf" id="1_yjyd8"]
@@ -43,12 +43,28 @@ texture_margin_top = 8.0
 texture_margin_right = 8.0
 texture_margin_bottom = 8.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dr6vg"]
+bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
+
+[sub_resource type="Gradient" id="Gradient_w6o3d"]
+colors = PackedColorArray(0.9609375, 0.9234009, 0, 1, 0, 0.5078125, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2sejw"]
+gradient = SubResource("Gradient_w6o3d")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2t8xm"]
+texture = SubResource("GradientTexture1D_2sejw")
+
 [resource]
 Button/styles/disabled = SubResource("StyleBoxFlat_r5mhu")
 Button/styles/focus = SubResource("StyleBoxEmpty_yjyd8")
 Button/styles/hover = SubResource("StyleBoxTexture_2sejw")
 Button/styles/normal = SubResource("StyleBoxTexture_dr6vg")
 Button/styles/pressed = SubResource("StyleBoxTexture_w6o3d")
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.5)
+Label/constants/shadow_outline_size = 4
 Label/font_sizes/font_size = 20
 Label/fonts/font = ExtResource("1_yjyd8")
 Panel/styles/panel = SubResource("StyleBoxTexture_yjyd8")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_dr6vg")
+ProgressBar/styles/fill = SubResource("StyleBoxTexture_2t8xm")

@@ -10,3 +10,4 @@ enum TYPES {SINGLE , AUTO , SHOTGUN}
 @export var weapon_type : TYPES = TYPES.SINGLE
 @export var shoot_sound : AudioStream
 @export var reload_sound : AudioStream
+@export var next_weapon : Array[Weapon]

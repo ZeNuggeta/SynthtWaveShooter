@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bntb06f7xtal5"]
 
 [ext_resource type="Script" uid="uid://doa76srsmuent" path="res://scripts/hit_hurt/hit_box.gd" id="1_hl25f"]
-[ext_resource type="Script" uid="uid://c37rn5qetyhdv" path="res://scripts/bullet.gd" id="1_p5aa7"]
+[ext_resource type="Script" uid="uid://c37rn5qetyhdv" path="res://scripts/enemy/bullet.gd" id="1_p5aa7"]
 [ext_resource type="Shader" uid="uid://bps4j05t72kiv" path="res://shaders/chrome.gdshader" id="2_15gq6"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_hl25f"]

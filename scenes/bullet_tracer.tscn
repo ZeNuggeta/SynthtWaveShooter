@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b7s1qv74n7g7r"]
 
-[ext_resource type="Script" uid="uid://brnixr0a3pd3e" path="res://scripts/bullet_tracer.gd" id="1_dk6yj"]
+[ext_resource type="Script" uid="uid://brnixr0a3pd3e" path="res://scripts/weapons/bullet_tracer.gd" id="1_dk6yj"]
 
 [sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_dk6yj"]
 size = 0.1

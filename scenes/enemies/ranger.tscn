@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b02gq3arv2rth"]
 
 [ext_resource type="PackedScene" uid="uid://ccrk55ebba6wa" path="res://scenes/enemies/base_enemy.tscn" id="1_sp1ca"]
-[ext_resource type="Script" uid="uid://d1eo3unyiu8dk" path="res://scripts/stats.gd" id="2_2r13h"]
+[ext_resource type="Script" uid="uid://d1eo3unyiu8dk" path="res://scripts/player/stats.gd" id="2_2r13h"]
 [ext_resource type="PackedScene" uid="uid://gmc87frw5xdr" path="res://assets/bot/Bot.blend" id="4_2r13h"]
 
 [sub_resource type="Resource" id="Resource_drc0v"]
@@ -19,7 +19,8 @@ stop_range = 8.0
 attack_speed = 0.5
 
 [node name="Head" parent="Visuals" index="1"]
-bone_idx = -1
+transform = Transform3D(-0.8, -1.7265368e-08, -1.1955632e-07, -2.8759214e-15, 0.7917864, -0.1143435, 1.207966e-07, -0.11434346, -0.79178613, -6.8272827e-09, 0.4250399, -0.045215003)
+external_skeleton = NodePath("../Ranger/metarig/Skeleton3D")
 
 [node name="Ranger" parent="Visuals" index="4" instance=ExtResource("4_2r13h")]
 transform = Transform3D(-0.8, 0, -1.2079664e-07, 0, 0.8, 0, 1.2079664e-07, 0, -0.8, 0, -1, 0)

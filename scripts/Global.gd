@@ -4,6 +4,7 @@ signal shake_cam(amount:float,seconds:float)
 signal update_xp
 signal update_powerups
 
+var game_controller : Node
 
 var kills : int = 0
 

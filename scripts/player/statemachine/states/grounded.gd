@@ -2,7 +2,7 @@ extends PlayerState
 
 
 func _on_grounded_state_physics_processing(_delta: float) -> void:
-	if Input.is_action_just_pressed("jump") and player_controller.is_on_floor():
+	if Input.is_action_just_pressed("jump") and player_controller.is_on_floor() and player_controller.can_jump: 
 		player_controller.jump()
 		player_controller.state_chart.send_event("on_airborn")
 	

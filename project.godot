@@ -12,7 +12,7 @@ config_version=5
 
 config/name="WaveShooter"
 config/tags=PackedStringArray("jam")
-run/main_scene="uid://d3qg6rfdwp5kr"
+run/main_scene="uid://dm3gqheyx1prf"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

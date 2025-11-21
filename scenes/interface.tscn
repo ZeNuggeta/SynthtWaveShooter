@@ -61,8 +61,16 @@ shader_parameter/wiggle_speed = 25.0
 shader_parameter/smear = 0.50000002375
 shader_parameter/blur_samples = 15
 
-[node name="Interface" type="CanvasLayer" node_paths=PackedStringArray("damage_indicator", "animation_player", "power_panel", "power_up_container")]
+[node name="Interface" type="Control" node_paths=PackedStringArray("damage_indicator", "animation_player", "power_panel", "power_up_container")]
 process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("6_pr3t4")
 script = ExtResource("1_t72xj")
 available_upgrades = Array[ExtResource("2_0qpc3")]([ExtResource("5_ttflf"), ExtResource("7_dtbhd"), ExtResource("8_t62tn"), ExtResource("4_32vrv"), ExtResource("6_prp0k")])
 damage_indicator = NodePath("HUD/DamageIndicator")
@@ -71,6 +79,7 @@ power_panel = NodePath("PowerPanel")
 power_up_container = NodePath("PowerPanel/MarginContainer/HBoxContainer/GridContainer")
 
 [node name="Crosshair" type="CenterContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -85,7 +94,7 @@ thickness = 13.755
 gap_angle = 80.0
 
 [node name="HUD" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -138,6 +147,7 @@ texture = ExtResource("4_uidac")
 libraries = {
 &"": SubResource("AnimationLibrary_mfcci")
 }
+autoplay = "fade_out"
 
 [node name="XPBar" type="TextureProgressBar" parent="HUD"]
 custom_minimum_size = Vector2(0, 26)
@@ -174,7 +184,7 @@ offset_bottom = -47.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("4_s0di0")
 theme_override_font_sizes/font_size = 40
-value = 50.0
+value = 49.79
 show_percentage = false
 
 [node name="AmmoLabel" type="Label" parent="HUD"]
@@ -195,7 +205,8 @@ text = "ammo ads/asdas"
 horizontal_alignment = 2
 
 [node name="VFX" type="Control" parent="."]
-layout_mode = 3
+visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -216,6 +227,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="PowerPanel" type="Panel" parent="."]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -288,7 +300,7 @@ layout_mode = 2
 
 [node name="Pause" type="Control" parent="."]
 visible = false
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

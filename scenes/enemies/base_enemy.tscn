@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://ccrk55ebba6wa"]
 
 [ext_resource type="Script" uid="uid://0xiixl1wd3f6" path="res://scripts/enemy/base_enemy.gd" id="1_n1jr3"]
-[ext_resource type="Script" uid="uid://d1eo3unyiu8dk" path="res://scripts/stats.gd" id="2_2kb2m"]
+[ext_resource type="Script" uid="uid://d1eo3unyiu8dk" path="res://scripts/player/stats.gd" id="2_2kb2m"]
 [ext_resource type="Script" uid="uid://doa76srsmuent" path="res://scripts/hit_hurt/hit_box.gd" id="2_sw3va"]
 [ext_resource type="Script" uid="uid://bnpjxgerfin32" path="res://scripts/enemy/soft_collision.gd" id="4_kegi0"]
 [ext_resource type="Script" uid="uid://3tcow7oyiab4" path="res://scripts/hit_hurt/hurt_box.gd" id="7_rffmh"]

@@ -13,6 +13,10 @@ class_name Player
 @onready var weapon_controller: WeaponController = $Components/WeaponController
 @onready var state_chart: StateChart = $StateChart
 
+@export_group("Toggles")
+@export var can_sprint : bool = true
+@export var can_jump : bool = true
+@export var can_crouch : bool = true
 @export_group("Easing")
 @export var acceleration : float = 0.2
 @export var deceleration : float = 0.5

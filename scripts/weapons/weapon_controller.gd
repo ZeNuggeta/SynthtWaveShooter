@@ -5,6 +5,8 @@ signal update_ammo
 
 const BULLET_TRACER : PackedScene = preload("res://scenes/bullet_tracer.tscn")
 
+@onready var current_scene : Node3D = get_tree().current_scene.get_node_or_null("Pool")
+
 @export_group("Reference")
 @export var player : Player
 @export var current_weapon : Weapon
@@ -98,16 +100,17 @@ func shoot()->void:
 	weapon_sfx.pitch_scale = randf_range(0.9,1.9)
 	weapon_sfx.play()
 	var bullet_target : Vector3 = raycast.global_transform * raycast.target_position
+	
 	if raycast.is_colliding():
 		var target : Node3D = raycast.get_collider()
 		var point : Vector3 = raycast.get_collision_point()
 		bullet_target = point
 		if target is HurtBox and target.is_in_group("body"):
 			target.take_damage(current_weapon.damage * Global.stats["Damage"])
-			ParticalPool.spawn_partical(point,get_tree().current_scene.get_node_or_null("CurrentLevel"))
+			ParticalPool.spawn_partical(point,current_scene)
 		elif target is HurtBox and target.is_in_group("head"):
 			target.take_damage(current_weapon.damage * head_shot_multiplier* Global.stats["Damage"])
-			ParticalPool.spawn_partical(point,get_tree().current_scene.get_node_or_null("CurrentLevel"))
+			ParticalPool.spawn_partical(point,current_scene)
 	ammo -= 1
 	update_ammo.emit(ammo,max_ammo)
 	make_bullet_trail(bullet_target)

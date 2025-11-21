@@ -34,6 +34,7 @@ const CHROME = preload("uid://bps4j05t72kiv")
 @onready var muzzle: Marker3D = $Visuals/Muzzle
 @onready var attack_timer: Timer = $AttackTimer
 
+@onready var current_scene : Node3D = get_tree().current_scene.get_node_or_null("Pool")
 @onready var shader : ShaderMaterial = ShaderMaterial.new()
 
 var player : Player
@@ -129,7 +130,7 @@ func dead()->void:
 	queue_free()
 
 func attack()->void:
-	BulletPool.spawn_bullet(get_tree().current_scene.get_node_or_null("CurrentLevel"),muzzle,bullet_speed)
+	BulletPool.spawn_bullet(current_scene,muzzle,bullet_speed)
 
 func _on_attack_timer_timeout() -> void:
 	attack()

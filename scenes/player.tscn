@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bnorctsg14k6r" path="res://scripts/player/mouse_capture_component.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bul1vpdae7den" path="res://scripts/player/player.gd" id="1_g2els"]
-[ext_resource type="Script" uid="uid://d1eo3unyiu8dk" path="res://scripts/stats.gd" id="2_a38lo"]
+[ext_resource type="Script" uid="uid://d1eo3unyiu8dk" path="res://scripts/player/stats.gd" id="2_a38lo"]
 [ext_resource type="Script" uid="uid://cebgaixlayyse" path="res://scripts/player/camera_controller.gd" id="2_qhqgy"]
 [ext_resource type="Script" uid="uid://bhsskko2nw5jw" path="res://scripts/player/camera_effects.gd" id="3_4r5pv"]
 [ext_resource type="Script" uid="uid://c5p87x3ks4xpa" path="res://scripts/player/statemachine/state_machine.gd" id="3_smehm"]
@@ -46,6 +46,8 @@ stream_0/stream = ExtResource("25_ke2ow")
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
 script = ExtResource("1_g2els")
+can_sprint = false
+can_crouch = false
 
 [node name="StandCol" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_u8vuu")

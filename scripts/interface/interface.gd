@@ -1,10 +1,12 @@
-extends CanvasLayer
+extends Control
 class_name Interface
+
+
 
 @export var available_upgrades : Array[BaseUpgrade]
 @export_group("References")
-@export var player : Player
 @export var wave_manager : WaveManager
+@export var player : Player
 @export var damage_indicator: Control
 @export var animation_player: AnimationPlayer 
 @export var power_panel: Panel
@@ -25,20 +27,21 @@ var weapon_controller : WeaponController
 var stats_handler : StatsHandler
 
 func _ready() -> void:
-	if player:
-		stats_handler = player.stats_handler
-		weapon_controller = player.weapon_controller
-		
-		vhs.visible = vhs_toggle
-		power_panel.visible = false
-		damage_indicator.modulate = Color(255,255,255,0)
-		
-		stats_handler.health_changed.connect(_update_health)
-		wave_manager.update_info.connect(_update_info)
-		weapon_controller.update_ammo.connect(_update_ammo)
-		
-		_update_health(stats_handler.stats.health,stats_handler.stats.max_health)
-		_update_ammo(weapon_controller.ammo,weapon_controller.max_ammo)
+	
+	stats_handler = player.stats_handler
+	weapon_controller = player.weapon_controller
+	
+	vhs.visible = vhs_toggle
+	power_panel.visible = false
+	damage_indicator.modulate = Color(255,255,255,0)
+	
+	stats_handler.health_changed.connect(_update_health)
+	wave_manager.update_info.connect(_update_info)
+	weapon_controller.update_ammo.connect(_update_ammo)
+	
+	_update_health(stats_handler.stats.health,stats_handler.stats.max_health)
+	_update_ammo(weapon_controller.ammo,weapon_controller.max_ammo)
+	power_panel.hide()
 	
 	Global.update_xp.connect(_update_exp)
 	Global.update_powerups.connect(_update_power_ups)
@@ -48,7 +51,7 @@ func _ready() -> void:
 		p.upgrade = available_upgrades[p.get_index()]
 		p.update_card()
 
-	power_panel.hide()
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("upgrade_tab"):

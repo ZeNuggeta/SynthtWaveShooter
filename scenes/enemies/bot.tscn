@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bh5744ekuh3sn"]
 
 [ext_resource type="PackedScene" uid="uid://ccrk55ebba6wa" path="res://scenes/enemies/base_enemy.tscn" id="1_gtugy"]
-[ext_resource type="Script" uid="uid://d1eo3unyiu8dk" path="res://scripts/stats.gd" id="2_p4124"]
+[ext_resource type="Script" uid="uid://d1eo3unyiu8dk" path="res://scripts/player/stats.gd" id="2_p4124"]
 [ext_resource type="PackedScene" uid="uid://gmc87frw5xdr" path="res://assets/bot/Bot.blend" id="3_gtugy"]
 
 [sub_resource type="Resource" id="Resource_4dswm"]
