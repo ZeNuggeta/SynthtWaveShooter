@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_drc0v"]
 resource_local_to_scene = true
 script = ExtResource("2_2r13h")
-max_health = 12.0
+max_health = 2.0
 metadata/_custom_type_script = "uid://d1eo3unyiu8dk"
 
 [node name="Ranger" node_paths=PackedStringArray("mesh", "anim") instance=ExtResource("1_sp1ca")]

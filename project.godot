@@ -32,7 +32,7 @@ window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg", "res://addons/linear_stairs/plugin.cfg")
+enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg", "res://addons/linear_stairs/plugin.cfg")
 
 [global_group]
 

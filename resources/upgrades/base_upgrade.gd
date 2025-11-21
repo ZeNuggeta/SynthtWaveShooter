@@ -7,4 +7,5 @@ enum TYPES {HEALTH,REGEN,DAMAGE,FIRERATE,QUANTITY}
 @export var icon : Texture2D
 @export var upgrade_type : TYPES = TYPES.HEALTH
 @export var amount : float = 0.02
-@export var max_ups : float = amount * 5
+@export var max_ups : float 
+@export var required_skill_points : int = 1

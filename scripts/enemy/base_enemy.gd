@@ -65,10 +65,10 @@ func _physics_process(delta: float) -> void:
 		tick_update()
 		time_elapsed = 0.0
 	
-	if player.global_position.y >= self.global_position.y:
-		velocity.y = 0.0
-	elif player.global_position.y <= self.global_position.y and not is_on_floor():
-		velocity.y += get_gravity().y * delta
+	#if player.global_position.y >= self.global_position.y:
+		#velocity.y = 0.0
+	#elif player.global_position.y <= self.global_position.y and not is_on_floor():
+		#velocity.y += get_gravity().y * delta
 	
 	if (eyes.global_position.x != player.global_position.x and eyes.global_position.z != player.global_position.z) and global_position != player.global_position:
 		eyes.look_at(player.global_position,Vector3.UP)

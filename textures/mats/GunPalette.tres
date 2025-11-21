@@ -1,14 +1,16 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cudsgkwaevwtc"]
 
-[ext_resource type="Texture2D" uid="uid://dt40n0whu7mlh" path="res://textures/pallet.png" id="1_l0h83"]
+[ext_resource type="Texture2D" uid="uid://dt40n0whu7mlh" path="res://textures/pallet.png" id="1_qgnsc"]
 
 [resource]
-albedo_texture = ExtResource("1_l0h83")
+albedo_texture = ExtResource("1_qgnsc")
+metallic_specular = 0.0
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_operator = 1
-emission_texture = ExtResource("1_l0h83")
+emission_texture = ExtResource("1_qgnsc")
 uv1_offset = Vector3(0.03, 0, 0)
 use_z_clip_scale = true
 z_clip_scale = 0.5
+fov_override = 45.0
 stencil_color = Color(0, 1, 0.9296875, 1)

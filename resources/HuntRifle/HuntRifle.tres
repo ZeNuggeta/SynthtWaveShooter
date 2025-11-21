@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=5 format=3 uid="uid://dwv7o1b0awtsm"]
+
+[ext_resource type="Script" uid="uid://b2bsym4r5yr41" path="res://scripts/weapons/weapon.gd" id="1_1kdav"]
+[ext_resource type="AudioStream" uid="uid://b1ynwajjxhnbe" path="res://resources/HuntRifle/hunterifle_reload.sfxr" id="1_l07ml"]
+[ext_resource type="PackedScene" uid="uid://csi4bj4g75d6a" path="res://resources/HuntRifle/hunt_rifle_scene.tscn" id="2_y1tjl"]
+[ext_resource type="AudioStream" uid="uid://d0e0i6ystm75a" path="res://resources/HuntRifle/hunterifle_shoot.sfxr" id="3_oc3b6"]
+
+[resource]
+script = ExtResource("1_1kdav")
+weapon_name = "HuntRifle"
+damage = 35.0
+max_ammo = 8
+weapon_scene = ExtResource("2_y1tjl")
+shoot_sound = ExtResource("3_oc3b6")
+reload_sound = ExtResource("1_l07ml")
+metadata/_custom_type_script = "uid://b2bsym4r5yr41"

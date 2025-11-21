@@ -45,6 +45,8 @@ func _process(delta: float) -> void:
 	weapon_tilt(player._input_dir.x, delta)
 	weapon_bob(player._mouvement_velocity.length(), delta)
 	
+	if Input.is_action_just_pressed("reload") and !anim_player.is_playing() and ammo < max_ammo:
+		reload()
 	
 	if Input.is_action_pressed("fire") and !anim_player.is_playing() and ammo > 0:
 		match current_weapon.weapon_type:
@@ -57,18 +59,15 @@ func _process(delta: float) -> void:
 	
 	elif Input.is_action_just_released("fire"):
 		_shot_hold = false
-	
-	if Input.is_action_just_pressed("reload") and !anim_player.is_playing() and ammo < max_ammo:
-		reload()
-		
+
 
 func spawn_weapon_model()-> void:
 	if current_weapon_model:
 		current_weapon_model.queue_free()
 	
 	
-	if current_weapon.weapon_model:
-		current_weapon_model = current_weapon.weapon_model.instantiate()
+	if current_weapon.weapon_scene:
+		current_weapon_model = current_weapon.weapon_scene.instantiate()
 		weapon_holder.add_child(current_weapon_model)
 		current_weapon_model.name = current_weapon.weapon_name
 		anim_player = current_weapon_model.get_node_or_null("AnimationPlayer")
@@ -77,9 +76,12 @@ func spawn_weapon_model()-> void:
 		max_ammo = current_weapon.max_ammo
 		ammo = max_ammo
 		def_weapon_holder_pos = current_weapon_model.position
+		
 
 func reload()->void:
+	weapon_sfx.stream = current_weapon.reload_sound
 	anim_player.play("reload")
+	weapon_sfx.play()
 	ammo = max_ammo
 	update_ammo.emit(ammo,max_ammo)
 
@@ -90,8 +92,10 @@ func update_magsize()->void:
 	update_ammo.emit(ammo,max_ammo)
 
 func shoot()->void:
+	weapon_sfx.stream = current_weapon.shoot_sound
 	anim_player.play("shoot",-1,Global.stats["FireRate"])
 	weapon_holder.add_weapon_kick(0.1,0.1,0.1)
+	weapon_sfx.pitch_scale = randf_range(0.9,1.9)
 	weapon_sfx.play()
 	var bullet_target : Vector3 = raycast.global_transform * raycast.target_position
 	if raycast.is_colliding():

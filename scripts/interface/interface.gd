@@ -19,7 +19,7 @@ class_name Interface
 @onready var xp_bar: TextureProgressBar = $HUD/XPBar
 @onready var xp_label: Label = $HUD/XPBar/XPLabel
 @onready var ammo_label: Label = $HUD/AmmoLabel
-@onready var description_label: Label = $PowerPanel/MarginContainer/HBoxContainer/DescriptionLabel
+@onready var description_label: Label = $PowerPanel/MarginContainer/HBoxContainer/VBoxContainer/DescriptionLabel
 
 var weapon_controller : WeaponController
 var stats_handler : StatsHandler
@@ -84,6 +84,6 @@ func _choose_power_up_menu()->void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _update_power_ups()->void:
-	var to_say : String = "Skill points : %s\nLevel : %s\nHealth : x%s\nRegen : x%s\nDamage: x%s\nFirerate : x%s\nQuantity : +%s\n" 
+	var to_say : String = "Skill points : %d\nLevel : %d\n\nHealth : x%.2f\nRegen : x%.2f\nDamage: x%.2f\nFirerate : x%.2f\nQuantity : +%d\n" 
 	var stats : Dictionary[String,float] = Global.stats
 	description_label.text = to_say % [Global.skill_points,Global.level,stats["Health"],stats["Regen"],stats["Damage"],stats["FireRate"],stats["Quantity"]]

@@ -9,24 +9,23 @@ extends Node
 
 @export var playlist : Array[AudioStream]
 
-var current_track : AudioStream
+var current_track_index : int = -1
 var _in_combo : bool = false
 
 func _ready() -> void:
 	wave_manager.enemy_hit.connect(_enemy_hit)
-	music.finished.connect(shuffle_music)
+	music.finished.connect(playlist_next)
 	randomize()
-	shuffle_music()
+	playlist.shuffle()
+	playlist_next()
 	
 
-func shuffle_music()->void:
-	var new_track : AudioStream = playlist.pick_random()
-	if playlist.size() > 1 and new_track == current_track :
-		shuffle_music()
-	else:
-		current_track = new_track
-		music.stream = current_track
-		music.play()
+func playlist_next()->void:
+	current_track_index += 1
+	if playlist.size() <= current_track_index:
+		current_track_index = 0
+	music.stream = playlist[current_track_index]
+	music.play()
 
 func _enemy_hit(dead : bool)->void:
 	if dead:

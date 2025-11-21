@@ -4,7 +4,7 @@ class_name WaveManager
 signal update_info(text:String)
 signal enemy_hit(dead:bool)
 
-const MAX_ENEMYS : int = 45
+const MAX_ENEMYS : int = 1
 const OFFSET : Vector3 = Vector3(0,1.0,0)
 
 @export_group("Reference")
@@ -36,12 +36,18 @@ func _ready() -> void:
 	intermission_timer.wait_time = between_round_time
 	spawn_timer.wait_time = mob_wait_time
 	mobs_spawned_per_round = MAX_ENEMYS
-	
+
+
+func _process(_delta: float) -> void:
+	if moving_to_next_wave:
+		update_info.emit("%d"%(intermission_timer.time_left + 1))
+
 func position_to_next_wave()->void:
 	if enemies_left == 0:
 		update_info.emit("Wave finished !!! Starting new wave...",true)
 		current_wave +=1
 		wave_displayer += 1
+		await get_tree().create_timer(1.5).timeout
 		if current_wave > waves.size():
 			if infinite_waves:
 				current_wave = 1
@@ -49,10 +55,11 @@ func position_to_next_wave()->void:
 				update_info.emit("No more waves! Game ended")
 				return
 		intermission_timer.start()
+		moving_to_next_wave = true
 		await intermission_timer.timeout
 		update_info.emit("Wave started!!!")
 		spawn_type()
-		
+		moving_to_next_wave = false
 		
 
 
@@ -76,13 +83,13 @@ func spawn_type()->void:
 			mobs_spawned_per_round -= 1
 			spawn_timer.start()
 			await spawn_timer.timeout
-			update_info.emit("Enemies left : %s | Current wave : %s" %[enemies_to_kill,wave_displayer])
+			update_info.emit("Enemies left : %d | Current wave : %d" %[enemies_to_kill,wave_displayer])
 
 func _damaged_enemy()->void:
 	enemy_hit.emit(false)
 
 func _dead_enemy()->void:
 	enemies_to_kill -= 1
-	update_info.emit("Enemies left : %s | Current wave : %s" %[enemies_to_kill,wave_displayer])
+	update_info.emit("Enemies left : %d | Current wave : %d" %[enemies_to_kill,wave_displayer])
 	if enemies_to_kill == 0:
 		position_to_next_wave()

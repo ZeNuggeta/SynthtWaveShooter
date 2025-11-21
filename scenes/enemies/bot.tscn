@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_4dswm"]
 resource_local_to_scene = true
 script = ExtResource("2_p4124")
-max_health = 24.0
+max_health = 5.0
 metadata/_custom_type_script = "uid://d1eo3unyiu8dk"
 
 [node name="Bot" node_paths=PackedStringArray("mesh", "anim") instance=ExtResource("1_gtugy")]

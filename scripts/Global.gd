@@ -19,7 +19,7 @@ var level : int = 1
 var experience : float = 0
 var experience_total : float = 0
 var experience_required : float = get_required_exp(level + 1)
-var skill_points : int = 100
+var skill_points : int = 1
 
 func get_required_exp(my_level:int)->int:
 	return round(pow(my_level,1.8) + level + 4)
@@ -39,9 +39,9 @@ func level_up()->void:
 	experience_required = get_required_exp(level + 1)
 
 func upgrade_stats(upgrade:BaseUpgrade,amount:float)->void:
-	if skill_points > 0 and stats[upgrade.upgrade_name] < upgrade.max_ups:
+	if skill_points >= upgrade.required_skill_points and stats[upgrade.upgrade_name] < upgrade.max_ups:
 		stats[upgrade.upgrade_name] += amount
-		skill_points -= 1
+		skill_points -= upgrade.required_skill_points
 		stats[upgrade.upgrade_name] = clampf(stats[upgrade.upgrade_name],1.0,upgrade.max_ups)
 		update_powerups.emit()
 

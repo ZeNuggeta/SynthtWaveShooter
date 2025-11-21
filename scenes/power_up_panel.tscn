@@ -18,10 +18,10 @@ colors = PackedColorArray(1, 0.9609375, 0, 1, 0.9411765, 0, 0.85882354, 1)
 gradient = SubResource("Gradient_4lbmw")
 
 [node name="PowerUp" type="Control"]
-custom_minimum_size = Vector2(297, 89)
+custom_minimum_size = Vector2(346, 89)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 356.0
+offset_right = 346.0
 offset_bottom = 89.0
 theme = ExtResource("4_gbrfl")
 script = ExtResource("1_4i2nj")
@@ -54,14 +54,20 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="UpgradeName" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(181, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 2
-size_flags_vertical = 2
-text = "name"
-vertical_alignment = 1
-autowrap_mode = 3
+
+[node name="UpgradeName" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "namenjjjj"
+
+[node name="SkillNeeded" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "skill points : 0"
+horizontal_alignment = 2
 
 [node name="ProgressBar" type="TextureProgressBar" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)

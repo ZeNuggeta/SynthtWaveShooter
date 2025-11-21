@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bhop26d66s581"]
+[gd_scene load_steps=32 format=3 uid="uid://bhop26d66s581"]
 
 [ext_resource type="Script" uid="uid://bnorctsg14k6r" path="res://scripts/player/mouse_capture_component.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bul1vpdae7den" path="res://scripts/player/player.gd" id="1_g2els"]
@@ -25,7 +25,6 @@
 [ext_resource type="Script" uid="uid://jqxq4nbol7ps" path="res://scripts/weapons/weapon_controller.gd" id="22_ke2ow"]
 [ext_resource type="Resource" uid="uid://dv83oc30rw574" path="res://resources/G19/G190.tres" id="23_ujl30"]
 [ext_resource type="AudioStream" uid="uid://bw3dq0lfwsfdi" path="res://assets/audio/player_hurt.sfxr" id="25_ke2ow"]
-[ext_resource type="AudioStream" uid="uid://brvrbkd0xpv1f" path="res://assets/audio/g19.sfxr" id="26_ujl30"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
 
@@ -43,11 +42,6 @@ metadata/_custom_type_script = "uid://d1eo3unyiu8dk"
 random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("25_ke2ow")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_31cv2"]
-random_pitch = 1.1
-streams_count = 1
-stream_0/stream = ExtResource("26_ujl30")
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -262,8 +256,6 @@ stream = SubResource("AudioStreamRandomizer_ke2ow")
 bus = &"SFX"
 
 [node name="WeaponSFX" type="AudioStreamPlayer" parent="SFX"]
-stream = SubResource("AudioStreamRandomizer_31cv2")
-volume_db = -10.0
 max_polyphony = 6
 bus = &"SFX"
 
