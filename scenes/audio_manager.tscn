@@ -12,9 +12,8 @@ random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("5_064dn")
 
-[node name="AudioManager" type="Node" node_paths=PackedStringArray("wave_manager")]
+[node name="AudioManager" type="Node"]
 script = ExtResource("1_njtn3")
-wave_manager = NodePath("")
 playlist = Array[AudioStream]([ExtResource("2_kq7b2"), ExtResource("3_02gw7"), ExtResource("4_ujhup")])
 
 [node name="Death" type="AudioStreamPlayer" parent="."]

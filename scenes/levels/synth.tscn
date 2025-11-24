@@ -4,7 +4,7 @@
 [ext_resource type="CompressedTexture3D" uid="uid://djcwtynegcnfa" path="res://textures/SynthLut.png" id="1_iyx0m"]
 [ext_resource type="PackedScene" uid="uid://bbt8hpm5dk2eg" path="res://assets/maps/map1.blend" id="3_iyx0m"]
 [ext_resource type="PackedScene" uid="uid://bhop26d66s581" path="res://scenes/player.tscn" id="4_6mibg"]
-[ext_resource type="PackedScene" uid="uid://d3f4d5lvcbvvk" path="res://scenes/interface.tscn" id="5_2mv0b"]
+[ext_resource type="PackedScene" uid="uid://d3f4d5lvcbvvk" path="res://scenes/menu/interface.tscn" id="5_2mv0b"]
 [ext_resource type="PackedScene" uid="uid://12p40tnpon77" path="res://scenes/wave_manager.tscn" id="6_tpxsr"]
 [ext_resource type="PackedScene" uid="uid://cb0lyoi4q0ry3" path="res://scenes/audio_manager.tscn" id="7_8htgp"]
 

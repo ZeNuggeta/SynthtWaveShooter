@@ -44,6 +44,7 @@ const UPDATE_INTERVAL: float = 0.25
 var time_elapsed: float = 0.0
 
 var dir : Vector3 
+var vel : Vector3
 
 var _is_dead : bool = false
 var _stun : bool = false
@@ -79,10 +80,12 @@ func _physics_process(delta: float) -> void:
 		if ranged and !attack_timer.time_left:
 			anim.play('stand_range')
 			attack_timer.start()
+		else:
+			anim.play('walk')
 	else:
 		attack_timer.stop()
 		anim.play('walk')
-		move_and_slide()
+		global_position += vel * speed * delta
 	
 	if soft_collision.is_colliding():
 		velocity.x += soft_collision.get_push_vector().x * delta * push_force
@@ -91,11 +94,19 @@ func _physics_process(delta: float) -> void:
 
 
 func tick_update() -> void:
-	if !player:return
-	dir = player.global_position - global_position
-	dir = dir.normalized()
-	velocity.x = dir.x * speed 
-	velocity.z = dir.z * speed 
+	if player:
+		vel = global_position.direction_to(player.global_position)
+	
+	
+		
+	#dir = player.global_position - global_position
+	#dir = dir.normalized()
+	#velocity.x = dir.x * speed 
+	#velocity.z = dir.z * speed 
+	
+	
+	
+	
 
 
 func climb()->void:

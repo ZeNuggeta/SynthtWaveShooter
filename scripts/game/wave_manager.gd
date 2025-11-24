@@ -95,6 +95,7 @@ func _damaged_enemy()->void:
 	enemy_hit.emit(false)
 
 func _dead_enemy()->void:
+	enemy_hit.emit(true)
 	enemies_to_kill -= 1
 	update_info.emit("Enemies left : %d | Current wave : %d" %[enemies_to_kill,wave_displayer])
 	if enemies_to_kill == 0:

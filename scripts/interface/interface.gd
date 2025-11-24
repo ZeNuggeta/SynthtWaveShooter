@@ -3,6 +3,7 @@ class_name Interface
 
 
 
+
 @export var available_upgrades : Array[BaseUpgrade]
 @export_group("References")
 @export var wave_manager : WaveManager
@@ -22,6 +23,7 @@ class_name Interface
 @onready var xp_label: Label = $HUD/XPBar/XPLabel
 @onready var ammo_label: Label = $HUD/AmmoLabel
 @onready var description_label: Label = $PowerPanel/MarginContainer/HBoxContainer/VBoxContainer/DescriptionLabel
+@onready var weapon_panel: WeaponPanel = $WeaponPanel
 
 var weapon_controller : WeaponController
 var stats_handler : StatsHandler
@@ -50,12 +52,14 @@ func _ready() -> void:
 	for p : UpgradePanel in power_up_container.get_children():
 		p.upgrade = available_upgrades[p.get_index()]
 		p.update_card()
-
+	
+	weapon_panel.weapon_controller = weapon_controller
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("upgrade_tab"):
 		_choose_power_up_menu()
+		weapon_panel.update_next_weapon()
 
 func _update_health(value:float,max_value:float,look_at:Node3D=null) -> void:
 	health_bar.max_value = max_value

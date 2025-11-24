@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://genhxv0a2tl2"]
+
+[ext_resource type="Texture2D" uid="uid://bysbwpfdn0jd4" path="res://textures/checker.png" id="1_y3m4q"]
+[ext_resource type="Script" uid="uid://bxof6li4l0j2a" path="res://scripts/weapon_slot.gd" id="2_78y0o"]
+
+[node name="WeaponSlot" type="TextureButton"]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
+texture_normal = ExtResource("1_y3m4q")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("2_78y0o")
+
+[node name="Panel" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.94400007)
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

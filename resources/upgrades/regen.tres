@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BaseUpgrade" load_steps=3 format=3 uid="uid://htnnm882u0nl"]
 
-[ext_resource type="Texture2D" uid="uid://p268feqrsder" path="res://textures/icons/damage.svg" id="1_44cnk"]
+[ext_resource type="Texture2D" uid="uid://bnk760lagwlo4" path="res://textures/icons/regen.svg" id="1_44cnk"]
 [ext_resource type="Script" uid="uid://v8w608i0p1ty" path="res://resources/upgrades/base_upgrade.gd" id="1_f5kyy"]
 
 [resource]

@@ -77,8 +77,8 @@ func spawn_weapon_model()-> void:
 		raycast = current_weapon_model.get_node_or_null("RayCast3D")
 		max_ammo = current_weapon.max_ammo
 		ammo = max_ammo
+		update_magsize()
 		def_weapon_holder_pos = current_weapon_model.position
-		
 
 func reload()->void:
 	weapon_sfx.stream = current_weapon.reload_sound

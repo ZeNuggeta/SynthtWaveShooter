@@ -28,6 +28,7 @@ height = 1.4311523
 
 [node name="BaseEnemy" type="CharacterBody3D" node_paths=PackedStringArray("visual")]
 collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_n1jr3")
 stats = SubResource("Resource_kegi0")
 visual = NodePath("Visuals")
