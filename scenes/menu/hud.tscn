@@ -1,0 +1,179 @@
+[gd_scene load_steps=15 format=3 uid="uid://cpt8geknybf46"]
+
+[ext_resource type="Script" uid="uid://s12m32w4te0d" path="res://scripts/interface/hud.gd" id="1_b5tn1"]
+[ext_resource type="Theme" uid="uid://ctovemxdyxlqj" path="res://textures/Hud.tres" id="1_qx28e"]
+[ext_resource type="FontFile" uid="uid://dquy36gl2xnep" path="res://assets/fonts/windows-bold[1].ttf" id="2_qx28e"]
+[ext_resource type="Texture2D" uid="uid://dk17iypac8xw0" path="res://textures/icons/indicator.svg" id="3_2qp78"]
+[ext_resource type="Texture2D" uid="uid://b05gjp30xi7uq" path="res://textures/icons/bar_background.png" id="4_hhtce"]
+[ext_resource type="Texture2D" uid="uid://cms3unk7vpgp3" path="res://textures/icons/bar_fill.png" id="5_ajdgr"]
+[ext_resource type="FontFile" uid="uid://w814lrf2jjp0" path="res://assets/fonts/BebasNeue-Regular.ttf" id="6_y7h78"]
+
+[sub_resource type="Animation" id="Animation_mfcci"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_uidac"]
+resource_name = "fade_out"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mfcci"]
+_data = {
+&"RESET": SubResource("Animation_mfcci"),
+&"fade_out": SubResource("Animation_uidac")
+}
+
+[sub_resource type="Gradient" id="Gradient_fp75o"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.1254902, 0.11764706, 0.16862746, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_quj6c"]
+gradient = SubResource("Gradient_fp75o")
+
+[sub_resource type="Gradient" id="Gradient_iamtd"]
+offsets = PackedFloat32Array(0, 0.732)
+colors = PackedColorArray(0, 1, 0.4609375, 1, 0, 0.859375, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fp75o"]
+gradient = SubResource("Gradient_iamtd")
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("1_qx28e")
+script = ExtResource("1_b5tn1")
+
+[node name="Score" type="RichTextLabel" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 84.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("2_qx28e")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[wave amp=20 freq =15] [rainbow] Starting Game...
+"
+horizontal_alignment = 1
+vertical_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="DamageIndicator" type="Control" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="TextureRect" type="TextureRect" parent="DamageIndicator"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -39.0
+offset_top = -78.62903
+offset_right = 39.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_2qp78")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DamageIndicator"]
+libraries = {
+&"": SubResource("AnimationLibrary_mfcci")
+}
+
+[node name="XPBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 26.0
+grow_horizontal = 2
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("4_hhtce")
+texture_progress = ExtResource("5_ajdgr")
+
+[node name="XPLabel" type="Label" parent="XPBar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_y7h78")
+theme_override_font_sizes/font_size = 25
+text = "my level"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="AmmoLabel" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("6_y7h78")
+theme_override_font_sizes/font_size = 35
+text = "ammo ads/asdas"
+horizontal_alignment = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(350, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+value = 83.0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture1D_quj6c")
+texture_progress = SubResource("GradientTexture1D_fp75o")

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://d3qg6rfdwp5kr"]
 
-[ext_resource type="Script" uid="uid://cretbx6rp2sh0" path="res://scripts/game_controller.gd" id="1_0ld40"]
+[ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_0ld40"]
 [ext_resource type="Script" uid="uid://bk8buroylsa04" path="res://scripts/game/game_manager.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://12p40tnpon77" path="res://scenes/wave_manager.tscn" id="3_tefeu"]
 [ext_resource type="PackedScene" uid="uid://cb0lyoi4q0ry3" path="res://scenes/audio_manager.tscn" id="4_o6xl0"]
-[ext_resource type="Script" uid="uid://7kedeenhsx4" path="res://scripts/game/gui.gd" id="15_jbj1t"]
+[ext_resource type="Script" uid="uid://7kedeenhsx4" path="res://scripts/interface/gui.gd" id="15_jbj1t"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0ld40")

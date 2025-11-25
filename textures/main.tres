@@ -1,0 +1,47 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cy43ppi1rfjlv"]
+
+[ext_resource type="FontFile" uid="uid://w814lrf2jjp0" path="res://assets/fonts/BebasNeue-Regular.ttf" id="1_lfpuk"]
+[ext_resource type="Texture2D" uid="uid://b63c5heg73qk" path="res://textures/icons/gradient.png" id="2_0dbue"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bqqt6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu84c"]
+bg_color = Color(0.9882353, 0, 0.8392157, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9882353, 0, 0.8392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqqt6"]
+bg_color = Color(0.09411765, 0.09803922, 0.09411765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9882353, 0, 0.8392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ln24"]
+bg_color = Color(0.09411765, 0.09803922, 0.09411765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8ln24"]
+texture = ExtResource("2_0dbue")
+
+[resource]
+Button/colors/font_color = Color(0.9882353, 0, 0.8392157, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 40
+Button/fonts/font = ExtResource("1_lfpuk")
+Button/styles/focus = SubResource("StyleBoxEmpty_bqqt6")
+Button/styles/hover = SubResource("StyleBoxFlat_wu84c")
+Button/styles/normal = SubResource("StyleBoxFlat_bqqt6")
+Button/styles/pressed = SubResource("StyleBoxFlat_8ln24")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/font_sizes/font_size = 55
+Label/fonts/font = ExtResource("1_lfpuk")
+Panel/styles/panel = SubResource("StyleBoxTexture_8ln24")

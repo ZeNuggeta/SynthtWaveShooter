@@ -32,6 +32,8 @@ var max_ammo : int = 0
 var ammo : int = 0
 var head_shot_multiplier : float = 2.0
 
+var last_lvl : int
+
 func _ready() -> void:
 	if current_weapon:
 		spawn_weapon_model()
@@ -89,11 +91,16 @@ func reload()->void:
 
 
 func update_magsize()->void:
-	max_ammo = current_weapon.max_ammo + int(Global.stats["Quantity"])
-	ammo = current_weapon.max_ammo
-	update_ammo.emit(ammo,max_ammo)
+	if last_lvl != Global.stats["Quantity"]:
+		max_ammo = current_weapon.max_ammo * int(Global.stats["Quantity"])
+		ammo = max_ammo
+		last_lvl = int(Global.stats["Quantity"])
+		update_ammo.emit(ammo,max_ammo)
+	
 
 func shoot()->void:
+	current_scene = get_tree().current_scene.get_node_or_null("Pool")
+	
 	weapon_sfx.stream = current_weapon.shoot_sound
 	anim_player.play("shoot",-1,Global.stats["FireRate"])
 	weapon_holder.add_weapon_kick(0.1,0.1,0.1)

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://1tb8xpx1mbmu"]
+
+[ext_resource type="Texture2D" uid="uid://bu0gp2drh6ttq" path="res://icon.svg" id="1_1fl0p"]
+[ext_resource type="Script" uid="uid://b2bsym4r5yr41" path="res://scripts/weapons/weapon.gd" id="2_yym8x"]
+[ext_resource type="AudioStream" uid="uid://c68pqv8cj0rke" path="res://resources/M4000/m4000_shoot.sfxr" id="3_1fvwp"]
+[ext_resource type="AudioStream" uid="uid://5rrtgcvwh4yc" path="res://resources/M4000/m4000_reload.sfxr" id="3_rkgrl"]
+[ext_resource type="PackedScene" uid="uid://tkoxe51e4vji" path="res://resources/M4000/M4000Scene.tscn" id="3_yym8x"]
+
+[resource]
+script = ExtResource("2_yym8x")
+weapon_name = "M4000"
+weapon_type = 1
+damage = 6.0
+max_ammo = 30
+weapon_scene = ExtResource("3_yym8x")
+shoot_sound = ExtResource("3_1fvwp")
+reload_sound = ExtResource("3_rkgrl")
+metadata/_custom_type_script = "uid://b2bsym4r5yr41"

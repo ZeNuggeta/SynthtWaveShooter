@@ -21,9 +21,9 @@ class_name Player
 @export var acceleration : float = 0.2
 @export var deceleration : float = 0.5
 @export_group("Speed")
-@export var default_speed : float = 7.0
+@export var default_speed : float = 5.0
 @export var sprint_speed : float = 3.0
-@export var crouch_speed : float = -5.0
+@export var crouch_speed : float = -2.0
 @export_group("Jump")
 @export var jump_velocity : float = 5.0
 @export var fall_velocity_threshold : float = -5.0

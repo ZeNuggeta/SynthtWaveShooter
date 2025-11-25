@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cfq8dgnq17nkk"]
 
-[ext_resource type="PackedScene" uid="uid://cbdlkrok2didl" path="res://resources/G19/G190Model.blend" id="1_tnajr"]
+[ext_resource type="PackedScene" uid="uid://cbdlkrok2didl" path="res://resources/G190/G190Model.blend" id="1_tnajr"]
 
 [sub_resource type="Animation" id="Animation_7qawh"]
 length = 0.001

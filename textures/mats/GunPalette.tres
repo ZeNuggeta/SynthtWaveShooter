@@ -1,15 +1,27 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cudsgkwaevwtc"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cudsgkwaevwtc"]
 
 [ext_resource type="Texture2D" uid="uid://dt40n0whu7mlh" path="res://textures/pallet.png" id="1_qgnsc"]
+[ext_resource type="Shader" uid="uid://cmk420vpfhjcs" path="res://shaders/outline.gdshader" id="2_jogvm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jogvm"]
+render_priority = 0
+shader = ExtResource("2_jogvm")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 1.0
 
 [resource]
+next_pass = SubResource("ShaderMaterial_jogvm")
+albedo_color = Color(0, 0, 0, 1)
 albedo_texture = ExtResource("1_qgnsc")
 emission_enabled = true
-emission = Color(0.61328125, 0.61328125, 0.61328125, 1)
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 1.5
 emission_operator = 1
 emission_texture = ExtResource("1_qgnsc")
 uv1_offset = Vector3(0.03, 0, 0)
+grow_amount = -0.194
 use_z_clip_scale = true
 z_clip_scale = 0.5
-fov_override = 45.0
-stencil_color = Color(0, 1, 0.9296875, 1)
+fov_override = 50.0
+stencil_flags = 2
+stencil_color = Color(1, 1, 1, 1)

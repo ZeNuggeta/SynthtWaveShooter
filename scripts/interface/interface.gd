@@ -2,8 +2,6 @@ extends Control
 class_name Interface
 
 
-
-
 @export var available_upgrades : Array[BaseUpgrade]
 @export_group("References")
 @export var wave_manager : WaveManager
@@ -17,75 +15,59 @@ class_name Interface
 @export var vhs_toggle : bool = true
 
 @onready var vhs: ColorRect = $VFX/VHS
-@onready var health_bar: ProgressBar = $HUD/HealthBar
 @onready var info: RichTextLabel = $HUD/Score
-@onready var xp_bar: TextureProgressBar = $HUD/XPBar
-@onready var xp_label: Label = $HUD/XPBar/XPLabel
-@onready var ammo_label: Label = $HUD/AmmoLabel
 @onready var description_label: Label = $PowerPanel/MarginContainer/HBoxContainer/VBoxContainer/DescriptionLabel
+@onready var hud: Control = $HUD
 @onready var weapon_panel: WeaponPanel = $WeaponPanel
+@onready var pause: Control = $Pause
 
 var weapon_controller : WeaponController
 var stats_handler : StatsHandler
 
+var in_up : bool = false
+
 func _ready() -> void:
-	
 	stats_handler = player.stats_handler
 	weapon_controller = player.weapon_controller
+	weapon_panel.weapon_controller = weapon_controller
 	
 	vhs.visible = vhs_toggle
-	power_panel.visible = false
-	damage_indicator.modulate = Color(255,255,255,0)
 	
-	stats_handler.health_changed.connect(_update_health)
+	stats_handler.health_changed.connect(hud.update_health)
 	wave_manager.update_info.connect(_update_info)
-	weapon_controller.update_ammo.connect(_update_ammo)
+	weapon_controller.update_ammo.connect(hud.update_ammo)
 	
-	_update_health(stats_handler.stats.health,stats_handler.stats.max_health)
-	_update_ammo(weapon_controller.ammo,weapon_controller.max_ammo)
-	power_panel.hide()
+	hud.update_health(stats_handler.stats.health,stats_handler.stats.max_health)
+	hud.update_ammo(weapon_controller.ammo,weapon_controller.max_ammo)
 	
-	Global.update_xp.connect(_update_exp)
+	
+	Global.update_xp.connect(hud.update_exp)
 	Global.update_powerups.connect(_update_power_ups)
-	_update_exp()
 	
 	for p : UpgradePanel in power_up_container.get_children():
 		p.upgrade = available_upgrades[p.get_index()]
 		p.update_card()
 	
-	weapon_panel.weapon_controller = weapon_controller
+	power_panel.hide()
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("upgrade_tab"):
+	if event.is_action_pressed("upgrade_tab") or (event.is_action_pressed("pause") and in_up):
 		_choose_power_up_menu()
 		weapon_panel.update_next_weapon()
-
-func _update_health(value:float,max_value:float,look_at:Node3D=null) -> void:
-	health_bar.max_value = max_value
-	health_bar.value = value
-	if look_at:
-		damage_indicator.rotation = -look_at.rotation.y
-		animation_player.play("fade_out")
-
-func _update_ammo(value:int,max_value:int) -> void:
-	ammo_label.text = "Ammo : %s/%s" %[value,max_value]
+	elif event.is_action_pressed("pause") and !in_up:
+		pause.pause()
 
 func _update_info(stats:String,rainbow:bool=false) -> void:
 	var rainbow_text : String = "[rainbow]" if rainbow else ""
 	info.text = "[wave amp=20 freq =15]" + rainbow_text + stats 
 
-func _update_exp()->void:
-	xp_label.text = "level : %s" %Global.level
-	xp_bar.max_value = Global.experience_required
-	xp_bar.value = Global.experience
-
 func _choose_power_up_menu()->void:
+	in_up = !in_up
+	power_panel.visible = in_up
+	get_tree().paused = in_up
 	_update_power_ups()
-	power_panel.visible = !power_panel.visible
-	get_tree().paused = power_panel.visible
-	
-	if power_panel.visible:
+	if in_up:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

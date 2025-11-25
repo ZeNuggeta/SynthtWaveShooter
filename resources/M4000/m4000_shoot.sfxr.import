@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://c68pqv8cj0rke"
+path="res://.godot/imported/m4000_shoot.sfxr-38a97a6bf2ec74793b9d419f073293c6.sample"
+
+[deps]
+
+source_file="res://resources/M4000/m4000_shoot.sfxr"
+dest_files=["res://.godot/imported/m4000_shoot.sfxr-38a97a6bf2ec74793b9d419f073293c6.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

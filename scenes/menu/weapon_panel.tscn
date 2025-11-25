@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cuhub82qo5ir2"]
+[gd_scene load_steps=4 format=3 uid="uid://cuhub82qo5ir2"]
 
+[ext_resource type="Theme" uid="uid://ctovemxdyxlqj" path="res://textures/Hud.tres" id="1_auukh"]
 [ext_resource type="Script" uid="uid://cshsqw1aid0iw" path="res://scripts/game/weapon_panel.gd" id="1_hevio"]
 [ext_resource type="PackedScene" uid="uid://genhxv0a2tl2" path="res://scenes/menu/weapon_slot.tscn" id="2_auukh"]
 
@@ -11,6 +12,7 @@ offset_top = -162.0
 offset_right = 243.0
 offset_bottom = 84.0
 grow_vertical = 2
+theme = ExtResource("1_auukh")
 script = ExtResource("1_hevio")
 
 [node name="NextWeaponContainer" type="GridContainer" parent="."]
