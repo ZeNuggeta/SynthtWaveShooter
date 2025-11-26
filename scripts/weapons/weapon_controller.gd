@@ -32,8 +32,6 @@ var max_ammo : int = 0
 var ammo : int = 0
 var head_shot_multiplier : float = 2.0
 
-var last_lvl : int
-
 func _ready() -> void:
 	if current_weapon:
 		spawn_weapon_model()
@@ -91,19 +89,18 @@ func reload()->void:
 
 
 func update_magsize()->void:
-	if last_lvl != Global.stats["Quantity"]:
-		max_ammo = current_weapon.max_ammo * int(Global.stats["Quantity"])
-		ammo = max_ammo
-		last_lvl = int(Global.stats["Quantity"])
-		update_ammo.emit(ammo,max_ammo)
 	
+	max_ammo = current_weapon.max_ammo * int(Global.stats["Quantity"])
+	ammo = max_ammo
+	update_ammo.emit(ammo,max_ammo)
+
 
 func shoot()->void:
 	current_scene = get_tree().current_scene.get_node_or_null("Pool")
 	
 	weapon_sfx.stream = current_weapon.shoot_sound
 	anim_player.play("shoot",-1,Global.stats["FireRate"])
-	weapon_holder.add_weapon_kick(0.1,0.1,0.1)
+	weapon_holder.add_weapon_kick(0.5,0.8,1.9)
 	weapon_sfx.pitch_scale = randf_range(0.9,1.9)
 	weapon_sfx.play()
 	var bullet_target : Vector3 = raycast.global_transform * raycast.target_position
@@ -118,6 +115,7 @@ func shoot()->void:
 		elif target is HurtBox and target.is_in_group("head"):
 			target.take_damage(current_weapon.damage * head_shot_multiplier* Global.stats["Damage"])
 			ParticalPool.spawn_partical(point,current_scene)
+	
 	ammo -= 1
 	update_ammo.emit(ammo,max_ammo)
 	make_bullet_trail(bullet_target)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dm3gqheyx1prf"]
+[gd_scene load_steps=20 format=3 uid="uid://dm3gqheyx1prf"]
 
 [ext_resource type="Shader" uid="uid://d4kldxp6gw87k" path="res://shaders/vaporsky.gdshader" id="1_bl13t"]
 [ext_resource type="CompressedTexture3D" uid="uid://djcwtynegcnfa" path="res://textures/SynthLut.png" id="1_iyx0m"]
@@ -9,17 +9,28 @@
 [ext_resource type="PackedScene" uid="uid://7upg6bf0gbki" path="res://scenes/enemies/head.tscn" id="4_l1yhp"]
 [ext_resource type="PackedScene" uid="uid://d3f4d5lvcbvvk" path="res://scenes/menu/interface.tscn" id="5_2mv0b"]
 [ext_resource type="PackedScene" uid="uid://b02gq3arv2rth" path="res://scenes/enemies/ranger.tscn" id="5_5g75k"]
+[ext_resource type="PackedScene" uid="uid://d3q80qyug2kp4" path="res://scenes/enemies/boombox.tscn" id="5_rdm47"]
 [ext_resource type="PackedScene" uid="uid://12p40tnpon77" path="res://scenes/wave_manager.tscn" id="6_tpxsr"]
 [ext_resource type="PackedScene" uid="uid://cb0lyoi4q0ry3" path="res://scenes/audio_manager.tscn" id="7_8htgp"]
-
-[sub_resource type="Resource" id="Resource_muem4"]
-script = ExtResource("2_qybld")
-enemies = Array[PackedScene]([ExtResource("3_rdm47"), ExtResource("4_l1yhp"), ExtResource("5_5g75k")])
-metadata/_custom_type_script = "uid://cscusk7vt5xeh"
 
 [sub_resource type="Resource" id="Resource_dp3eg"]
 script = ExtResource("2_qybld")
 enemies = Array[PackedScene]([ExtResource("3_rdm47"), ExtResource("4_l1yhp")])
+metadata/_custom_type_script = "uid://cscusk7vt5xeh"
+
+[sub_resource type="Resource" id="Resource_rdm47"]
+script = ExtResource("2_qybld")
+enemies = Array[PackedScene]([ExtResource("3_rdm47"), ExtResource("4_l1yhp"), ExtResource("5_5g75k")])
+metadata/_custom_type_script = "uid://cscusk7vt5xeh"
+
+[sub_resource type="Resource" id="Resource_l1yhp"]
+script = ExtResource("2_qybld")
+enemies = Array[PackedScene]([ExtResource("3_rdm47"), ExtResource("5_rdm47"), ExtResource("5_5g75k")])
+metadata/_custom_type_script = "uid://cscusk7vt5xeh"
+
+[sub_resource type="Resource" id="Resource_5g75k"]
+script = ExtResource("2_qybld")
+enemies = Array[PackedScene]([ExtResource("3_rdm47"), ExtResource("4_l1yhp"), ExtResource("5_rdm47"), ExtResource("5_5g75k")])
 metadata/_custom_type_script = "uid://cscusk7vt5xeh"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iyx0m"]
@@ -82,7 +93,7 @@ adjustment_color_correction = ExtResource("1_iyx0m")
 
 [node name="WaveManager" parent="Managers" node_paths=PackedStringArray("player") instance=ExtResource("6_tpxsr")]
 player = NodePath("../../Player")
-waves = Array[ExtResource("2_qybld")]([SubResource("Resource_muem4"), SubResource("Resource_dp3eg")])
+waves = Array[ExtResource("2_qybld")]([SubResource("Resource_dp3eg"), SubResource("Resource_rdm47"), SubResource("Resource_l1yhp"), SubResource("Resource_5g75k")])
 
 [node name="AudioManager" parent="Managers" node_paths=PackedStringArray("wave_manager") instance=ExtResource("7_8htgp")]
 wave_manager = NodePath("../WaveManager")

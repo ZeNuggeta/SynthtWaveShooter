@@ -31,4 +31,5 @@ theme_override_font_sizes/font_size = 40
 text = "loading..."
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
 autostart = true

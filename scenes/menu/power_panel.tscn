@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://d30ctfq73gdbv"]
+
+[ext_resource type="Theme" uid="uid://ctovemxdyxlqj" path="res://textures/Hud.tres" id="1_ur1wd"]
+[ext_resource type="Script" uid="uid://c5qt3db36801l" path="res://scripts/interface/power_panel.gd" id="2_exm8t"]
+[ext_resource type="FontFile" uid="uid://dquy36gl2xnep" path="res://assets/fonts/windows-bold[1].ttf" id="2_hl5do"]
+[ext_resource type="PackedScene" uid="uid://36wq7mxjghx6" path="res://scenes/menu/power_up_panel.tscn" id="3_exm8t"]
+[ext_resource type="Resource" uid="uid://dxb5tilet2q8b" path="res://resources/upgrades/damage.tres" id="4_jytk3"]
+
+[node name="PowerPanel" type="Panel"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1004.0
+offset_top = -186.5
+offset_bottom = 186.5
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("1_ur1wd")
+script = ExtResource("2_exm8t")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_hl5do")
+theme_override_font_sizes/font_size = 30
+text = "Upgrades :"
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(221, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Skill points : l
+level
+"
+autowrap_mode = 3
+
+[node name="PowerUpContainer" type="GridContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 2
+
+[node name="PowerUp1" parent="MarginContainer/HBoxContainer/PowerUpContainer" instance=ExtResource("3_exm8t")]
+layout_mode = 2
+upgrade = ExtResource("4_jytk3")
+
+[node name="PowerUp2" parent="MarginContainer/HBoxContainer/PowerUpContainer" instance=ExtResource("3_exm8t")]
+layout_mode = 2
+
+[node name="PowerUp3" parent="MarginContainer/HBoxContainer/PowerUpContainer" instance=ExtResource("3_exm8t")]
+layout_mode = 2
+
+[node name="PowerUp4" parent="MarginContainer/HBoxContainer/PowerUpContainer" instance=ExtResource("3_exm8t")]
+layout_mode = 2
+
+[node name="PowerUp5" parent="MarginContainer/HBoxContainer/PowerUpContainer" instance=ExtResource("3_exm8t")]
+layout_mode = 2

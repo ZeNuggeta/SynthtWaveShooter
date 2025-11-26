@@ -34,6 +34,9 @@ collision_layer = 0
 monitoring = false
 monitorable = false
 
+[node name="Muzzle" parent="Visuals" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.30309248, -2.2454193, -0.89693755)
+
 [node name="HeadModel" parent="Visuals" index="4" instance=ExtResource("3_u1uar")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 0)
 

@@ -5,12 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://genhxv0a2tl2" path="res://scenes/menu/weapon_slot.tscn" id="2_auukh"]
 
 [node name="WeaponPanel" type="Panel"]
+custom_minimum_size = Vector2(228, 228)
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_top = -162.0
-offset_right = 243.0
-offset_bottom = 84.0
+offset_right = 228.0
+offset_bottom = 66.0
 grow_vertical = 2
 theme = ExtResource("1_auukh")
 script = ExtResource("1_hevio")

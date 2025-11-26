@@ -1,12 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://bntb06f7xtal5"]
+[gd_scene load_steps=10 format=3 uid="uid://bntb06f7xtal5"]
 
 [ext_resource type="Script" uid="uid://doa76srsmuent" path="res://scripts/hit_hurt/hit_box.gd" id="1_hl25f"]
 [ext_resource type="Script" uid="uid://c37rn5qetyhdv" path="res://scripts/enemy/bullet.gd" id="1_p5aa7"]
 [ext_resource type="Shader" uid="uid://bps4j05t72kiv" path="res://shaders/chrome.gdshader" id="2_15gq6"]
+[ext_resource type="Shader" uid="uid://dqk7vg2vm12mh" path="res://shaders/circle_wave.tres" id="4_4skmf"]
+[ext_resource type="ArrayMesh" uid="uid://ix4n2aoqyxo5" path="res://assets/props/circle_mesh.obj" id="4_ncsv3"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_hl25f"]
-radius = 0.25
-height = 0.5
+radius = 0.1
+height = 0.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ncsv3"]
 render_priority = 0
@@ -15,7 +17,14 @@ shader_parameter/normal_depth = 0.25
 shader_parameter/color_compression = 6.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_p5aa7"]
-radius = 0.25
+radius = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mvo23"]
+render_priority = 0
+shader = ExtResource("4_4skmf")
+shader_parameter/CircleColor = Color(0.93118286, 0.83984375, 1, 1)
+shader_parameter/Speed = Vector2(0, -1.5)
+shader_parameter/Opacity = 0.0
 
 [node name="Bullet" type="Node3D"]
 top_level = true
@@ -33,3 +42,13 @@ metadata/_custom_type_script = "uid://doa76srsmuent"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
 shape = SubResource("SphereShape3D_p5aa7")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0.073105514)
+material_override = SubResource("ShaderMaterial_mvo23")
+mesh = ExtResource("4_ncsv3")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.05, 0, 0, 0, -2.1855695e-09, 0.05, 0, -0.05, -2.1855695e-09, 0, 0, 0.25)
+material_override = SubResource("ShaderMaterial_mvo23")
+mesh = ExtResource("4_ncsv3")

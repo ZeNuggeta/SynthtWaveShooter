@@ -22,6 +22,9 @@ attack_speed = 0.5
 transform = Transform3D(-0.8, -1.7265368e-08, -1.1955632e-07, -2.8759214e-15, 0.7917864, -0.1143435, 1.207966e-07, -0.11434346, -0.79178613, -6.8272827e-09, 0.4250399, -0.045215003)
 external_skeleton = NodePath("../Ranger/metarig/Skeleton3D")
 
+[node name="Muzzle" parent="Visuals" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11530268, 0.70615816, -0.89693755)
+
 [node name="Ranger" parent="Visuals" index="4" instance=ExtResource("4_2r13h")]
 transform = Transform3D(-0.8, 0, -1.2079664e-07, 0, 0.8, 0, 1.2079664e-07, 0, -0.8, 0, -1, 0)
 

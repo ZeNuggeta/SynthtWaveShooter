@@ -14,6 +14,7 @@ metadata/_custom_type_script = "uid://d1eo3unyiu8dk"
 stats = SubResource("Resource_4dswm")
 mesh = NodePath("Visuals/Bot/metarig/Skeleton3D/BASE_Low Poly Man")
 anim = NodePath("Visuals/Bot/AnimationPlayer")
+xp = 10.0
 
 [node name="Head" parent="Visuals" index="1"]
 transform = Transform3D(-0.8, -9.996209e-09, -6.922008e-08, -2.8759214e-15, 0.7917864, -0.1143435, 6.993818e-08, -0.11434346, -0.79178613, -3.9528283e-09, 0.4250399, -0.045215003)

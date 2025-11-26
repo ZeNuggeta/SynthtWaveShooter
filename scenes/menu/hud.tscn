@@ -71,7 +71,7 @@ mouse_filter = 1
 theme = ExtResource("1_qx28e")
 script = ExtResource("1_b5tn1")
 
-[node name="Score" type="RichTextLabel" parent="."]
+[node name="Info" type="RichTextLabel" parent="."]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 10

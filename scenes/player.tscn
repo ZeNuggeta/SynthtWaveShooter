@@ -64,6 +64,7 @@ camera = NodePath("Camera")
 
 [node name="Camera" type="Camera3D" parent="Head" node_paths=PackedStringArray("player")]
 cull_mask = 1048573
+fov = 86.0
 script = ExtResource("3_4r5pv")
 player = NodePath("../..")
 

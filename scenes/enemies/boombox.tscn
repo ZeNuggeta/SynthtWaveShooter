@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3q80qyug2kp4"]
+
+[ext_resource type="PackedScene" uid="uid://ccrk55ebba6wa" path="res://scenes/enemies/base_enemy.tscn" id="1_klslx"]
+[ext_resource type="Script" uid="uid://d1eo3unyiu8dk" path="res://scripts/player/stats.gd" id="2_i1ctw"]
+[ext_resource type="PackedScene" uid="uid://bi31oi040ulvw" path="res://assets/bot/boombox.blend" id="3_klslx"]
+
+[sub_resource type="Resource" id="Resource_ad3fb"]
+resource_local_to_scene = true
+script = ExtResource("2_i1ctw")
+max_health = 4.0
+metadata/_custom_type_script = "uid://d1eo3unyiu8dk"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u1uar"]
+radius = 3.0
+
+[node name="BoomBox" node_paths=PackedStringArray("mesh", "anim") instance=ExtResource("1_klslx")]
+stats = SubResource("Resource_ad3fb")
+mesh = NodePath("Visuals/boombox/Armature/Skeleton3D/Cube")
+anim = NodePath("Visuals/boombox/AnimationPlayer")
+speed = 1.5
+ranged = true
+stop_range = 11.0
+bullet_speed = 4.0
+attack_speed = 0.6
+xp = 10
+
+[node name="Head" parent="Visuals" index="1"]
+transform = Transform3D(-0.2, 0, -1.7484556e-08, 0, 0.2, 0, 1.7484556e-08, 0, -0.2, 0, -0.8, 0)
+bone_name = "Head_2"
+bone_idx = -1
+
+[node name="CollisionShape3D" parent="Visuals/Head/HeadHurtBox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32754195, 0)
+shape = SubResource("SphereShape3D_u1uar")
+
+[node name="BodyHurtBox" parent="Visuals" index="2"]
+collision_layer = 0
+monitoring = false
+monitorable = false
+
+[node name="Muzzle" parent="Visuals" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.80239475, -0.3318953)
+
+[node name="boombox" parent="Visuals" index="4" instance=ExtResource("3_klslx")]
+transform = Transform3D(-0.2, 0, -1.7484556e-08, 0, 0.2, 0, 1.7484556e-08, 0, -0.2, 0, -1, 0)
+
+[editable path="Visuals/boombox"]

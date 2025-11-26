@@ -10,6 +10,7 @@ var distance_moved : float = 0
 func _physics_process(delta: float) -> void:
 	var new_pos : Vector3 =  global_transform.origin - (direction * speed * delta)
 	distance_moved += position.distance_to(new_pos)
+	look_at(new_pos,Vector3.UP)
 	position = new_pos
 	if distance_moved > MAX_DISTANCE:
 		queue_free()

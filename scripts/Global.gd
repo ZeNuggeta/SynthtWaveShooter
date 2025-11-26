@@ -16,7 +16,7 @@ var stats : Dictionary[String,float] = {
 	"Quantity" : 1.0,
 }
 
-var level : int = 13
+var level : int = 1
 var experience : float = 0
 var experience_total : float = 0
 var experience_required : float = get_required_exp(level + 1)

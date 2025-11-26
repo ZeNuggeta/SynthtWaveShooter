@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://dhd5qptv2ncpr"]
+
+[ext_resource type="Texture2D" uid="uid://bu0gp2drh6ttq" path="res://icon.svg" id="1_3jj16"]
+[ext_resource type="Script" uid="uid://b2bsym4r5yr41" path="res://scripts/weapons/weapon.gd" id="2_4ikjk"]
+
+[resource]
+script = ExtResource("2_4ikjk")
+weapon_name = "Spammer"
+weapon_type = 1
+level_to_unlock = 33
+metadata/_custom_type_script = "uid://b2bsym4r5yr41"

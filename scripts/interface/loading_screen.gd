@@ -17,7 +17,7 @@ func _ready() -> void:
 	hide()
 	set_process(false)
 	
-	#timer.timeout.connect()
+	timer.timeout.connect(_on_dots_timer_timeout)
 
 func _process(_delta: float) -> void:
 	loading_status = ResourceLoader.load_threaded_get_status(scene_path)

@@ -1,9 +1,15 @@
 extends Control
 
 @onready var animation_player: AnimationPlayer = $DamageIndicator/AnimationPlayer
+@onready var info: RichTextLabel = $Info
 
 func _ready() -> void:
 	update_exp()
+	
+
+func update_info(stats:String,rainbow:bool=false) -> void:
+	var rainbow_text : String = "[rainbow]" if rainbow else ""
+	info.text = "[wave amp=20 freq =15]" + rainbow_text + stats 
 
 func update_health(value:float,max_value:float,look_at:Node3D=null) -> void:
 	%HealthBar.max_value = max_value

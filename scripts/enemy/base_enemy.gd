@@ -22,7 +22,7 @@ const CHROME = preload("uid://bps4j05t72kiv")
 @export var bullet_speed : float = 6.0
 @export var attack_speed : float = 1.0
 @export_subgroup("Rewards")
-@export var xp : int = 10
+@export var xp : float = 10
 
 @onready var eyes: Node3D = $Eyes
 @onready var hit_box: HitBox = $HitBox
@@ -78,7 +78,7 @@ func _physics_process(delta: float) -> void:
 	
 	if global_position.distance_to(player.global_position) <= stop_range:
 		if ranged and !attack_timer.time_left:
-			anim.play('stand_range')
+			anim.play('attack')
 			attack_timer.start()
 		
 	else:
@@ -125,6 +125,8 @@ func take_damage(value:float)->void:
 func set_difficulty(difficulty:int)->void:
 	stats.max_health = stats.max_health * difficulty
 	stats.health = stats.max_health
+	xp = xp * float(difficulty * 1.2)
+	
 
 func dead()->void:
 	_is_dead = true
