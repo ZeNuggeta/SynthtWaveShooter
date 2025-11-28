@@ -125,8 +125,9 @@ func take_damage(value:float)->void:
 func set_difficulty(difficulty:int)->void:
 	stats.max_health = stats.max_health * difficulty
 	stats.health = stats.max_health
-	xp = xp * float(difficulty * 1.2)
 	
+	#hit_box.damage = hit_box.damage * float(difficulty * 1.1)
+		
 
 func dead()->void:
 	_is_dead = true

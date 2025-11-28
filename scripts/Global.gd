@@ -20,7 +20,7 @@ var level : int = 1
 var experience : float = 0
 var experience_total : float = 0
 var experience_required : float = get_required_exp(level + 1)
-var skill_points : int = 2
+var skill_points : int = 1
 
 func get_required_exp(my_level:int)->int:
 	return round(pow(my_level,1.8) + level + 4)

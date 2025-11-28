@@ -4,7 +4,7 @@ class_name WaveManager
 signal update_info(text:String)
 signal enemy_hit(dead:bool)
 
-const MAX_ENEMYS : int = 45
+const MAX_ENEMYS : int = 64
 const OFFSET : Vector3 = Vector3(0,1.0,0)
 
 
@@ -72,7 +72,6 @@ func position_to_next_wave()->void:
 func spawn_type()->void:
 	mobs_spawned_per_round = MAX_ENEMYS
 	enemies_to_kill = mobs_spawned_per_round
-	print(mobs_spawned_per_round)
 	if mobs_spawned_per_round >= 1:
 		for i in mobs_spawned_per_round:
 			var random_spawn : Marker3D = spawn_container.get_child(randi_range(0,spawn_container.get_child_count(false) - 1))

@@ -1,0 +1,144 @@
+[gd_scene load_steps=6 format=3 uid="uid://dm4wpxitio123"]
+
+[ext_resource type="PackedScene" uid="uid://be4tanw3wqtwo" path="res://resources/Hasty/HastyModel.blend" id="1_5elfd"]
+
+[sub_resource type="Animation" id="Animation_7qawh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HastyModel/main:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HastyModel/main:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HastyModel/main/mag:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tnajr"]
+resource_name = "reload"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HastyModel/main:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.01), Vector3(0, 0, 0.01)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HastyModel/main:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.0034906585, 0, 0), Vector3(-0.0031892704, 0.0014188932, -0.41860208), Vector3(-0.0031892704, 0.0014188932, -0.41860208), Vector3(-0.0034906585, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HastyModel/main/mag:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, -1.4234779, 0.4145093), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_o7wus"]
+resource_name = "shoot"
+length = 0.03
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HastyModel/main:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.03),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.01), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HastyModel/main:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.03),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.0034906585, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7qawh"]
+_data = {
+&"RESET": SubResource("Animation_7qawh"),
+&"reload": SubResource("Animation_tnajr"),
+&"shoot": SubResource("Animation_o7wus")
+}
+
+[node name="HastyScene" type="Node3D"]
+
+[node name="HastyModel" parent="." instance=ExtResource("1_5elfd")]
+transform = Transform3D(0.969261, -0.24603488, 0, 0.24603488, 0.969261, 0, 0, 0, 1, 0.4324984, -0.36887026, -0.6857342)
+
+[node name="main" parent="HastyModel" index="0"]
+transform = Transform3D(0.48, 0, 0, 0, 0.48000005, 0, 0, 0, 0.48000005, 0, 0, 0)
+
+[node name="mag" parent="HastyModel/main" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7qawh")
+}
+
+[node name="Muzzle" type="Marker3D" parent="."]
+transform = Transform3D(0.969261, -0.24603488, 0, 0.24603488, 0.969261, 0, 0, 0, 1, 0.3903284, -0.27932242, -1.3454823)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -200)
+collision_mask = 9
+collide_with_areas = true
+
+[editable path="HastyModel"]

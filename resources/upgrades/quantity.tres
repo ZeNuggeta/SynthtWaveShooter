@@ -9,6 +9,6 @@ upgrade_name = "Quantity"
 icon = ExtResource("1_ccxvl")
 upgrade_type = 4
 amount = 1.0
-max_ups = 20.0
+max_ups = 10.0
 required_skill_points = 4
 metadata/_custom_type_script = "uid://v8w608i0p1ty"

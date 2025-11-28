@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://o5bmnxc5vk37"
+path="res://.godot/imported/hasty_shoot.sfxr-bb0e51a43b3ed8cbe8a6a02b8f170220.sample"
+
+[deps]
+
+source_file="res://resources/Hasty/hasty_shoot.sfxr"
+dest_files=["res://.godot/imported/hasty_shoot.sfxr-bb0e51a43b3ed8cbe8a6a02b8f170220.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

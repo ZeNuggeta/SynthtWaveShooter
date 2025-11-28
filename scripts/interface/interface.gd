@@ -41,7 +41,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("upgrade_tab") or (event.is_action_pressed("pause") and in_up):
+	if event.is_action_pressed("upgrade_tab") and !pause.visible or (event.is_action_pressed("pause") and in_up) :
 		_choose_power_up_menu()
 		weapon_panel.update_next_weapon()
 	elif event.is_action_pressed("pause") and !in_up:

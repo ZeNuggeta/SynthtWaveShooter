@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://b1ynwajjxhnbe"
+path="res://.godot/imported/huntrifle_reload.sfxr-9c633e83a41c98468283b0711d371211.sample"
+
+[deps]
+
+source_file="res://resources/HuntRifle/huntrifle_reload.sfxr"
+dest_files=["res://.godot/imported/huntrifle_reload.sfxr-9c633e83a41c98468283b0711d371211.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

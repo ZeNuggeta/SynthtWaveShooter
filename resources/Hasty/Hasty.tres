@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://c6f2pi54tq8j8"]
+
+[ext_resource type="Texture2D" uid="uid://bu0gp2drh6ttq" path="res://icon.svg" id="1_3ngc0"]
+[ext_resource type="Script" uid="uid://b2bsym4r5yr41" path="res://scripts/weapons/weapon.gd" id="2_ibyuq"]
+[ext_resource type="PackedScene" uid="uid://dm4wpxitio123" path="res://resources/Hasty/HastyScene.tscn" id="3_ibyuq"]
+[ext_resource type="AudioStream" uid="uid://cjmcq7vqlilyr" path="res://resources/Hasty/hasty_reload.sfxr" id="3_tm151"]
+[ext_resource type="AudioStream" uid="uid://o5bmnxc5vk37" path="res://resources/Hasty/hasty_shoot.sfxr" id="4_h2y1s"]
+
+[resource]
+script = ExtResource("2_ibyuq")
+weapon_name = "Hasty"
+weapon_type = 1
+damage = 9.0
+max_ammo = 33
+level_to_unlock = 33
+weapon_scene = ExtResource("3_ibyuq")
+shoot_sound = ExtResource("4_h2y1s")
+reload_sound = ExtResource("3_tm151")
+metadata/_custom_type_script = "uid://b2bsym4r5yr41"

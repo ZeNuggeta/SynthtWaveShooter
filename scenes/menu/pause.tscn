@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ckswfjttajpdd"]
+[gd_scene load_steps=9 format=3 uid="uid://ckswfjttajpdd"]
 
 [ext_resource type="Theme" uid="uid://cy43ppi1rfjlv" path="res://textures/main.tres" id="1_nesnr"]
 [ext_resource type="Script" uid="uid://cg5akbdaihsyu" path="res://scripts/interface/pause.gd" id="2_4wejy"]
 [ext_resource type="Shader" uid="uid://skgxjiy3txl3" path="res://shaders/blur.gdshader" id="3_1mvc1"]
+[ext_resource type="PackedScene" uid="uid://b7kmo18v0yip" path="res://scenes/menu/settings.tscn" id="4_1mso8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1mso8"]
 shader = ExtResource("3_1mvc1")
@@ -11,12 +12,12 @@ shader_parameter/offset = 5.0000002375
 [sub_resource type="Gradient" id="Gradient_4wejy"]
 colors = PackedColorArray(0.9882353, 0, 0.8392157, 1, 0.57254905, 0, 0.99215686, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_1mvc1"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1mso8"]
 gradient = SubResource("Gradient_4wejy")
 fill_from = Vector2(0, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1mso8"]
-texture = SubResource("GradientTexture2D_1mvc1")
+texture = SubResource("GradientTexture2D_1mso8")
 
 [node name="Pause" type="Control"]
 layout_mode = 3
@@ -79,7 +80,7 @@ text = "Options
 layout_mode = 2
 text = "Main Menu"
 
-[node name="PausedPanel" type="Panel" parent="."]
+[node name="PausedTitle" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -95,7 +96,7 @@ grow_vertical = 2
 rotation = -0.15123843
 theme_override_styles/panel = SubResource("StyleBoxTexture_1mso8")
 
-[node name="Label" type="Label" parent="PausedPanel"]
+[node name="Label" type="Label" parent="PausedTitle"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -113,5 +114,10 @@ text = "Paused"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Settings" parent="." instance=ExtResource("4_1mso8")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="MainPanel/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MainPanel/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MainPanel/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://dwv7o1b0awtsm"]
 
 [ext_resource type="Script" uid="uid://b2bsym4r5yr41" path="res://scripts/weapons/weapon.gd" id="1_1kdav"]
-[ext_resource type="AudioStream" uid="uid://b1ynwajjxhnbe" path="res://resources/HuntRifle/hunterifle_reload.sfxr" id="1_l07ml"]
+[ext_resource type="AudioStream" uid="uid://b1ynwajjxhnbe" path="res://resources/HuntRifle/huntrifle_reload.sfxr" id="1_l07ml"]
 [ext_resource type="Texture2D" uid="uid://bu0gp2drh6ttq" path="res://icon.svg" id="1_oc3b6"]
 [ext_resource type="PackedScene" uid="uid://csi4bj4g75d6a" path="res://resources/HuntRifle/HuntRifleScene.tscn" id="2_y1tjl"]
-[ext_resource type="AudioStream" uid="uid://d0e0i6ystm75a" path="res://resources/HuntRifle/hunterifle_shoot.sfxr" id="3_oc3b6"]
+[ext_resource type="AudioStream" uid="uid://d0e0i6ystm75a" path="res://resources/HuntRifle/huntrifle_shoot.sfxr" id="3_oc3b6"]
 
 [resource]
 script = ExtResource("1_1kdav")

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cbdlkrok2didl"
-path="res://.godot/imported/G190Model.blend-924b6673a2bbca49e3a342573a104cfb.scn"
+uid="uid://be4tanw3wqtwo"
+path="res://.godot/imported/HastyModel.blend-a2d1e2170be1926fb472a4352a5cb2ee.scn"
 
 [deps]
 
-source_file="res://resources/G190/G190Model.blend"
-dest_files=["res://.godot/imported/G190Model.blend-924b6673a2bbca49e3a342573a104cfb.scn"]
+source_file="res://resources/Hasty/HastyModel.blend"
+dest_files=["res://.godot/imported/HastyModel.blend-a2d1e2170be1926fb472a4352a5cb2ee.scn"]
 
 [params]
 

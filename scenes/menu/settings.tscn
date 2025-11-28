@@ -1,0 +1,153 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7kmo18v0yip"]
+
+[ext_resource type="Theme" uid="uid://cy43ppi1rfjlv" path="res://textures/main.tres" id="1_rqcjd"]
+[ext_resource type="Script" uid="uid://l171jd1lrkm8" path="res://scripts/interface/settings.gd" id="2_37860"]
+[ext_resource type="FontFile" uid="uid://bptsp56kfavva" path="res://assets/fonts/SometypeMono-VariableFont_wght.ttf" id="2_dxr1k"]
+[ext_resource type="Script" uid="uid://dj2ccjnaa4l77" path="res://scripts/interface/slider.gd" id="4_0t5g5"]
+
+[sub_resource type="Gradient" id="Gradient_0t5g5"]
+colors = PackedColorArray(0.9882353, 0, 0.8392157, 1, 0.57254905, 0, 0.99215686, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1mvc1"]
+gradient = SubResource("Gradient_0t5g5")
+fill_from = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_occy7"]
+texture = SubResource("GradientTexture2D_1mvc1")
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_rqcjd")
+script = ExtResource("2_37860")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -430.0
+offset_top = -270.0
+offset_right = 430.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Master" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/Master"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_dxr1k")
+theme_override_font_sizes/font_size = 30
+text = "Master volume :"
+
+[node name="Slider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/Master"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 0.5
+script = ExtResource("4_0t5g5")
+
+[node name="Music" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/Music"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_dxr1k")
+theme_override_font_sizes/font_size = 30
+text = "Music volume :"
+
+[node name="Slider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/Music"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 0.5
+script = ExtResource("4_0t5g5")
+bus = 4
+
+[node name="SFX" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/SFX"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_dxr1k")
+theme_override_font_sizes/font_size = 30
+text = "SFX volume :"
+
+[node name="Slider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/SFX"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 0.5
+script = ExtResource("4_0t5g5")
+bus = 3
+
+[node name="BackButton" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Back"
+
+[node name="SettingTitle" type="Panel" parent="Panel"]
+layout_mode = 1
+offset_left = -100.000015
+offset_top = -12.0
+offset_right = 156.14128
+offset_bottom = 49.5
+rotation = -0.15123843
+theme_override_styles/panel = SubResource("StyleBoxTexture_occy7")
+
+[node name="Label" type="Label" parent="Panel/SettingTitle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -63.0
+offset_top = -33.5
+offset_right = 63.0
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 35
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/Master/Slider" to="." method="_on_s_slider_value_changed"]
+[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/Music/Slider" to="." method="_on_s_slider_value_changed"]
+[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/SFX/Slider" to="." method="_on_s_slider_value_changed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://chir5h48dtiaf"
+path="res://.godot/imported/spammer_reload.sfxr-42a54892957101e52e1f43fa585b6758.sample"
+
+[deps]
+
+source_file="res://resources/Spammer/spammer_reload.sfxr"
+dest_files=["res://.godot/imported/spammer_reload.sfxr-42a54892957101e52e1f43fa585b6758.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

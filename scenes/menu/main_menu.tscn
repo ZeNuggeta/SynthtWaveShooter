@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlh5mphjdwpjg"]
+[gd_scene load_steps=7 format=3 uid="uid://dlh5mphjdwpjg"]
 
 [ext_resource type="Theme" uid="uid://cy43ppi1rfjlv" path="res://textures/main.tres" id="1_bqqt6"]
 [ext_resource type="Script" uid="uid://bsk8sanm3ph1w" path="res://scripts/interface/main_menu.gd" id="1_ekxnf"]
 [ext_resource type="Shader" uid="uid://cjdxlaf1hph54" path="res://shaders/wavy.gdshader" id="1_l6cm7"]
 [ext_resource type="AudioStream" uid="uid://csekyffeetfb6" path="res://assets/audio/music/80s_song_mastered.mp3" id="4_wu84c"]
+[ext_resource type="PackedScene" uid="uid://b7kmo18v0yip" path="res://scenes/menu/settings.tscn" id="5_hj162"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ekxnf"]
 shader = ExtResource("1_l6cm7")
@@ -96,6 +97,10 @@ text = "Quit"
 stream = ExtResource("4_wu84c")
 autoplay = true
 bus = &"Music"
+
+[node name="Settings" parent="." instance=ExtResource("5_hj162")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="Panel/Buttons/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Panel/Buttons/Options" to="." method="_on_options_pressed"]

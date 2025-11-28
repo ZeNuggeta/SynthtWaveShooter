@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://d0e0i6ystm75a"
+path="res://.godot/imported/huntrifle_shoot.sfxr-1f78c39c9fea74fa0acc41b51bb99661.sample"
+
+[deps]
+
+source_file="res://resources/HuntRifle/huntrifle_shoot.sfxr"
+dest_files=["res://.godot/imported/huntrifle_shoot.sfxr-1f78c39c9fea74fa0acc41b51bb99661.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

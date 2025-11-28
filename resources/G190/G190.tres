@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=8 format=3 uid="uid://dv83oc30rw574"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=9 format=3 uid="uid://dv83oc30rw574"]
 
 [ext_resource type="Texture2D" uid="uid://bu0gp2drh6ttq" path="res://icon.svg" id="1_dcxxi"]
 [ext_resource type="Script" uid="uid://b2bsym4r5yr41" path="res://scripts/weapons/weapon.gd" id="2_fglng"]
 [ext_resource type="Resource" uid="uid://dwv7o1b0awtsm" path="res://resources/HuntRifle/HuntRifle.tres" id="3_ijk61"]
 [ext_resource type="Resource" uid="uid://1tb8xpx1mbmu" path="res://resources/M4000/M4000.tres" id="4_yxptq"]
+[ext_resource type="Resource" uid="uid://dhd5qptv2ncpr" path="res://resources/Spammer/Spammer.tres" id="5_fglng"]
 [ext_resource type="AudioStream" uid="uid://c4wnbjnipcwir" path="res://resources/G190/g190_reload.sfxr" id="5_tcc7s"]
 [ext_resource type="AudioStream" uid="uid://brvrbkd0xpv1f" path="res://resources/G190/g190_shoot.sfxr" id="6_a43se"]
 [ext_resource type="PackedScene" uid="uid://cfq8dgnq17nkk" path="res://resources/G190/G190Scene.tscn" id="7_4ry4t"]
@@ -12,7 +13,7 @@
 script = ExtResource("2_fglng")
 weapon_name = "G19"
 damage = 2.0
-next_weapons = Array[ExtResource("2_fglng")]([ExtResource("3_ijk61"), ExtResource("4_yxptq")])
+next_weapons = Array[ExtResource("2_fglng")]([ExtResource("3_ijk61"), ExtResource("4_yxptq"), ExtResource("5_fglng")])
 weapon_scene = ExtResource("7_4ry4t")
 shoot_sound = ExtResource("6_a43se")
 reload_sound = ExtResource("5_tcc7s")

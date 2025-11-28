@@ -2,33 +2,43 @@
 
 [ext_resource type="PackedScene" uid="uid://y1xfuclw1vqx" path="res://resources/M4000/M4000Model.blend" id="1_lhe11"]
 
-[sub_resource type="Animation" id="Animation_lhe11"]
-resource_name = "shoot"
-length = 0.3
-step = 0.1
+[sub_resource type="Animation" id="Animation_dbb0i"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("M4000Model/Main:position")
+tracks/0/path = NodePath("M4000Model/main:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.048215717), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("M4000Model/Main:rotation")
+tracks/1/path = NodePath("M4000Model/main:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 1.5707964, 0), Vector3(-0.15397295, 1.5707964, 0.043284163), Vector3(0.026179949, 1.5707964, 0.021642085), Vector3(0, 1.5707964, 0)]
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("M4000Model/main/mag:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_otcqc"]
@@ -37,65 +47,67 @@ length = 1.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("M4000Model/Main/Mag:position")
+tracks/0/path = NodePath("M4000Model/main/mag:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.43333334, 0.73333335, 0.93333334, 1.2),
-"transitions": PackedFloat32Array(1, -0.5, -0.5, -0.5, 0.5, -0.5),
+"times": PackedFloat32Array(0, 0.23333335, 0.5666667, 0.9666667, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, -3.6022122, 0), Vector3(0, -3.6022122, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, -1.2398223, 0.6231232), Vector3(0, 0, 0), Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("M4000Model/Main:rotation")
+tracks/1/path = NodePath("M4000Model/main:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 1.0666667, 1.2),
-"transitions": PackedFloat32Array(1, -0.5, -0.5, -0.5),
-"update": 0,
-"values": [Vector3(0, 1.5707964, 0), Vector3(0.52359885, 1.5707964, 2.523678e-08), Vector3(0.52359885, 1.5707964, 2.523678e-08), Vector3(0, 1.5707964, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_dbb0i"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("M4000Model/Main:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("M4000Model/Main:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 1.5707964, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("M4000Model/Main/Mag:position")
+tracks/2/path = NodePath("M4000Model/main:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.16666667, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.5907241), Vector3(0, 0, -0.5907241), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lhe11"]
+resource_name = "shoot"
+length = 0.28
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("M4000Model/main:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.28),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.082503855), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("M4000Model/main:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.049999997, 0.099999994, 0.21, 0.28),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.033021152, 0.003404911, 0.102768846), Vector3(0.06639234, 0, 0), Vector3(0.025761293, -0.0017290601, -0.067025475), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dbb0i"]
@@ -108,10 +120,10 @@ _data = {
 [node name="M4000" type="Node3D"]
 
 [node name="M4000Model" parent="." instance=ExtResource("1_lhe11")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33863103, -0.29630235, -0.33334005)
+transform = Transform3D(0.90915614, -0.41645536, 0, 0.41645536, 0.90915614, 0, 0, 0, 1, 0.51418734, -0.3465605, -0.4794374)
 
-[node name="Main" parent="M4000Model" index="0"]
-transform = Transform3D(-8.742276e-09, 0, 0.19999997, 0, 0.19999993, 0, -0.19999997, 0, -8.742276e-09, 0, 0, 0)
+[node name="main" parent="M4000Model" index="0"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -119,7 +131,7 @@ libraries = {
 }
 
 [node name="Muzzle" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3358395, -0.14698422, -1.2430499)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45188522, -0.19161716, -1.171637)
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -200)

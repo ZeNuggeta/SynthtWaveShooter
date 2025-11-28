@@ -39,7 +39,7 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
-"Pallet": {
+"texture": {
 "use_external/enabled": true,
 "use_external/fallback_path": "res://textures/mats/GunPalette.tres",
 "use_external/path": "uid://cudsgkwaevwtc"
