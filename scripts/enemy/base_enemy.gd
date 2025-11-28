@@ -109,18 +109,22 @@ func tick_update() -> void:
 func climb()->void:
 	velocity.y = 4.0
 
-func take_damage(value:float)->void:
+func take_damage(value:float,head:bool=false)->void:
 	if _is_dead:return
 	stats.health -= value
 	
 	base_mat.set_shader_parameter("color_compression",-6)
 	_stun = true
+	NumberEffectManager.damage_text(value,global_position,head)
+	
 	
 	damaged.emit()
 	if not _is_dead:
 		await get_tree().create_timer(0.2).timeout
 		base_mat.set_shader_parameter("color_compression",6)
 		_stun = false
+
+
 
 func set_difficulty(difficulty:int)->void:
 	stats.max_health = stats.max_health * difficulty

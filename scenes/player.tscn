@@ -48,6 +48,7 @@ collision_layer = 2
 script = ExtResource("1_g2els")
 can_sprint = false
 can_crouch = false
+default_speed = 4.0
 
 [node name="StandCol" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_u8vuu")
@@ -214,10 +215,11 @@ head = NodePath("../../Head")
 stairs_ahead = NodePath("../../StairsAhead")
 stairs_below = NodePath("../../StairsBelow")
 
-[node name="StatsHandler" type="Node" parent="Components" node_paths=PackedStringArray("hurt_box", "hurt_sfx", "look_at_enemy")]
+[node name="StatsHandler" type="Node" parent="Components" node_paths=PackedStringArray("hurt_box", "camera_effect", "hurt_sfx", "look_at_enemy")]
 script = ExtResource("21_4ni07")
 stats = SubResource("Resource_4ni07")
 hurt_box = NodePath("../../HurtBox")
+camera_effect = NodePath("../../Head/Camera")
 hurt_sfx = NodePath("../../SFX/PlayerHurt")
 look_at_enemy = NodePath("../../LookAtEnemy")
 

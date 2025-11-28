@@ -32,6 +32,7 @@ var max_ammo : int = 0
 var ammo : int = 0
 var head_shot_multiplier : float = 2.0
 
+
 func _ready() -> void:
 	if current_weapon:
 		spawn_weapon_model()
@@ -89,9 +90,7 @@ func reload()->void:
 
 
 func update_magsize()->void:
-	
 	max_ammo = current_weapon.max_ammo * int(Global.stats["Quantity"])
-	ammo = max_ammo
 	update_ammo.emit(ammo,max_ammo)
 
 
@@ -109,11 +108,8 @@ func shoot()->void:
 		var target : Node3D = raycast.get_collider()
 		var point : Vector3 = raycast.get_collision_point()
 		bullet_target = point
-		if target is HurtBox and target.is_in_group("body"):
+		if target is HurtBox:
 			target.take_damage(current_weapon.damage * Global.stats["Damage"])
-			ParticalPool.spawn_partical(point,current_scene)
-		elif target is HurtBox and target.is_in_group("head"):
-			target.take_damage(current_weapon.damage * head_shot_multiplier* Global.stats["Damage"])
 			ParticalPool.spawn_partical(point,current_scene)
 	
 	ammo -= 1

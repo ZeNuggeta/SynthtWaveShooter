@@ -18,9 +18,10 @@ config/icon="uid://p268feqrsder"
 
 [autoload]
 
-Global="*res://scripts/Global.gd"
+Global="*res://scripts/globals/global.gd"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 LoadingScreen="*res://scenes/menu/loading_screen.tscn"
+NumberEffectManager="*res://scripts/globals/number_effect_manager.gd"
 
 [debug]
 

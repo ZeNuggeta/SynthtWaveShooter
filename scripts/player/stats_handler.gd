@@ -5,10 +5,11 @@ signal health_changed(value:int)
 
 @export var stats : Stats
 @export var hurt_box: HurtBox
+@export var camera_effect : CameraEffects
 @export var hurt_sfx : AudioStreamPlayer
 @export var look_at_enemy: Node3D
 
-@export var invincible_time : float = 0.4
+@export var invincible_time : float = 0.2
 @export var regen_time : float = 0
 
 @onready var regen_timer: Timer = $RegenTimer
@@ -43,17 +44,20 @@ func _update_health()->void:
 	health_changed.emit(health,max_health)
 
 func _take_hit(other_hit:HitBox) -> void:
-	if dead:return
 	if _stuned: return
 	
+	
 	health -= other_hit.damage
+	stats.health = health
 	_can_regent = false
 	regen_timer.start()
 	
+	camera_effect.add_damage_kick(2.0,2.0,other_hit.global_transform.origin)
 	look_at_enemy.look_at(other_hit.global_transform.origin,Vector3.UP)
 	health_changed.emit(health,max_health,look_at_enemy)
 	
 	hurt_sfx.play()
+	
 	
 	_stuned = true
 	hurt_box.set_deferred("monitoring",false)
@@ -62,7 +66,9 @@ func _take_hit(other_hit:HitBox) -> void:
 	hurt_box.set_deferred("monitoring",true)
 
 func _player_dead() -> void:
-	dead = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	Global.reset_stats()
+	LoadingScreen.start_loading("uid://dlh5mphjdwpjg")
 
 
 func _on_regen_timer_timeout() -> void:

@@ -32,7 +32,6 @@ collision_mask = 0
 script = ExtResource("1_n1jr3")
 stats = SubResource("Resource_kegi0")
 visual = NodePath("Visuals")
-xp = 5
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_t1as8")
@@ -75,6 +74,7 @@ external_skeleton = NodePath("")
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("7_rffmh")
+head_shot_multiplier = 2.0
 metadata/_custom_type_script = "uid://3tcow7oyiab4"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/Head/HeadHurtBox"]

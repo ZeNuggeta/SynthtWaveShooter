@@ -22,6 +22,8 @@ var experience_total : float = 0
 var experience_required : float = get_required_exp(level + 1)
 var skill_points : int = 1
 
+var sens : float = 5
+
 func get_required_exp(my_level:int)->int:
 	return round(pow(my_level,1.8) + level + 4)
 
@@ -45,6 +47,16 @@ func upgrade_stats(upgrade:BaseUpgrade,amount:float)->void:
 		skill_points -= upgrade.required_skill_points
 		stats[upgrade.upgrade_name] = clampf(stats[upgrade.upgrade_name],1.0,upgrade.max_ups)
 		update_powerups.emit()
+
+func reset_stats()->void:
+	skill_points = 1
+	level = 1
+	experience  = 0
+	experience_total  = 0
+	experience_required = get_required_exp(level + 1)
+	
+	for i in stats:
+		stats[i] = 1.0
 
 func shake_camera(amount:float,seconds:float)->void:
 	shake_cam.emit(amount,seconds)

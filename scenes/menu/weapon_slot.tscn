@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://genhxv0a2tl2"]
 
 [ext_resource type="Texture2D" uid="uid://ch1lrpleyvenk" path="res://textures/icons/gradient_blue.png" id="1_471jl"]
-[ext_resource type="Script" uid="uid://bxof6li4l0j2a" path="res://scripts/weapon_slot.gd" id="2_78y0o"]
+[ext_resource type="Script" uid="uid://bxof6li4l0j2a" path="res://scripts/weapons/weapon_slot.gd" id="2_78y0o"]
 
 [node name="WeaponSlot" type="TextureButton"]
 custom_minimum_size = Vector2(64, 64)

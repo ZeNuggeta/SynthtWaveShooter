@@ -4,7 +4,7 @@ class_name WaveManager
 signal update_info(text:String)
 signal enemy_hit(dead:bool)
 
-const MAX_ENEMYS : int = 64
+const MAX_ENEMIES : int = 64
 const OFFSET : Vector3 = Vector3(0,1.0,0)
 
 
@@ -18,8 +18,8 @@ const OFFSET : Vector3 = Vector3(0,1.0,0)
 @export var infinite_waves : bool = true
 @export var waves : Array[Wave]
 @export var between_round_time : float = 5.0
-@export var mob_wait_time : float = 1.0
-
+@export var mob_wait_time : float = 0.6
+@export var max_enemy : int = 30
 
 
 var wave_displayer : int 
@@ -42,7 +42,7 @@ func start_waving()->void:
 	position_to_next_wave()
 	intermission_timer.wait_time = between_round_time
 	spawn_timer.wait_time = mob_wait_time
-	mobs_spawned_per_round = MAX_ENEMYS
+	mobs_spawned_per_round = max_enemy
 
 func _process(_delta: float) -> void:
 	if moving_to_next_wave:
@@ -64,13 +64,15 @@ func position_to_next_wave()->void:
 		moving_to_next_wave = true
 		await intermission_timer.timeout
 		update_info.emit("Wave started!!!")
+		if max_enemy < MAX_ENEMIES:
+			max_enemy += 2
+		
 		spawn_type()
 		moving_to_next_wave = false
-		
 
 
 func spawn_type()->void:
-	mobs_spawned_per_round = MAX_ENEMYS
+	mobs_spawned_per_round = max_enemy
 	enemies_to_kill = mobs_spawned_per_round
 	if mobs_spawned_per_round >= 1:
 		for i in mobs_spawned_per_round:
@@ -79,6 +81,7 @@ func spawn_type()->void:
 			
 			enemy.damaged.connect(_damaged_enemy)
 			enemy.no_health.connect(_dead_enemy)
+			
 			enemy.player = player
 			enemy.set_difficulty(wave_displayer)
 			
