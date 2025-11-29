@@ -59,6 +59,10 @@ func _process(delta: float) -> void:
 					shoot()
 			current_weapon.TYPES.AUTO:
 				shoot()
+			current_weapon.TYPES.LAUNCHER:
+				if !_shot_hold:
+					_shot_hold = true
+					launcher_shoot()
 	
 	elif Input.is_action_just_released("fire"):
 		_shot_hold = false
@@ -96,7 +100,6 @@ func update_magsize()->void:
 
 func shoot()->void:
 	current_scene = get_tree().current_scene.get_node_or_null("Pool")
-	
 	weapon_sfx.stream = current_weapon.shoot_sound
 	anim_player.play("shoot",-1,Global.stats["FireRate"])
 	weapon_holder.add_weapon_kick(0.5,0.8,1.9)
@@ -115,6 +118,31 @@ func shoot()->void:
 	ammo -= 1
 	update_ammo.emit(ammo,max_ammo)
 	make_bullet_trail(bullet_target)
+
+func launcher_shoot()->void:
+	weapon_sfx.stream = current_weapon.shoot_sound
+	anim_player.play("shoot",-1,Global.stats["FireRate"])
+	weapon_holder.add_weapon_kick(0.5,0.8,1.9)
+	weapon_sfx.pitch_scale = randf_range(0.9,1.9)
+	weapon_sfx.play()
+	
+	var rel_spawn_pos : Vector3 = current_weapon.projectile_relative_spawn_pos
+
+	
+	if raycast.is_colliding() :
+		rel_spawn_pos = raycast.global_transform.affine_inverse() * raycast.get_collision_point()
+		rel_spawn_pos = rel_spawn_pos.limit_length(rel_spawn_pos.length() - 0.5 )
+	
+	var obj : RigidBody3D = current_weapon.projectile.instantiate()
+	obj.damage = current_weapon.damage
+	player.add_sibling(obj)
+	
+	obj.global_transform = raycast.global_transform * Transform3D(
+		Basis.from_euler(current_weapon.projectile_relative_spawn_rot),rel_spawn_pos)
+	obj.linear_velocity = player.velocity + raycast.global_transform.basis * current_weapon.projectile_relative_velocity
+	
+	ammo -= 1
+	update_ammo.emit(ammo,max_ammo)
 
 func make_bullet_trail(target_pos:Vector3)->void:
 	if muzzle:

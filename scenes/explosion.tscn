@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://vavky71du3v1"]
+
+[ext_resource type="Shader" uid="uid://bps4j05t72kiv" path="res://shaders/chrome.gdshader" id="1_17npe"]
+[ext_resource type="AudioStream" uid="uid://btxlab3x623m2" path="res://resources/Destroyer/explosion.sfxr" id="2_nfeox"]
+[ext_resource type="Script" uid="uid://doa76srsmuent" path="res://scripts/hit_hurt/hit_box.gd" id="3_aw4cw"]
+
+[sub_resource type="GDScript" id="GDScript_nfeox"]
+script/source = "extends Node3D
+
+var damage : float
+
+func _ready() -> void:
+	$Shatter.emitting = true
+	$HitBox.damage = damage
+	await  $Shatter.finished
+	queue_free()
+"
+
+[sub_resource type="Curve" id="Curve_g3p33"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.72874486, 0.988793), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_0488c"]
+curve = SubResource("Curve_g3p33")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g3p33"]
+particle_flag_align_y = true
+spread = 180.0
+initial_velocity_min = 12.0
+initial_velocity_max = 14.0
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_0488c")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8re86"]
+render_priority = 0
+shader = ExtResource("1_17npe")
+shader_parameter/normal_depth = 0.25
+shader_parameter/color_compression = 6.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_46i8x"]
+material = SubResource("ShaderMaterial_8re86")
+top_radius = 0.1
+bottom_radius = 0.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_aw4cw"]
+radius = 2.0
+
+[node name="Explosion" type="Node3D"]
+script = SubResource("GDScript_nfeox")
+
+[node name="Shatter" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 10
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_g3p33")
+draw_pass_1 = SubResource("CylinderMesh_46i8x")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_nfeox")
+autoplay = true
+
+[node name="HitBox" type="Area3D" parent="." groups=["not_hurt"]]
+collision_layer = 32
+collision_mask = 40
+script = ExtResource("3_aw4cw")
+metadata/_custom_type_script = "uid://doa76srsmuent"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+shape = SubResource("SphereShape3D_aw4cw")

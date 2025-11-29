@@ -36,7 +36,7 @@ visual = NodePath("Visuals")
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_t1as8")
 
-[node name="HitBox" type="Area3D" parent="."]
+[node name="HitBox" type="Area3D" parent="." groups=["enemy"]]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("2_sw3va")
@@ -44,8 +44,6 @@ metadata/_custom_type_script = "uid://doa76srsmuent"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
 shape = SubResource("CapsuleShape3D_sw3va")
-
-[node name="Eyes" type="Node3D" parent="."]
 
 [node name="SoftCollision" type="Area3D" parent="."]
 collision_layer = 32
@@ -55,6 +53,8 @@ metadata/_custom_type_script = "uid://bnpjxgerfin32"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SoftCollision"]
 shape = SubResource("SphereShape3D_0gk8p")
+
+[node name="Eyes" type="Node3D" parent="."]
 
 [node name="Visuals" type="Node3D" parent="."]
 
@@ -70,7 +70,7 @@ bone_idx = 6
 use_external_skeleton = true
 external_skeleton = NodePath("")
 
-[node name="HeadHurtBox" type="Area3D" parent="Visuals/Head" groups=["head"]]
+[node name="HeadHurtBox" type="Area3D" parent="Visuals/Head"]
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("7_rffmh")
@@ -80,7 +80,7 @@ metadata/_custom_type_script = "uid://3tcow7oyiab4"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/Head/HeadHurtBox"]
 shape = SubResource("SphereShape3D_rffmh")
 
-[node name="BodyHurtBox" type="Area3D" parent="Visuals" groups=["body"]]
+[node name="BodyHurtBox" type="Area3D" parent="Visuals"]
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("7_rffmh")

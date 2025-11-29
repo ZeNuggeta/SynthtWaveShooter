@@ -34,7 +34,7 @@ script = ExtResource("1_p5aa7")
 mesh = SubResource("SphereMesh_hl25f")
 surface_material_override/0 = SubResource("ShaderMaterial_ncsv3")
 
-[node name="HitBox" type="Area3D" parent="."]
+[node name="HitBox" type="Area3D" parent="." groups=["enemy"]]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("1_hl25f")

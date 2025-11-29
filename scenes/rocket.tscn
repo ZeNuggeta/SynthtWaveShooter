@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1hbj8n3b8geu"]
+
+[sub_resource type="GDScript" id="GDScript_00dr1"]
+script/source = "extends RigidBody3D
+
+const EXPLOSION = preload(\"uid://vavky71du3v1\")
+
+var timer : float = 0.0
+
+var damage : float 
+
+func explode_projectile(normal:Vector3=Vector3(0,1,0),pos:Vector3=global_position) -> void:
+	var explosion :Node3D= EXPLOSION.instantiate()
+	explosion.damage = damage
+	add_sibling(explosion)
+	explosion.global_transform =  Transform3D(Basis(Quaternion(Vector3.UP,normal)),pos)
+	queue_free()
+
+
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	if state.get_contact_count() > 0:
+		explode_projectile(state.get_contact_local_normal(0),state.get_contact_local_position(0))
+
+func  _process(delta: float) -> void:
+	timer += delta
+	
+	if timer > 10:
+		explode_projectile()
+"
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_00dr1"]
+radius = 0.155
+height = 0.845
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00dr1"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.90734863, 0.484375, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_00dr1"]
+radius = 0.17675781
+height = 1.0
+
+[node name="Rocket" type="RigidBody3D"]
+collision_layer = 0
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
+script = SubResource("GDScript_00dr1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_00dr1")
+surface_material_override/0 = SubResource("StandardMaterial3D_00dr1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_00dr1")

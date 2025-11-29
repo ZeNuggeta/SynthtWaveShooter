@@ -53,6 +53,9 @@ func _ready() -> void:
 	stats.no_health.connect(dead)
 	body_hurt_box.took_damage.connect(take_damage)
 	head_hurt_box.took_damage.connect(take_damage)
+	body_hurt_box.hurt.connect(take_explosion_damage)
+	head_hurt_box.hurt.connect(take_explosion_damage)
+	
 	
 	shader.shader = CHROME
 	mesh.set_surface_override_material(0,shader)
@@ -109,6 +112,10 @@ func tick_update() -> void:
 func climb()->void:
 	velocity.y = 4.0
 
+func take_explosion_damage(area:HitBox)->void:
+	if area.is_in_group("enemy"):return
+	take_damage(area.damage)
+
 func take_damage(value:float,head:bool=false)->void:
 	if _is_dead:return
 	stats.health -= value
@@ -136,10 +143,11 @@ func set_difficulty(difficulty:int)->void:
 func dead()->void:
 	_is_dead = true
 	anim.pause()
-	collision_shape.disabled = true
-	no_health.emit()
-	hit_box.monitorable = false
+	
+	collision_shape.set_deferred("disabled",true)
+	hit_box.set_deferred("monitorable",false)
 	base_mat.set_shader_parameter("color_compression",6)
+	no_health.emit()
 	Global.gain_experience(xp)
 	await get_tree().create_timer(0.2).timeout
 	queue_free()

@@ -3,7 +3,6 @@ class_name SoftCollision
 
 func is_colliding()-> bool:
 	var areas : Array[Area3D] = get_overlapping_areas()
-	
 	return areas.size() > 0
 
 func get_push_vector()->Vector3:

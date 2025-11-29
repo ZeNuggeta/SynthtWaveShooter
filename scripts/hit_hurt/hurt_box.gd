@@ -7,7 +7,6 @@ signal took_damage(damage:float,head:bool)
 @export var head_shot_multiplier : float = 1.0
 
 func hurted(area3d:Area3D)->void:
-	if area3d is not HitBox:return
 	hurt.emit(area3d)
 
 func take_damage(damage:float)->void:

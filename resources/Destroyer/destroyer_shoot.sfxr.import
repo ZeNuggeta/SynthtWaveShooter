@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://b4th3ar0toxe"
+path="res://.godot/imported/destroyer_shoot.sfxr-92da88841b795e0e58d25f6077019c00.sample"
+
+[deps]
+
+source_file="res://resources/Destroyer/destroyer_shoot.sfxr"
+dest_files=["res://.godot/imported/destroyer_shoot.sfxr-92da88841b795e0e58d25f6077019c00.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

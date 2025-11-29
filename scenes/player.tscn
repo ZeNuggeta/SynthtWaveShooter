@@ -23,7 +23,7 @@
 [ext_resource type="Script" uid="uid://cucso6p0t07s2" path="res://scripts/player/stats_handler.gd" id="21_4ni07"]
 [ext_resource type="Script" uid="uid://3tcow7oyiab4" path="res://scripts/hit_hurt/hurt_box.gd" id="21_i4ail"]
 [ext_resource type="Script" uid="uid://jqxq4nbol7ps" path="res://scripts/weapons/weapon_controller.gd" id="22_ke2ow"]
-[ext_resource type="Resource" uid="uid://dv83oc30rw574" path="res://resources/G190/G190.tres" id="23_ke2ow"]
+[ext_resource type="Resource" uid="uid://dpeljtdql8q42" path="res://resources/Destroyer/Destroyer.tres" id="23_ke2ow"]
 [ext_resource type="AudioStream" uid="uid://bw3dq0lfwsfdi" path="res://assets/audio/player_hurt.sfxr" id="25_ke2ow"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]

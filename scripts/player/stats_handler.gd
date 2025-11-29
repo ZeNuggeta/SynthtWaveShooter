@@ -45,7 +45,7 @@ func _update_health()->void:
 
 func _take_hit(other_hit:HitBox) -> void:
 	if _stuned: return
-	
+	if other_hit.is_in_group("not_hurt"):return
 	
 	health -= other_hit.damage
 	stats.health = health
