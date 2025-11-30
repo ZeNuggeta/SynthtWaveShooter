@@ -10,7 +10,7 @@
 script = ExtResource("2_xt0bc")
 weapon_name = "M5000"
 weapon_type = 1
-damage = 10.0
+damage = 14.0
 max_ammo = 30
 level_to_unlock = 33
 icon = ExtResource("1_xt0bc")

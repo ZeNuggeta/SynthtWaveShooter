@@ -2,11 +2,15 @@ extends Node
 
 signal shake_cam(amount:float,seconds:float)
 signal update_xp
+signal leveled_up
 signal update_powerups
+
 
 var game_controller : Node
 
 var kills : int = 0
+
+var vhs : bool = true
 
 var stats : Dictionary[String,float] = {
 	"Health" : 1.0,
@@ -40,6 +44,7 @@ func level_up()->void:
 	level += 1
 	skill_points += 1
 	experience_required = get_required_exp(level + 1)
+	leveled_up.emit()
 
 func upgrade_stats(upgrade:BaseUpgrade,amount:float)->void:
 	if skill_points >= upgrade.required_skill_points and stats[upgrade.upgrade_name] < upgrade.max_ups:
@@ -47,6 +52,14 @@ func upgrade_stats(upgrade:BaseUpgrade,amount:float)->void:
 		skill_points -= upgrade.required_skill_points
 		stats[upgrade.upgrade_name] = clampf(stats[upgrade.upgrade_name],1.0,upgrade.max_ups)
 		update_powerups.emit()
+
+func full_upgrade_stats(upgrade:BaseUpgrade,amount:float)->void:
+	while skill_points >= upgrade.required_skill_points and stats[upgrade.upgrade_name] < upgrade.max_ups:
+		stats[upgrade.upgrade_name] += amount
+		skill_points -= upgrade.required_skill_points
+		stats[upgrade.upgrade_name] = clampf(stats[upgrade.upgrade_name],1.0,upgrade.max_ups)
+		update_powerups.emit()
+
 
 func reset_stats()->void:
 	skill_points = 1

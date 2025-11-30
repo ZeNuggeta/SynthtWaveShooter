@@ -9,8 +9,9 @@
 [resource]
 script = ExtResource("1_1kdav")
 weapon_name = "HuntRifle"
-damage = 15.0
-max_ammo = 8
+damage = 30.0
+max_ammo = 5
+level_to_unlock = 33
 icon = ExtResource("1_oc3b6")
 weapon_scene = ExtResource("2_y1tjl")
 shoot_sound = ExtResource("3_oc3b6")

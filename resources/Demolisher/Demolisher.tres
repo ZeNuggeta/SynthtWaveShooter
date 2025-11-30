@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=8 format=3 uid="uid://ck8lc5870qfkv"]
+
+[ext_resource type="Texture2D" uid="uid://dhsshdyntgwh" path="res://resources/Demolisher/Demolisher.png" id="1_icasr"]
+[ext_resource type="Script" uid="uid://b2bsym4r5yr41" path="res://scripts/weapons/weapon.gd" id="2_nqsfe"]
+[ext_resource type="Resource" uid="uid://dwv7o1b0awtsm" path="res://resources/HuntRifle/HuntRifle.tres" id="3_icasr"]
+[ext_resource type="PackedScene" uid="uid://drj1htobil8g7" path="res://resources/Demolisher/DemolisherScene.tscn" id="3_nqsfe"]
+[ext_resource type="AudioStream" uid="uid://54modon3v2jx" path="res://resources/Demolisher/demolisher_reload.sfxr" id="4_02xcw"]
+[ext_resource type="Resource" uid="uid://cbbeiehjf7yeg" path="res://resources/Project05/Project05.tres" id="4_d330g"]
+[ext_resource type="AudioStream" uid="uid://cv7wi33yn2c7y" path="res://resources/Demolisher/demolisher_shoot.sfxr" id="5_d330g"]
+
+[resource]
+script = ExtResource("2_nqsfe")
+weapon_name = "Demolisher"
+max_ammo = 10
+next_weapons = Array[ExtResource("2_nqsfe")]([ExtResource("3_icasr"), ExtResource("4_d330g")])
+icon = ExtResource("1_icasr")
+weapon_scene = ExtResource("3_nqsfe")
+shoot_sound = ExtResource("5_d330g")
+reload_sound = ExtResource("4_02xcw")
+metadata/_custom_type_script = "uid://b2bsym4r5yr41"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://cbbeiehjf7yeg"]
+
+[ext_resource type="Texture2D" uid="uid://b4cegrlep5f3r" path="res://resources/Project05/Project05.png" id="1_5n3ke"]
+[ext_resource type="Script" uid="uid://b2bsym4r5yr41" path="res://scripts/weapons/weapon.gd" id="2_woeu5"]
+[ext_resource type="AudioStream" uid="uid://8hb0nnaucnf8" path="res://resources/Project05/project05_reload.sfxr" id="3_ppowt"]
+[ext_resource type="PackedScene" uid="uid://djp5f8p8ovyid" path="res://resources/Project05/Project05Scene.tscn" id="3_woeu5"]
+[ext_resource type="AudioStream" uid="uid://bvhyr4yecvaxb" path="res://resources/Project05/project05_shoot.sfxr" id="4_l5jlh"]
+
+[resource]
+script = ExtResource("2_woeu5")
+weapon_name = "Project05"
+damage = 20.0
+max_ammo = 20
+level_to_unlock = 33
+icon = ExtResource("1_5n3ke")
+weapon_scene = ExtResource("3_woeu5")
+shoot_sound = ExtResource("4_l5jlh")
+reload_sound = ExtResource("3_ppowt")
+metadata/_custom_type_script = "uid://b2bsym4r5yr41"

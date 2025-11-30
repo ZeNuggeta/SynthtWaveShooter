@@ -103,9 +103,11 @@ gap_angle = 80.0
 layout_mode = 1
 
 [node name="PowerPanel" parent="." instance=ExtResource("11_g8pt7")]
+visible = false
 layout_mode = 1
 
 [node name="WeaponPanel" parent="." instance=ExtResource("16_siruo")]
+visible = false
 layout_mode = 1
 offset_top = -123.0
 offset_bottom = 123.0

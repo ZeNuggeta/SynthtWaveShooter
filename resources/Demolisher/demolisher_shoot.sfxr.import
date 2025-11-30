@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://cv7wi33yn2c7y"
+path="res://.godot/imported/demolisher_shoot.sfxr-129afe936e85a2c43fe54e33a9b6fb9c.sample"
+
+[deps]
+
+source_file="res://resources/Demolisher/demolisher_shoot.sfxr"
+dest_files=["res://.godot/imported/demolisher_shoot.sfxr-129afe936e85a2c43fe54e33a9b6fb9c.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

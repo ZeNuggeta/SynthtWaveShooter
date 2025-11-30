@@ -24,7 +24,6 @@ bus = &"SFX"
 
 [node name="Point" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ic5jq")
-max_polyphony = 6
 bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dm3gqheyx1prf"]
+[gd_scene load_steps=24 format=3 uid="uid://dm3gqheyx1prf"]
 
 [ext_resource type="Shader" uid="uid://d4kldxp6gw87k" path="res://shaders/vaporsky.gdshader" id="1_bl13t"]
 [ext_resource type="CompressedTexture3D" uid="uid://djcwtynegcnfa" path="res://textures/SynthLut.png" id="1_iyx0m"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://d3q80qyug2kp4" path="res://scenes/enemies/boombox.tscn" id="5_rdm47"]
 [ext_resource type="PackedScene" uid="uid://12p40tnpon77" path="res://scenes/wave_manager.tscn" id="6_tpxsr"]
 [ext_resource type="PackedScene" uid="uid://cb0lyoi4q0ry3" path="res://scenes/audio_manager.tscn" id="7_8htgp"]
+[ext_resource type="PackedScene" uid="uid://c1tf8cctydqyh" path="res://scenes/enemies/flyinghead.tscn" id="7_l1yhp"]
 
 [sub_resource type="Resource" id="Resource_dp3eg"]
 script = ExtResource("2_qybld")
@@ -28,19 +29,34 @@ script = ExtResource("2_qybld")
 enemies = Array[PackedScene]([ExtResource("3_rdm47"), ExtResource("5_rdm47"), ExtResource("5_5g75k")])
 metadata/_custom_type_script = "uid://cscusk7vt5xeh"
 
+[sub_resource type="Resource" id="Resource_ymyfo"]
+script = ExtResource("2_qybld")
+enemies = Array[PackedScene]([ExtResource("5_rdm47"), ExtResource("5_5g75k")])
+metadata/_custom_type_script = "uid://cscusk7vt5xeh"
+
+[sub_resource type="Resource" id="Resource_lhcw7"]
+script = ExtResource("2_qybld")
+enemies = Array[PackedScene]([ExtResource("7_l1yhp"), ExtResource("4_l1yhp")])
+metadata/_custom_type_script = "uid://cscusk7vt5xeh"
+
 [sub_resource type="Resource" id="Resource_5g75k"]
 script = ExtResource("2_qybld")
 enemies = Array[PackedScene]([ExtResource("3_rdm47"), ExtResource("4_l1yhp"), ExtResource("5_rdm47"), ExtResource("5_5g75k")])
 metadata/_custom_type_script = "uid://cscusk7vt5xeh"
 
+[sub_resource type="Resource" id="Resource_q3uqq"]
+script = ExtResource("2_qybld")
+enemies = Array[PackedScene]([ExtResource("3_rdm47"), ExtResource("4_l1yhp"), ExtResource("5_rdm47"), ExtResource("5_5g75k"), ExtResource("7_l1yhp")])
+metadata/_custom_type_script = "uid://cscusk7vt5xeh"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iyx0m"]
 shader = ExtResource("1_bl13t")
-shader_parameter/sky_color = Color(0.025327964, 0.0006866455, 0.05859375, 1)
-shader_parameter/sky_horizon_color = Color(0.026508493, 0.007827759, 0.22265625, 1)
+shader_parameter/sky_color = Color(0.09411765, 0.09803922, 0.09411765, 1)
+shader_parameter/sky_horizon_color = Color(0.57254905, 0, 0.99215686, 1)
 shader_parameter/sky_horizon_decay = 3.0
-shader_parameter/ground_color = Color(0, 0, 0, 1)
-shader_parameter/ground_horizon_color = Color(0.1, 0, 0.07, 1)
-shader_parameter/ground_horizon_decay = 1.0
+shader_parameter/ground_color = Color(0.09411765, 0.09803922, 0.09411765, 1)
+shader_parameter/ground_horizon_color = Color(0.57254905, 0, 0.99215686, 1)
+shader_parameter/ground_horizon_decay = 4.0000000596048
 shader_parameter/stars_enabled = true
 shader_parameter/stars_below_horizon = false
 shader_parameter/star_color = Color(0.9958444, 0.921875, 1, 1)
@@ -49,13 +65,13 @@ shader_parameter/star_density = 20.0000002905734
 shader_parameter/star_randomness = 1.0
 shader_parameter/star_seed = Vector2(0, 0)
 shader_parameter/grid_enabled = false
-shader_parameter/grid_color = Color(0.8156863, 0.5568628, 0.91764706, 1)
-shader_parameter/grid_depth = 1.0
+shader_parameter/grid_color = Color(0.18, 0.92, 0.74, 1)
+shader_parameter/grid_depth = 2.0
 shader_parameter/grid_spacing = 1.0
 shader_parameter/grid_thickness = 0.03
-shader_parameter/grid_max_distance = 30.000000447036
-shader_parameter/grid_max_distance_fade = 0.60000000894072
-shader_parameter/grid_energy = 1.20000001788144
+shader_parameter/grid_max_distance = 25.0
+shader_parameter/grid_max_distance_fade = 0.3
+shader_parameter/grid_energy = 1.0
 shader_parameter/sun_radius = 10.0
 shader_parameter/sun_smoothing = 0.35
 shader_parameter/sun_glow_color = Color(0.5176471, 0.39215687, 0.6, 1)
@@ -91,7 +107,7 @@ adjustment_color_correction = ExtResource("1_iyx0m")
 
 [node name="WaveManager" parent="Managers" node_paths=PackedStringArray("player") instance=ExtResource("6_tpxsr")]
 player = NodePath("../../Player")
-waves = Array[ExtResource("2_qybld")]([SubResource("Resource_dp3eg"), SubResource("Resource_rdm47"), SubResource("Resource_l1yhp"), SubResource("Resource_5g75k")])
+waves = Array[ExtResource("2_qybld")]([SubResource("Resource_dp3eg"), SubResource("Resource_rdm47"), SubResource("Resource_l1yhp"), SubResource("Resource_ymyfo"), SubResource("Resource_lhcw7"), SubResource("Resource_5g75k"), SubResource("Resource_q3uqq")])
 
 [node name="AudioManager" parent="Managers" node_paths=PackedStringArray("wave_manager") instance=ExtResource("7_8htgp")]
 wave_manager = NodePath("../WaveManager")
@@ -99,7 +115,7 @@ wave_manager = NodePath("../WaveManager")
 [node name="Envi" type="Node3D" parent="."]
 
 [node name="Sun" type="DirectionalLight3D" parent="Envi"]
-transform = Transform3D(1, 0, 0, 0, 0.99725276, 0.07407359, 0, -0.07407359, 0.99725276, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.97703445, 0.21308145, 0, -0.21308145, 0.97703445, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Envi"]
 environment = SubResource("Environment_iyx0m")

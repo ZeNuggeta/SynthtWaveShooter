@@ -25,7 +25,11 @@ func update_card()->void:
 
 func _on_button_pressed() -> void:
 	if upgrade :
-		Global.upgrade_stats(upgrade,upgrade.amount)
+		if Input.is_action_pressed("sprint"):
+			Global.full_upgrade_stats(upgrade,upgrade.amount)
+		else:
+			Global.upgrade_stats(upgrade,upgrade.amount)
+		
 
 func _on_button_mouse_entered() -> void:
 	_tween("scale",Vector2.ONE * 1.05,DURATION)

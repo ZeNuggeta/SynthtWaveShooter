@@ -6,8 +6,6 @@ class_name Interface
 @export_group("References")
 @export var wave_manager : WaveManager
 @export var player : Player
-@export_group("VFX")
-@export var vhs_toggle : bool = true
 
 @onready var vhs: ColorRect = $VFX/VHS
 @onready var blur: ColorRect = $VFX/Blur
@@ -26,7 +24,8 @@ func _ready() -> void:
 	weapon_controller = player.weapon_controller
 	weapon_panel.weapon_controller = weapon_controller
 	
-	vhs.visible = vhs_toggle
+	vhs.visible = Global.vhs
+	
 	blur.hide()
 	
 	stats_handler.health_changed.connect(hud.update_health)
@@ -47,7 +46,9 @@ func _input(event: InputEvent) -> void:
 		_choose_power_up_menu()
 		weapon_panel.update_next_weapon()
 	elif event.is_action_pressed("pause") and !in_up:
+		
 		pause.pause()
+		vhs.visible = Global.vhs
 
 func _choose_power_up_menu()->void:
 	in_up = !in_up

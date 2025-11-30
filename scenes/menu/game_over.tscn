@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://003381n8cpva"]
+[gd_scene load_steps=3 format=3 uid="uid://003381n8cpva"]
 
 [ext_resource type="Script" uid="uid://drew54pd2ketx" path="res://scripts/interface/game_over.gd" id="1_4njwu"]
+[ext_resource type="Theme" uid="uid://cy43ppi1rfjlv" path="res://textures/main.tres" id="1_tu1hx"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -9,19 +10,56 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_tu1hx")
 script = ExtResource("1_4njwu")
 
-[node name="Label" type="Label" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.09411765, 0.09803922, 0.09411765, 1)
+
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+offset_left = -364.0
+offset_top = -138.0
+offset_right = 364.0
+offset_bottom = 138.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -100.0
+offset_right = 97.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
 text = "asdasdasd"
+
+[node name="HighLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "asdasdasd"
+
+[node name="ReturnButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Return"
+
+[connection signal="pressed" from="Panel/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]

@@ -9,7 +9,7 @@ const BULLET_TRACER : PackedScene = preload("res://scenes/bullet_tracer.tscn")
 
 @export_group("Reference")
 @export var player : Player
-@export var current_weapon : Weapon
+@export var current_weapon : Weapon = preload("res://resources/G190/G190.tres")
 @export var weapon_holder : CameraEffects
 @export var weapon_sfx : AudioStreamPlayer
 
@@ -103,7 +103,7 @@ func shoot()->void:
 	current_scene = get_tree().current_scene.get_node_or_null("Pool")
 	weapon_sfx.stream = current_weapon.shoot_sound
 	anim_player.play("shoot",-1,Global.stats["FireRate"])
-	var yaw : float = anim_player.current_animation_length * 10
+	var yaw : float = anim_player.current_animation_length * 7
 	weapon_holder.add_weapon_kick(yaw,0.8,0.2)
 	weapon_sfx.pitch_scale = randf_range(0.9,1.9)
 	weapon_sfx.play()

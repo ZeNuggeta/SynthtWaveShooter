@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://54modon3v2jx"
+path="res://.godot/imported/demolisher_reload.sfxr-eef8e72c41591b9c0e9200cc66dbffeb.sample"
+
+[deps]
+
+source_file="res://resources/Demolisher/demolisher_reload.sfxr"
+dest_files=["res://.godot/imported/demolisher_reload.sfxr-eef8e72c41591b9c0e9200cc66dbffeb.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

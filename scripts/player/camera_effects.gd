@@ -20,7 +20,7 @@ class_name CameraEffects
 @export_subgroup("Damage Kick")
 @export var damage_time : float = 0.3
 @export_subgroup("Weapon Kick")
-@export var weapon_decay : float = 0.6
+@export var weapon_decay : float = 0.45
 @export_subgroup("HeadBob")
 @export_range(0.0,0.1,0.001) var bob_pitch : float = 0.05
 @export_range(0.0,0.1,0.001) var bob_roll : float = 0.025

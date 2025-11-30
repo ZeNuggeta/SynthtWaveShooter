@@ -2,10 +2,12 @@ extends Control
 
 @onready var animation_player: AnimationPlayer = $DamageIndicator/AnimationPlayer
 @onready var info: RichTextLabel = $Info
+@onready var tab_label: Label = $TabLabel
 
 func _ready() -> void:
 	update_exp()
-	
+	tab_label.modulate = Color("ffffff00")
+	Global.leveled_up.connect(remind)
 
 func update_info(stats:String,rainbow:bool=false) -> void:
 	var rainbow_text : String = "[rainbow]" if rainbow else ""
@@ -25,3 +27,9 @@ func update_exp()->void:
 	%XPLabel.text = "level : %s" %Global.level
 	%XPBar.max_value = Global.experience_required
 	%XPBar.value = Global.experience
+
+func remind()->void:
+	tab_label.modulate = Color.WHITE
+	await get_tree().create_timer(1.5).timeout
+	var tween : Tween = create_tween()
+	tween.tween_property(tab_label,"modulate",Color("ffffff00"),1.5)

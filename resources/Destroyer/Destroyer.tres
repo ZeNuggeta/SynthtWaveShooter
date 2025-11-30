@@ -11,7 +11,7 @@
 script = ExtResource("2_oxv06")
 weapon_name = "Destroyer"
 weapon_type = 3
-damage = 2.0
+damage = 10.0
 max_ammo = 2
 level_to_unlock = 33
 projectile = ExtResource("3_ho0v3")

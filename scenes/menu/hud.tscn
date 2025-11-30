@@ -177,3 +177,15 @@ value = 83.0
 nine_patch_stretch = true
 texture_under = SubResource("GradientTexture1D_quj6c")
 texture_progress = SubResource("GradientTexture1D_fp75o")
+
+[node name="TabLabel" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 40.0
+offset_bottom = 11.5
+grow_vertical = 2
+text = "Press \"Tab\" to view upgrades"

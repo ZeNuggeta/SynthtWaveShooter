@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bhop26d66s581"]
+[gd_scene load_steps=31 format=3 uid="uid://bhop26d66s581"]
 
 [ext_resource type="Script" uid="uid://bnorctsg14k6r" path="res://scripts/player/mouse_capture_component.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bul1vpdae7den" path="res://scripts/player/player.gd" id="1_g2els"]
@@ -23,7 +23,6 @@
 [ext_resource type="Script" uid="uid://cucso6p0t07s2" path="res://scripts/player/stats_handler.gd" id="21_4ni07"]
 [ext_resource type="Script" uid="uid://3tcow7oyiab4" path="res://scripts/hit_hurt/hurt_box.gd" id="21_i4ail"]
 [ext_resource type="Script" uid="uid://jqxq4nbol7ps" path="res://scripts/weapons/weapon_controller.gd" id="22_ke2ow"]
-[ext_resource type="Resource" uid="uid://dv83oc30rw574" path="res://resources/G190/G190.tres" id="23_ke2ow"]
 [ext_resource type="AudioStream" uid="uid://bw3dq0lfwsfdi" path="res://assets/audio/player_hurt.sfxr" id="25_ke2ow"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
@@ -230,7 +229,6 @@ one_shot = true
 [node name="WeaponController" type="Node" parent="Components" node_paths=PackedStringArray("player", "weapon_holder", "weapon_sfx")]
 script = ExtResource("22_ke2ow")
 player = NodePath("../..")
-current_weapon = ExtResource("23_ke2ow")
 weapon_holder = NodePath("../../Head/Camera")
 weapon_sfx = NodePath("../../SFX/WeaponSFX")
 weapon_rotation_amount = 0.01
