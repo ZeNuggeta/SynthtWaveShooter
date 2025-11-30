@@ -11,8 +11,8 @@ var weapon_controller : WeaponController
 func _ready() -> void:
 	hide()
 
-func update_next_weapon()->void:
-	if visible == false:
+func update_next_weapon(conti:bool=false)->void:
+	if visible == false or conti:
 		show()
 		for child in next_weapon_container.get_children():
 			child.queue_free()
@@ -32,5 +32,4 @@ func update_next_weapon()->void:
 func _weapon_choose(weapon:Weapon)->void:
 	weapon_controller.current_weapon = weapon
 	weapon_controller.spawn_weapon_model()
-	for child in next_weapon_container.get_children():
-		child.queue_free()
+	update_next_weapon(true)

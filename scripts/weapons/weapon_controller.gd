@@ -10,7 +10,7 @@ const BULLET_TRACER : PackedScene = preload("res://scenes/bullet_tracer.tscn")
 @export_group("Reference")
 @export var player : Player
 @export var current_weapon : Weapon
-@export var weapon_holder : Node3D
+@export var weapon_holder : CameraEffects
 @export var weapon_sfx : AudioStreamPlayer
 
 @export_group("Weapon Effects")
@@ -89,6 +89,7 @@ func reload()->void:
 	weapon_sfx.stream = current_weapon.reload_sound
 	anim_player.play("reload")
 	weapon_sfx.play()
+	await anim_player.animation_finished
 	ammo = max_ammo
 	update_ammo.emit(ammo,max_ammo)
 
@@ -102,7 +103,8 @@ func shoot()->void:
 	current_scene = get_tree().current_scene.get_node_or_null("Pool")
 	weapon_sfx.stream = current_weapon.shoot_sound
 	anim_player.play("shoot",-1,Global.stats["FireRate"])
-	weapon_holder.add_weapon_kick(0.5,0.8,1.9)
+	var yaw : float = anim_player.current_animation_length * 10
+	weapon_holder.add_weapon_kick(yaw,0.8,0.2)
 	weapon_sfx.pitch_scale = randf_range(0.9,1.9)
 	weapon_sfx.play()
 	var bullet_target : Vector3 = raycast.global_transform * raycast.target_position
@@ -127,7 +129,6 @@ func launcher_shoot()->void:
 	weapon_sfx.play()
 	
 	var rel_spawn_pos : Vector3 = current_weapon.projectile_relative_spawn_pos
-
 	
 	if raycast.is_colliding() :
 		rel_spawn_pos = raycast.global_transform.affine_inverse() * raycast.get_collision_point()

@@ -67,8 +67,7 @@ func _take_hit(other_hit:HitBox) -> void:
 
 func _player_dead() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	Global.reset_stats()
-	LoadingScreen.start_loading("uid://dlh5mphjdwpjg")
+	LoadingScreen.start_loading("uid://003381n8cpva")
 
 
 func _on_regen_timer_timeout() -> void:

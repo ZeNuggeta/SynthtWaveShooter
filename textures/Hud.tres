@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://ctovemxdyxlqj"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://ctovemxdyxlqj"]
 
 [ext_resource type="Texture2D" uid="uid://b63c5heg73qk" path="res://textures/icons/gradient.png" id="1_dr6vg"]
 [ext_resource type="FontFile" uid="uid://4kitl8yvylrr" path="res://assets/fonts/Ubuntu-Regular.ttf" id="1_yjyd8"]
@@ -43,6 +43,14 @@ texture_margin_top = 8.0
 texture_margin_right = 8.0
 texture_margin_bottom = 8.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w6o3d"]
+bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
+
 [resource]
 Button/styles/disabled = SubResource("StyleBoxFlat_r5mhu")
 Button/styles/focus = SubResource("StyleBoxEmpty_yjyd8")
@@ -56,3 +64,5 @@ Label/constants/shadow_outline_size = 5
 Label/font_sizes/font_size = 20
 Label/fonts/font = ExtResource("1_yjyd8")
 Panel/styles/panel = SubResource("StyleBoxTexture_yjyd8")
+TooltipLabel/fonts/font = ExtResource("1_yjyd8")
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_w6o3d")

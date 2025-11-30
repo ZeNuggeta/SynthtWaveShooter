@@ -10,6 +10,7 @@ class_name Interface
 @export var vhs_toggle : bool = true
 
 @onready var vhs: ColorRect = $VFX/VHS
+@onready var blur: ColorRect = $VFX/Blur
 @onready var hud: Control = $HUD
 @onready var weapon_panel: WeaponPanel = $WeaponPanel
 @onready var power_panel: Panel = $PowerPanel
@@ -26,6 +27,7 @@ func _ready() -> void:
 	weapon_panel.weapon_controller = weapon_controller
 	
 	vhs.visible = vhs_toggle
+	blur.hide()
 	
 	stats_handler.health_changed.connect(hud.update_health)
 	wave_manager.update_info.connect(hud.update_info)
@@ -52,7 +54,12 @@ func _choose_power_up_menu()->void:
 	power_panel.visible = in_up
 	get_tree().paused = in_up
 	power_panel.update_power_ups()
+	blur.visible = in_up
+	AudioServer.set_bus_effect_enabled(1,0,in_up)
+	
 	if in_up:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		

@@ -8,7 +8,7 @@ func _ready() -> void:
 func pause()->void:
 	visible = !visible
 	get_tree().paused = visible
-	
+	AudioServer.set_bus_effect_enabled(1,0,visible)
 	if visible:
 		settings.hide()
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://r45u5jws20ba"]
+
+[ext_resource type="Texture2D" uid="uid://db42can50l10l" path="res://resources/M5000/M5000.png" id="1_xt0bc"]
+[ext_resource type="Script" uid="uid://b2bsym4r5yr41" path="res://scripts/weapons/weapon.gd" id="2_xt0bc"]
+[ext_resource type="AudioStream" uid="uid://18uaq72lfh3k" path="res://resources/M5000/m5000_reload.sfxr" id="3_bc07j"]
+[ext_resource type="PackedScene" uid="uid://bq6vk2503i2rd" path="res://resources/M5000/M5000Scene.tscn" id="3_xt0bc"]
+[ext_resource type="AudioStream" uid="uid://b82xpp2kqyo7h" path="res://resources/M5000/m5000_shoot.sfxr" id="4_ks8ox"]
+
+[resource]
+script = ExtResource("2_xt0bc")
+weapon_name = "M5000"
+weapon_type = 1
+damage = 10.0
+max_ammo = 30
+level_to_unlock = 33
+icon = ExtResource("1_xt0bc")
+weapon_scene = ExtResource("3_xt0bc")
+shoot_sound = ExtResource("4_ks8ox")
+reload_sound = ExtResource("3_bc07j")
+metadata/_custom_type_script = "uid://b2bsym4r5yr41"

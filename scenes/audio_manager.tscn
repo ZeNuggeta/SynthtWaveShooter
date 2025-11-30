@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cb0lyoi4q0ry3"]
+[gd_scene load_steps=9 format=3 uid="uid://cb0lyoi4q0ry3"]
 
 [ext_resource type="Script" uid="uid://cuyglg53sr64x" path="res://scripts/game/audio_manager.gd" id="1_njtn3"]
 [ext_resource type="AudioStream" uid="uid://btp60822po60p" path="res://assets/audio/music/Danya Vodovoz - Driven.mp3" id="2_kq7b2"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://b0jmpamujug26" path="res://assets/audio/music/neon-odyssey-399913.mp3" id="4_ujhup"]
 [ext_resource type="AudioStream" uid="uid://crqypi24353n6" path="res://assets/audio/enemy_death.sfxr" id="5_064dn"]
 [ext_resource type="AudioStream" uid="uid://4j3t1gw0t3dp" path="res://assets/audio/point.sfxr" id="6_ic5jq"]
+[ext_resource type="AudioStream" uid="uid://csekyffeetfb6" path="res://assets/audio/music/80s_song_mastered.mp3" id="7_kq7b2"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_eb6dy"]
 random_pitch = 1.1
@@ -18,7 +19,7 @@ playlist = Array[AudioStream]([ExtResource("2_kq7b2"), ExtResource("3_02gw7"), E
 
 [node name="Death" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_eb6dy")
-max_polyphony = 3
+max_polyphony = 2
 bus = &"SFX"
 
 [node name="Point" type="AudioStreamPlayer" parent="."]
@@ -28,6 +29,7 @@ bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
+stream = ExtResource("7_kq7b2")
 autoplay = true
 bus = &"Music"
 

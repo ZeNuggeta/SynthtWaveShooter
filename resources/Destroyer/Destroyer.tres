@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Weapon" load_steps=7 format=3 uid="uid://dpeljtdql8q42"]
 
-[ext_resource type="Texture2D" uid="uid://bu0gp2drh6ttq" path="res://icon.svg" id="1_7ar65"]
+[ext_resource type="Texture2D" uid="uid://brtgl8syjq7ev" path="res://resources/Destroyer/Destroyer.png" id="1_srxs0"]
 [ext_resource type="Script" uid="uid://b2bsym4r5yr41" path="res://scripts/weapons/weapon.gd" id="2_oxv06"]
 [ext_resource type="PackedScene" uid="uid://b1hbj8n3b8geu" path="res://scenes/rocket.tscn" id="3_ho0v3"]
 [ext_resource type="PackedScene" uid="uid://c4rsru3y6h65o" path="res://resources/Destroyer/DestroyerScene.tscn" id="3_oxv06"]
@@ -15,6 +15,7 @@ damage = 2.0
 max_ammo = 2
 level_to_unlock = 33
 projectile = ExtResource("3_ho0v3")
+icon = ExtResource("1_srxs0")
 weapon_scene = ExtResource("3_oxv06")
 shoot_sound = ExtResource("5_xy6m8")
 reload_sound = ExtResource("4_srxs0")

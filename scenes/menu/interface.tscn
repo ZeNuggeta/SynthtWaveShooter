@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d3f4d5lvcbvvk"]
+[gd_scene load_steps=19 format=3 uid="uid://d3f4d5lvcbvvk"]
 
 [ext_resource type="Script" uid="uid://d3bgt0t4x73f7" path="res://scripts/interface/interface.gd" id="1_t72xj"]
 [ext_resource type="Script" uid="uid://dmbo7s8gfxba4" path="res://scripts/interface/retical_draw.gd" id="1_tg63u"]
@@ -9,7 +9,9 @@
 [ext_resource type="Resource" uid="uid://1tef1xrt0ytv" path="res://resources/upgrades/quantity.tres" id="6_prp0k"]
 [ext_resource type="Resource" uid="uid://htnnm882u0nl" path="res://resources/upgrades/regen.tres" id="7_dtbhd"]
 [ext_resource type="Resource" uid="uid://dxb5tilet2q8b" path="res://resources/upgrades/damage.tres" id="8_t62tn"]
+[ext_resource type="Shader" uid="uid://skgxjiy3txl3" path="res://shaders/blur.gdshader" id="9_6kjqj"]
 [ext_resource type="PackedScene" uid="uid://cpt8geknybf46" path="res://scenes/menu/hud.tscn" id="10_6kjqj"]
+[ext_resource type="Shader" uid="uid://be3yohn6cxrmy" path="res://shaders/vignette.gdshader" id="10_jtiyt"]
 [ext_resource type="PackedScene" uid="uid://d30ctfq73gdbv" path="res://scenes/menu/power_panel.tscn" id="11_g8pt7"]
 [ext_resource type="PackedScene" uid="uid://ckswfjttajpdd" path="res://scenes/menu/pause.tscn" id="15_jtiyt"]
 [ext_resource type="PackedScene" uid="uid://cuhub82qo5ir2" path="res://scenes/menu/weapon_panel.tscn" id="16_siruo"]
@@ -20,6 +22,18 @@ shader_parameter/wiggle = 0.03
 shader_parameter/wiggle_speed = 25.0
 shader_parameter/smear = 0.50000002375
 shader_parameter/blur_samples = 15
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jtiyt"]
+shader = ExtResource("9_6kjqj")
+shader_parameter/offset = 5.0000002375
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_siruo"]
+shader = ExtResource("10_jtiyt")
+shader_parameter/radius = 0.390000018525
+shader_parameter/softness = 1.0
+shader_parameter/intensity = 0.58000002755
+shader_parameter/contrast = 3.1400001254
+shader_parameter/vignette_color = Color(0, 0, 0, 1)
 
 [node name="Interface" type="Control"]
 process_mode = 3
@@ -34,7 +48,6 @@ script = ExtResource("1_t72xj")
 available_upgrades = Array[ExtResource("2_0qpc3")]([ExtResource("5_ttflf"), ExtResource("7_dtbhd"), ExtResource("8_t62tn"), ExtResource("4_32vrv"), ExtResource("6_prp0k")])
 
 [node name="VFX" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,7 +57,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="VHS" type="ColorRect" parent="VFX"]
-visible = false
 material = SubResource("ShaderMaterial_t72xj")
 layout_mode = 1
 anchors_preset = 15
@@ -53,6 +65,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Blur" type="ColorRect" parent="VFX"]
+material = SubResource("ShaderMaterial_jtiyt")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Vignette" type="ColorRect" parent="VFX"]
+material = SubResource("ShaderMaterial_siruo")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Crosshair" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -77,8 +107,8 @@ layout_mode = 1
 
 [node name="WeaponPanel" parent="." instance=ExtResource("16_siruo")]
 layout_mode = 1
-offset_top = -186.0
-offset_bottom = 60.0
+offset_top = -123.0
+offset_bottom = 123.0
 
 [node name="Pause" parent="." instance=ExtResource("15_jtiyt")]
 visible = false

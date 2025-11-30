@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://18uaq72lfh3k"
+path="res://.godot/imported/m5000_reload.sfxr-a96ea47026d790de0412cf71cccd5675.sample"
+
+[deps]
+
+source_file="res://resources/M5000/m5000_reload.sfxr"
+dest_files=["res://.godot/imported/m5000_reload.sfxr-a96ea47026d790de0412cf71cccd5675.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

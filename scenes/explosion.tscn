@@ -11,7 +11,7 @@ var damage : float
 
 func _ready() -> void:
 	$Shatter.emitting = true
-	$HitBox.damage = damage
+	$HitBox.damage = damage * Global.stats[\"Damage\"]
 	await  $Shatter.finished
 	queue_free()
 "

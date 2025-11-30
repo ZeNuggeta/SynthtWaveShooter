@@ -1,8 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://cuhub82qo5ir2"]
+[gd_scene load_steps=8 format=3 uid="uid://cuhub82qo5ir2"]
 
 [ext_resource type="Theme" uid="uid://ctovemxdyxlqj" path="res://textures/Hud.tres" id="1_auukh"]
 [ext_resource type="Script" uid="uid://cshsqw1aid0iw" path="res://scripts/game/weapon_panel.gd" id="1_hevio"]
 [ext_resource type="PackedScene" uid="uid://genhxv0a2tl2" path="res://scenes/menu/weapon_slot.tscn" id="2_auukh"]
+[ext_resource type="FontFile" uid="uid://dquy36gl2xnep" path="res://assets/fonts/windows-bold[1].ttf" id="4_cuog3"]
+
+[sub_resource type="Gradient" id="Gradient_auukh"]
+colors = PackedColorArray(0.9882353, 0, 0.8392157, 1, 0.57254905, 0, 0.99215686, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1mso8"]
+gradient = SubResource("Gradient_auukh")
+fill_from = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cuog3"]
+texture = SubResource("GradientTexture2D_1mso8")
 
 [node name="WeaponPanel" type="Panel"]
 custom_minimum_size = Vector2(228, 228)
@@ -43,3 +54,34 @@ layout_mode = 2
 
 [node name="WeaponSlot5" parent="NextWeaponContainer" instance=ExtResource("2_auukh")]
 layout_mode = 2
+
+[node name="PausedTitle" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -228.0
+offset_top = -58.000008
+offset_bottom = -2.0000076
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_cuog3")
+
+[node name="Label" type="Label" parent="PausedTitle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -63.0
+offset_top = -33.5
+offset_right = 63.0
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_cuog3")
+theme_override_font_sizes/font_size = 35
+text = "Next weapon"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true

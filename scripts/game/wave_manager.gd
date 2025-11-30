@@ -91,7 +91,7 @@ func spawn_type()->void:
 			mobs_spawned_per_round -= 1
 			spawn_timer.start()
 			await spawn_timer.timeout
-			update_info.emit("Enemies left : %d | Current wave : %d" %[enemies_to_kill,wave_displayer])
+			update_info.emit("Enemies left : %d | Current wave : %d | Kills : %d" %[enemies_to_kill,wave_displayer,Global.kills])
 
 func _damaged_enemy()->void:
 	enemy_hit.emit(false)
@@ -99,6 +99,7 @@ func _damaged_enemy()->void:
 func _dead_enemy()->void:
 	enemy_hit.emit(true)
 	enemies_to_kill -= 1
-	update_info.emit("Enemies left : %d | Current wave : %d" %[enemies_to_kill,wave_displayer])
+	Global.kills += 1
+	update_info.emit("Enemies left : %d | Current wave : %d | Kills : %d" %[enemies_to_kill,wave_displayer,Global.kills])
 	if enemies_to_kill == 0:
 		position_to_next_wave()

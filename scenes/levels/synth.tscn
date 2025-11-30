@@ -48,7 +48,7 @@ shader_parameter/star_radius = 0.19999999925492
 shader_parameter/star_density = 20.0000002905734
 shader_parameter/star_randomness = 1.0
 shader_parameter/star_seed = Vector2(0, 0)
-shader_parameter/grid_enabled = true
+shader_parameter/grid_enabled = false
 shader_parameter/grid_color = Color(0.8156863, 0.5568628, 0.91764706, 1)
 shader_parameter/grid_depth = 1.0
 shader_parameter/grid_spacing = 1.0
@@ -79,12 +79,10 @@ sky_material = SubResource("ShaderMaterial_iyx0m")
 background_mode = 2
 sky = SubResource("Sky_74lek")
 tonemap_exposure = 1.85
-glow_enabled = true
 glow_levels/3 = 0.0
 glow_levels/4 = 0.05
 glow_levels/5 = 0.0
 glow_blend_mode = 1
-adjustment_enabled = true
 adjustment_color_correction = ExtResource("1_iyx0m")
 
 [node name="Synth" type="Node3D"]

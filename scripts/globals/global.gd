@@ -16,11 +16,11 @@ var stats : Dictionary[String,float] = {
 	"Quantity" : 1.0,
 }
 
-var level : int = 1
+var level : int = 40
 var experience : float = 0
 var experience_total : float = 0
 var experience_required : float = get_required_exp(level + 1)
-var skill_points : int = 1
+var skill_points : int = 110
 
 var sens : float = 5
 
@@ -54,7 +54,7 @@ func reset_stats()->void:
 	experience  = 0
 	experience_total  = 0
 	experience_required = get_required_exp(level + 1)
-	
+	kills = 0
 	for i in stats:
 		stats[i] = 1.0
 

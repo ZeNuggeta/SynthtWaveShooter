@@ -22,6 +22,7 @@ Global="*res://scripts/globals/global.gd"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 LoadingScreen="*res://scenes/menu/loading_screen.tscn"
 NumberEffectManager="*res://scripts/globals/number_effect_manager.gd"
+Saveload="*res://scripts/globals/saveload.gd"
 
 [debug]
 
