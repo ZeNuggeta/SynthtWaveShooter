@@ -1,7 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://dm3gqheyx1prf"]
+[gd_scene load_steps=26 format=3 uid="uid://dm3gqheyx1prf"]
 
 [ext_resource type="Shader" uid="uid://d4kldxp6gw87k" path="res://shaders/vaporsky.gdshader" id="1_bl13t"]
-[ext_resource type="CompressedTexture3D" uid="uid://djcwtynegcnfa" path="res://textures/SynthLut.png" id="1_iyx0m"]
 [ext_resource type="Script" uid="uid://cscusk7vt5xeh" path="res://scripts/game/wave.gd" id="2_qybld"]
 [ext_resource type="PackedScene" uid="uid://bbt8hpm5dk2eg" path="res://assets/maps/map1.blend" id="3_iyx0m"]
 [ext_resource type="PackedScene" uid="uid://bh5744ekuh3sn" path="res://scenes/enemies/bot.tscn" id="3_rdm47"]
@@ -13,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://12p40tnpon77" path="res://scenes/wave_manager.tscn" id="6_tpxsr"]
 [ext_resource type="PackedScene" uid="uid://cb0lyoi4q0ry3" path="res://scenes/audio_manager.tscn" id="7_8htgp"]
 [ext_resource type="PackedScene" uid="uid://c1tf8cctydqyh" path="res://scenes/enemies/flyinghead.tscn" id="7_l1yhp"]
+[ext_resource type="Texture2D" uid="uid://576g6ey71kcy" path="res://textures/glow.png" id="12_5g75k"]
 
 [sub_resource type="Resource" id="Resource_dp3eg"]
 script = ExtResource("2_qybld")
@@ -51,8 +51,8 @@ metadata/_custom_type_script = "uid://cscusk7vt5xeh"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iyx0m"]
 shader = ExtResource("1_bl13t")
-shader_parameter/sky_color = Color(0.09411765, 0.09803922, 0.09411765, 1)
-shader_parameter/sky_horizon_color = Color(0.57254905, 0, 0.99215686, 1)
+shader_parameter/sky_color = Color(0.035858154, 0.07954426, 0.1953125, 1)
+shader_parameter/sky_horizon_color = Color(0, 0.8359375, 1, 1)
 shader_parameter/sky_horizon_decay = 3.0
 shader_parameter/ground_color = Color(0.09411765, 0.09803922, 0.09411765, 1)
 shader_parameter/ground_horizon_color = Color(0.57254905, 0, 0.99215686, 1)
@@ -74,12 +74,12 @@ shader_parameter/grid_max_distance_fade = 0.3
 shader_parameter/grid_energy = 1.0
 shader_parameter/sun_radius = 10.0
 shader_parameter/sun_smoothing = 0.35
-shader_parameter/sun_glow_color = Color(0.5176471, 0.39215687, 0.6, 1)
-shader_parameter/sun_glow_radius = 30.0
-shader_parameter/sun_glow_intensity = 0.5
+shader_parameter/sun_glow_color = Color(0.9607843, 0.34901965, 0.6357843, 1)
+shader_parameter/sun_glow_radius = 19.70000027865244
+shader_parameter/sun_glow_intensity = 0.25999999418848
 shader_parameter/sun_gradient_enabled = true
-shader_parameter/sun_color_1 = Color(1, 1, 1, 1)
-shader_parameter/sun_color_2 = Color(1, 0, 0, 1)
+shader_parameter/sun_color_1 = Color(1, 0.7734375, 0, 1)
+shader_parameter/sun_color_2 = Color(1, 0, 0.3515625, 1)
 shader_parameter/sun_gradient_pos_frac = 0.6
 shader_parameter/sun_gradient_span_frac = 0.8
 shader_parameter/sun_banding_enabled = true
@@ -94,12 +94,45 @@ sky_material = SubResource("ShaderMaterial_iyx0m")
 [sub_resource type="Environment" id="Environment_iyx0m"]
 background_mode = 2
 sky = SubResource("Sky_74lek")
-tonemap_exposure = 1.85
-glow_levels/3 = 0.0
-glow_levels/4 = 0.05
+tonemap_mode = 2
+glow_levels/2 = 0.05
+glow_levels/3 = 0.1
 glow_levels/5 = 0.0
-glow_blend_mode = 1
-adjustment_color_correction = ExtResource("1_iyx0m")
+glow_intensity = 0.0
+glow_blend_mode = 0
+adjustment_enabled = true
+adjustment_contrast = 1.1
+adjustment_saturation = 1.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5g75k"]
+render_priority = 1
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 1, 0.8828125, 1)
+grow = true
+grow_amount = 1.0
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+metadata/_stencil_owned = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ymyfo"]
+next_pass = SubResource("StandardMaterial3D_5g75k")
+albedo_color = Color(0, 0.1796875, 1, 1)
+metallic_specular = 0.0
+emission_enabled = true
+emission = Color(0, 1, 1, 1)
+emission_energy_multiplier = 5.0
+emission_operator = 1
+emission_texture = ExtResource("12_5g75k")
+uv1_scale = Vector3(0.05, 0.05, 0.05)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 150.0
+texture_filter = 2
+stencil_mode = 1
+stencil_flags = 2
+stencil_color = Color(0, 1, 0.8828125, 1)
+stencil_outline_thickness = 1.0
 
 [node name="Synth" type="Node3D"]
 
@@ -115,12 +148,15 @@ wave_manager = NodePath("../WaveManager")
 [node name="Envi" type="Node3D" parent="."]
 
 [node name="Sun" type="DirectionalLight3D" parent="Envi"]
-transform = Transform3D(1, 0, 0, 0, 0.97703445, 0.21308145, 0, -0.21308145, 0.97703445, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9761296, 0.21718922, 0, -0.21718922, 0.9761296, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Envi"]
 environment = SubResource("Environment_iyx0m")
 
 [node name="map1" parent="Envi" instance=ExtResource("3_iyx0m")]
+
+[node name="Mountain" parent="Envi/map1" index="3"]
+material_override = SubResource("StandardMaterial3D_ymyfo")
 
 [node name="Player" parent="." instance=ExtResource("4_6mibg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

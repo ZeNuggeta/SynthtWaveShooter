@@ -7,6 +7,9 @@ const DEFAULT_HEIGHT : float = 0.5
 @export_group("Reference")
 @export var component_mouse_capture : MouseCaptureComponent
 @export var camera : Camera3D 
+@export var animation_player: AnimationPlayer 
+@export var death_sfx: AudioStreamPlayer
+
 @export_group("Camera Settings")
 @export_group("Camera Tilt")
 @export_range(-90,-60) var tilt_lower_limits : int = -90
@@ -16,10 +19,11 @@ const DEFAULT_HEIGHT : float = 0.5
 @export var crouch_speed : float = 5.0
 
 var _rotation : Vector3
+var is_dead : bool = false
 
 func _process(_delta: float) -> void:
+	if is_dead:return
 	update_camera_rotation(component_mouse_capture._mouse_input)
-	
 
 func update_camera_rotation(input:Vector2)->void:
 	_rotation.x += input.y
@@ -37,3 +41,7 @@ func update_camera_rotation(input:Vector2)->void:
 func update_camera_height(delta:float,direction:int)->void:
 	if position.y >= crouch_offset and position.y <= DEFAULT_HEIGHT:
 		position.y = clampf(position.y +   (crouch_speed *direction)* delta,crouch_offset,DEFAULT_HEIGHT)
+
+func dead()->void:
+	animation_player.play("death")
+	death_sfx.play()

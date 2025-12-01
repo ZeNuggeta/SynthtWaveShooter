@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dhsshdyntgwh" path="res://resources/Demolisher/Demolisher.png" id="1_icasr"]
 [ext_resource type="Script" uid="uid://b2bsym4r5yr41" path="res://scripts/weapons/weapon.gd" id="2_nqsfe"]
-[ext_resource type="Resource" uid="uid://dwv7o1b0awtsm" path="res://resources/HuntRifle/HuntRifle.tres" id="3_icasr"]
+[ext_resource type="Resource" uid="uid://dwv7o1b0awtsm" path="res://resources/ManHunter/ManHunter.tres" id="3_icasr"]
 [ext_resource type="PackedScene" uid="uid://drj1htobil8g7" path="res://resources/Demolisher/DemolisherScene.tscn" id="3_nqsfe"]
 [ext_resource type="AudioStream" uid="uid://54modon3v2jx" path="res://resources/Demolisher/demolisher_reload.sfxr" id="4_02xcw"]
 [ext_resource type="Resource" uid="uid://cbbeiehjf7yeg" path="res://resources/Project05/Project05.tres" id="4_d330g"]

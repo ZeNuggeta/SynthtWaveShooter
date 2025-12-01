@@ -16,8 +16,6 @@ metadata/_custom_type_script = "uid://d1eo3unyiu8dk"
 stats = SubResource("Resource_ad3fb")
 mesh = NodePath("Visuals/HeadModel/Armature/Skeleton3D/Head")
 anim = NodePath("Visuals/HeadModel/AnimationPlayer")
-speed = 1.5
-xp = 10
 
 [node name="Head" parent="Visuals" index="1"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.90000004, 0)

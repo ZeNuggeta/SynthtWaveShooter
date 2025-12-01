@@ -34,8 +34,14 @@ var sprint_modifier : float = 0.0
 var crouch_modifier : float = 0.0 
 var _speed : float = 0.0
 var curren_fall_velocity : float
+var is_dead : bool = false
+
+
+func _ready() -> void:
+	stats_handler.end_game.connect(death)
 
 func _physics_process(delta: float) -> void:
+	if is_dead:return
 	if is_on_floor():
 		step_handler.last_frame_on_floor = Engine.get_physics_frames()
 	else:
@@ -94,3 +100,9 @@ func jump()->void:
 
 func get_input_direction()->Vector2:
 	return _input_dir
+
+func death()->void:
+	is_dead = true
+	head.dead()
+	weapon_controller.current_weapon = null
+	weapon_controller.spawn_weapon_model()

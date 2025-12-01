@@ -18,17 +18,17 @@ var weapon_controller : WeaponController
 var stats_handler : StatsHandler
 
 var in_up : bool = false
+var game_ended : bool = false
 
 func _ready() -> void:
 	stats_handler = player.stats_handler
 	weapon_controller = player.weapon_controller
 	weapon_panel.weapon_controller = weapon_controller
 	
-	vhs.visible = Global.vhs
-	
-	blur.hide()
+
 	
 	stats_handler.health_changed.connect(hud.update_health)
+	stats_handler.end_game.connect(end_game)
 	wave_manager.update_info.connect(hud.update_info)
 	weapon_controller.update_ammo.connect(hud.update_ammo)
 	
@@ -39,14 +39,19 @@ func _ready() -> void:
 	Global.update_powerups.connect(power_panel.update_power_ups)
 	
 	power_panel.set_available(available_upgrades)
-
+	
+	
+	vhs.visible = Global.vhs
+	blur.hide()
+	
 
 func _input(event: InputEvent) -> void:
+	if game_ended:return
+	
 	if event.is_action_pressed("upgrade_tab") and !pause.visible or (event.is_action_pressed("pause") and in_up) :
 		_choose_power_up_menu()
 		weapon_panel.update_next_weapon()
 	elif event.is_action_pressed("pause") and !in_up:
-		
 		pause.pause()
 		vhs.visible = Global.vhs
 
@@ -64,3 +69,8 @@ func _choose_power_up_menu()->void:
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
+func end_game()->void:
+	game_ended = true
+	await get_tree().create_timer(2.0).timeout
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	LoadingScreen.start_loading("uid://003381n8cpva")

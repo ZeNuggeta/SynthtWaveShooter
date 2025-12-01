@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://d0e0i6ystm75a"
+path="res://.godot/imported/manhunter_shoot.sfxr-6fe01ca6ae17e5f049be582280e1a7bb.sample"
+
+[deps]
+
+source_file="res://resources/ManHunter/manhunter_shoot.sfxr"
+dest_files=["res://.godot/imported/manhunter_shoot.sfxr-6fe01ca6ae17e5f049be582280e1a7bb.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

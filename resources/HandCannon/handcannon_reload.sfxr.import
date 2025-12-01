@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://cv1kmw8pxwebm"
+path="res://.godot/imported/handcannon_reload.sfxr-0cd2b5dce3c8b1ae568c39ea579604b5.sample"
+
+[deps]
+
+source_file="res://resources/HandCannon/handcannon_reload.sfxr"
+dest_files=["res://.godot/imported/handcannon_reload.sfxr-0cd2b5dce3c8b1ae568c39ea579604b5.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

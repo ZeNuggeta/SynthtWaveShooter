@@ -33,6 +33,8 @@ const CHROME = preload("uid://bps4j05t72kiv")
 @onready var body_hurt_box: HurtBox = $Visuals/BodyHurtBox
 @onready var muzzle: Marker3D = $Visuals/Muzzle
 @onready var attack_timer: Timer = $AttackTimer
+@onready var spawn_partical: GPUParticles3D = $SpawnPartical
+@onready var spawn_sound: AudioStreamPlayer3D = $SpawnSound
 
 @onready var current_scene : Node3D = get_tree().current_scene.get_node_or_null("Pool")
 @onready var shader : ShaderMaterial = ShaderMaterial.new()
@@ -55,15 +57,18 @@ func _ready() -> void:
 	head_hurt_box.took_damage.connect(take_damage)
 	body_hurt_box.hurt.connect(take_explosion_damage)
 	head_hurt_box.hurt.connect(take_explosion_damage)
-	
-	
 	shader.shader = CHROME
 	mesh.set_surface_override_material(0,shader)
 	base_mat = mesh.get_surface_override_material(0)
+	spawn_partical.emitting = true
+	spawn_sound.play()
+
 
 func _physics_process(delta: float) -> void:
 	if !player:return
 	if _is_dead:return
+	
+	
 	
 	time_elapsed += delta
 	if time_elapsed >= UPDATE_INTERVAL:
@@ -83,11 +88,9 @@ func _physics_process(delta: float) -> void:
 		if ranged and !attack_timer.time_left:
 			anim.play('attack')
 			attack_timer.start()
-		
 	else:
 		attack_timer.stop()
 		anim.play('walk')
-		#global_position += vel * speed * delta
 		move_and_slide()
 	
 	if soft_collision.is_colliding():

@@ -21,7 +21,9 @@ func _on_resume_pressed() -> void:
 
 func _on_main_menu_pressed() -> void:
 	get_tree().paused = false
-	LoadingScreen.start_loading("uid://dlh5mphjdwpjg")
+	AudioServer.set_bus_effect_enabled(1,0,false)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	LoadingScreen.start_loading("uid://003381n8cpva")
 
 
 func _on_options_pressed() -> void:

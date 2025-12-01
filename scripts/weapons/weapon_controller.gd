@@ -4,6 +4,7 @@ class_name WeaponController
 signal update_ammo
 
 const BULLET_TRACER : PackedScene = preload("res://scenes/bullet_tracer.tscn")
+const GUN_PALETTE = preload("uid://cudsgkwaevwtc")
 
 @onready var current_scene : Node3D = get_tree().current_scene.get_node_or_null("Pool")
 
@@ -69,6 +70,7 @@ func _process(delta: float) -> void:
 
 
 func spawn_weapon_model()-> void:
+	if !current_weapon:return
 	if current_weapon_model:
 		current_weapon_model.queue_free()
 	
@@ -83,6 +85,7 @@ func spawn_weapon_model()-> void:
 		max_ammo = current_weapon.max_ammo
 		ammo = max_ammo
 		update_magsize()
+		apply_palette(current_weapon_model)
 		def_weapon_holder_pos = current_weapon_model.position
 
 func reload()->void:
@@ -116,6 +119,7 @@ func shoot()->void:
 		if target is HurtBox:
 			target.take_damage(current_weapon.damage * Global.stats["Damage"])
 			ParticalPool.spawn_partical(point,current_scene)
+		
 	
 	ammo -= 1
 	update_ammo.emit(ammo,max_ammo)
@@ -179,3 +183,13 @@ func weapon_bob(vel : float, delta:float)->void:
 		else:
 			current_weapon_model.position.y = lerp(current_weapon_model.position.y, def_weapon_holder_pos.y, 10 * delta)
 			current_weapon_model.position.x = lerp(current_weapon_model.position.x, def_weapon_holder_pos.x, 10 * delta)
+
+func apply_palette(node3d : Node3D)->void:
+	var all_mesh_instances : Array[Node] = node3d.find_children("*", "MeshInstance3D")
+	if node3d is MeshInstance3D:
+		all_mesh_instances.push_back(node3d)
+	for mesh_instance in all_mesh_instances:
+		var mesh : Mesh = mesh_instance.mesh
+		mesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		for surface_idx in mesh.get_surface_count():
+			mesh.surface_set_material(surface_idx, GUN_PALETTE)

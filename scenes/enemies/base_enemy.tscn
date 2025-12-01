@@ -1,10 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://ccrk55ebba6wa"]
+[gd_scene load_steps=20 format=3 uid="uid://ccrk55ebba6wa"]
 
 [ext_resource type="Script" uid="uid://0xiixl1wd3f6" path="res://scripts/enemy/base_enemy.gd" id="1_n1jr3"]
 [ext_resource type="Script" uid="uid://d1eo3unyiu8dk" path="res://scripts/player/stats.gd" id="2_2kb2m"]
 [ext_resource type="Script" uid="uid://doa76srsmuent" path="res://scripts/hit_hurt/hit_box.gd" id="2_sw3va"]
 [ext_resource type="Script" uid="uid://bnpjxgerfin32" path="res://scripts/enemy/soft_collision.gd" id="4_kegi0"]
+[ext_resource type="ArrayMesh" uid="uid://dvpli7amlo6uo" path="res://assets/props/cylindre.obj" id="6_2t7ph"]
+[ext_resource type="Shader" uid="uid://cc37e8j33lyuv" path="res://shaders/aura.tres" id="6_n2ebm"]
 [ext_resource type="Script" uid="uid://3tcow7oyiab4" path="res://scripts/hit_hurt/hurt_box.gd" id="7_rffmh"]
+[ext_resource type="AudioStream" uid="uid://iirln3bf6ijd" path="res://assets/audio/enemy_spawn.sfxr" id="8_i1su5"]
 
 [sub_resource type="Resource" id="Resource_kegi0"]
 resource_local_to_scene = true
@@ -25,6 +28,27 @@ radius = 0.25
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rffmh"]
 radius = 0.31640625
 height = 1.4311523
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i1su5"]
+render_priority = 0
+shader = ExtResource("6_n2ebm")
+
+[sub_resource type="Curve" id="Curve_n2ebm"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.086065575, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_i1su5"]
+curve = SubResource("Curve_n2ebm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n2ebm"]
+gravity = Vector3(0, 0, 0)
+color = Color(0.512, 1.9078126, 2.454, 1)
+alpha_curve = SubResource("CurveTexture_i1su5")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_i1su5"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("8_i1su5")
 
 [node name="BaseEnemy" type="CharacterBody3D" node_paths=PackedStringArray("visual")]
 collision_layer = 4
@@ -92,6 +116,19 @@ shape = SubResource("CapsuleShape3D_rffmh")
 
 [node name="Muzzle" type="Marker3D" parent="Visuals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.30309248, 0.70615816, -0.89693755)
+
+[node name="SpawnPartical" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+material_override = SubResource("ShaderMaterial_i1su5")
+cast_shadow = 0
+emitting = false
+amount = 1
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_n2ebm")
+draw_pass_1 = ExtResource("6_2t7ph")
+
+[node name="SpawnSound" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_i1su5")
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true

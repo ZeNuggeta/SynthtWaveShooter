@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://ciliu26m54tch"]
+
+[ext_resource type="Texture2D" uid="uid://unjjja5ed2dx" path="res://resources/HandCannon/HandCannon.png" id="1_m0n7u"]
+[ext_resource type="Script" uid="uid://b2bsym4r5yr41" path="res://scripts/weapons/weapon.gd" id="2_m0n7u"]
+[ext_resource type="PackedScene" uid="uid://ciw6scf3q11e3" path="res://resources/HandCannon/HandCannonScene.tscn" id="3_55iyo"]
+[ext_resource type="AudioStream" uid="uid://cv1kmw8pxwebm" path="res://resources/HandCannon/handcannon_reload.sfxr" id="3_ktk1w"]
+[ext_resource type="AudioStream" uid="uid://b8ge7gntfbpmb" path="res://resources/HandCannon/handcannon_shoot.sfxr" id="4_vnnc6"]
+
+[resource]
+script = ExtResource("2_m0n7u")
+weapon_name = "HandCannon"
+weapon_type = 1
+damage = 25.0
+max_ammo = 15
+level_to_unlock = 33
+icon = ExtResource("1_m0n7u")
+weapon_scene = ExtResource("3_55iyo")
+shoot_sound = ExtResource("4_vnnc6")
+reload_sound = ExtResource("3_ktk1w")
+metadata/_custom_type_script = "uid://b2bsym4r5yr41"

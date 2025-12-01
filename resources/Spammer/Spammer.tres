@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=7 format=3 uid="uid://dhd5qptv2ncpr"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=8 format=3 uid="uid://dhd5qptv2ncpr"]
 
 [ext_resource type="Texture2D" uid="uid://b0pxco45uo4k1" path="res://resources/Spammer/Spammer.png" id="1_tin1l"]
 [ext_resource type="Script" uid="uid://b2bsym4r5yr41" path="res://scripts/weapons/weapon.gd" id="2_4ikjk"]
 [ext_resource type="PackedScene" uid="uid://1idti1sqmvqr" path="res://resources/Spammer/SpammerScene.tscn" id="3_4ikjk"]
 [ext_resource type="AudioStream" uid="uid://chir5h48dtiaf" path="res://resources/Spammer/spammer_reload.sfxr" id="3_tdihm"]
 [ext_resource type="Resource" uid="uid://c6f2pi54tq8j8" path="res://resources/Hasty/Hasty.tres" id="3_tin1l"]
+[ext_resource type="Resource" uid="uid://b1k0g8uaeyjfx" path="res://resources/Persistent/Persistent.tres" id="4_q1eqc"]
 [ext_resource type="AudioStream" uid="uid://pp0ab2yeiybp" path="res://resources/Spammer/spammer_shoot.sfxr" id="4_tin1l"]
 
 [resource]
@@ -13,7 +14,7 @@ weapon_name = "Spammer"
 weapon_type = 1
 damage = 4.0
 max_ammo = 25
-next_weapons = Array[ExtResource("2_4ikjk")]([ExtResource("3_tin1l")])
+next_weapons = Array[ExtResource("2_4ikjk")]([ExtResource("3_tin1l"), ExtResource("4_q1eqc")])
 icon = ExtResource("1_tin1l")
 weapon_scene = ExtResource("3_4ikjk")
 shoot_sound = ExtResource("4_tin1l")

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://b1k0g8uaeyjfx"]
+
+[ext_resource type="Texture2D" uid="uid://ql2djpwyrdip" path="res://resources/Persistent/Persistent.png" id="1_0e44b"]
+[ext_resource type="Script" uid="uid://b2bsym4r5yr41" path="res://scripts/weapons/weapon.gd" id="2_n680o"]
+[ext_resource type="AudioStream" uid="uid://byflsb0pof0f5" path="res://resources/Persistent/persistent_reload.sfxr" id="3_0e44b"]
+[ext_resource type="PackedScene" uid="uid://jkuvml01xvql" path="res://resources/Persistent/PersistentScene.tscn" id="3_n680o"]
+[ext_resource type="AudioStream" uid="uid://bob53s1dd44yh" path="res://resources/Persistent/persistent_shoot.sfxr" id="4_h2qai"]
+
+[resource]
+script = ExtResource("2_n680o")
+weapon_name = "Persistent"
+weapon_type = 1
+damage = 8.0
+max_ammo = 90
+level_to_unlock = 33
+icon = ExtResource("1_0e44b")
+weapon_scene = ExtResource("3_n680o")
+shoot_sound = ExtResource("4_h2qai")
+reload_sound = ExtResource("3_0e44b")
+metadata/_custom_type_script = "uid://b2bsym4r5yr41"

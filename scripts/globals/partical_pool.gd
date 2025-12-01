@@ -1,6 +1,6 @@
 class_name ParticalPool
 
-const MAX_PARTICALS : int = 2
+const MAX_PARTICALS : int = 10
 static var partical_pool : Array = []
 
 static func spawn_partical(global_pos:Vector3,parent:Node3D)->void:

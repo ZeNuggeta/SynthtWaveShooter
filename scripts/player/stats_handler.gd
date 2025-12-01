@@ -2,6 +2,7 @@ extends Node
 class_name StatsHandler
 
 signal health_changed(value:int)
+signal end_game
 
 @export var stats : Stats
 @export var hurt_box: HurtBox
@@ -44,7 +45,7 @@ func _update_health()->void:
 	health_changed.emit(health,max_health)
 
 func _take_hit(other_hit:HitBox) -> void:
-	if _stuned: return
+	if _stuned or stats.health <= 0: return
 	if other_hit.is_in_group("not_hurt"):return
 	
 	health -= other_hit.damage
@@ -66,8 +67,7 @@ func _take_hit(other_hit:HitBox) -> void:
 	hurt_box.set_deferred("monitoring",true)
 
 func _player_dead() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	LoadingScreen.start_loading("uid://003381n8cpva")
+	end_game.emit()
 
 
 func _on_regen_timer_timeout() -> void:

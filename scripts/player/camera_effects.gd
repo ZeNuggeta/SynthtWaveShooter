@@ -20,7 +20,7 @@ class_name CameraEffects
 @export_subgroup("Damage Kick")
 @export var damage_time : float = 0.3
 @export_subgroup("Weapon Kick")
-@export var weapon_decay : float = 0.45
+@export var weapon_decay : float = 0.2
 @export_subgroup("HeadBob")
 @export_range(0.0,0.1,0.001) var bob_pitch : float = 0.05
 @export_range(0.0,0.1,0.001) var bob_roll : float = 0.025
@@ -127,10 +127,9 @@ func add_damage_kick(pitch:float,roll:float,source:Vector3)->void:
 	_damage_timer = damage_time
 	
 func add_weapon_kick(pitch:float,yaw:float,roll:float)->void:
-	_weapon_kick_angles.x += deg_to_rad(pitch)
+	_weapon_kick_angles.x += deg_to_rad(pitch/2)
 	_weapon_kick_angles.y += deg_to_rad(randf_range(-yaw,yaw))
 	_weapon_kick_angles.z += deg_to_rad(randf_range(-roll,roll))
-	_weapon_kick_angles.x = clampf(_weapon_kick_angles.x,-PI/4,PI/4)
 
 func add_screen_shake(amount:float,seconds:float)->void:
 	if _screen_shake_tween:

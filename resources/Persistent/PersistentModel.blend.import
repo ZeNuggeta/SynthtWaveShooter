@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cr0rkyjcpp50b"
-path="res://.godot/imported/HuntRifleModel.blend-0498aa1873f9e9b84fe349fe630380bf.scn"
+uid="uid://pm6w7t2d5743"
+path="res://.godot/imported/PersistentModel.blend-7eb9b87779cdfea6973b4d401b931d4f.scn"
 
 [deps]
 
-source_file="res://resources/HuntRifle/HuntRifleModel.blend"
-dest_files=["res://.godot/imported/HuntRifleModel.blend-0498aa1873f9e9b84fe349fe630380bf.scn"]
+source_file="res://resources/Persistent/PersistentModel.blend"
+dest_files=["res://.godot/imported/PersistentModel.blend-7eb9b87779cdfea6973b4d401b931d4f.scn"]
 
 [params]
 
@@ -37,15 +37,7 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={
-"materials": {
-"texture": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://textures/mats/GunPalette.tres",
-"use_external/path": "uid://cudsgkwaevwtc"
-}
-}
-}
+_subresources={}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true

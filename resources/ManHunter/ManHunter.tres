@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://dwv7o1b0awtsm"]
+
+[ext_resource type="Texture2D" uid="uid://b3undt8pt4v6w" path="res://resources/ManHunter/ManHunter.png" id="1_call2"]
+[ext_resource type="Script" uid="uid://b2bsym4r5yr41" path="res://scripts/weapons/weapon.gd" id="2_elu8r"]
+[ext_resource type="AudioStream" uid="uid://b1ynwajjxhnbe" path="res://resources/ManHunter/manhunter_reload.sfxr" id="3_p3jiw"]
+[ext_resource type="AudioStream" uid="uid://d0e0i6ystm75a" path="res://resources/ManHunter/manhunter_shoot.sfxr" id="4_36116"]
+[ext_resource type="PackedScene" uid="uid://csi4bj4g75d6a" path="res://resources/ManHunter/ManHunterScene.tscn" id="5_3eee7"]
+
+[resource]
+script = ExtResource("2_elu8r")
+weapon_name = "ManHunter"
+damage = 26.0
+max_ammo = 5
+level_to_unlock = 33
+icon = ExtResource("1_call2")
+weapon_scene = ExtResource("5_3eee7")
+shoot_sound = ExtResource("4_36116")
+reload_sound = ExtResource("3_p3jiw")
+metadata/_custom_type_script = "uid://b2bsym4r5yr41"

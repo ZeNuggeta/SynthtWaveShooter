@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://bob53s1dd44yh"
+path="res://.godot/imported/persistent_shoot.sfxr-56345d9dfd5adc695bd9b917773a388f.sample"
+
+[deps]
+
+source_file="res://resources/Persistent/persistent_shoot.sfxr"
+dest_files=["res://.godot/imported/persistent_shoot.sfxr-56345d9dfd5adc695bd9b917773a388f.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

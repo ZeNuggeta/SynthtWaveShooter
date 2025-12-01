@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bhop26d66s581"]
+[gd_scene load_steps=35 format=3 uid="uid://bhop26d66s581"]
 
 [ext_resource type="Script" uid="uid://bnorctsg14k6r" path="res://scripts/player/mouse_capture_component.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bul1vpdae7den" path="res://scripts/player/player.gd" id="1_g2els"]
@@ -24,10 +24,72 @@
 [ext_resource type="Script" uid="uid://3tcow7oyiab4" path="res://scripts/hit_hurt/hurt_box.gd" id="21_i4ail"]
 [ext_resource type="Script" uid="uid://jqxq4nbol7ps" path="res://scripts/weapons/weapon_controller.gd" id="22_ke2ow"]
 [ext_resource type="AudioStream" uid="uid://bw3dq0lfwsfdi" path="res://assets/audio/player_hurt.sfxr" id="25_ke2ow"]
+[ext_resource type="AudioStream" uid="uid://buwjialf8pdl1" path="res://assets/audio/player_death.sfxr" id="25_ujl30"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_60mlk"]
+
+[sub_resource type="Animation" id="Animation_ke2ow"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_l71n6"]
+resource_name = "death"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5666667, 2),
+"transitions": PackedFloat32Array(1, 1.7411021, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0.53421116, -1.3389089, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 2),
+"transitions": PackedFloat32Array(2.1435468, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.6718645), Vector3(0, 0, -0.6718645)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ke2ow"]
+_data = {
+&"RESET": SubResource("Animation_ke2ow"),
+&"death": SubResource("Animation_l71n6")
+}
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fulsm"]
 
@@ -56,17 +118,24 @@ shape = SubResource("CapsuleShape3D_u8vuu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("SphereShape3D_60mlk")
 
-[node name="Head" type="Node3D" parent="." node_paths=PackedStringArray("component_mouse_capture", "camera")]
+[node name="Head" type="Node3D" parent="." node_paths=PackedStringArray("component_mouse_capture", "camera", "animation_player", "death_sfx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("2_qhqgy")
 component_mouse_capture = NodePath("../Components/MouseCaptureComponent")
 camera = NodePath("Camera")
+animation_player = NodePath("AnimationPlayer")
+death_sfx = NodePath("../SFX/DeathSFX")
 
 [node name="Camera" type="Camera3D" parent="Head" node_paths=PackedStringArray("player")]
 cull_mask = 1048573
 fov = 86.0
 script = ExtResource("3_4r5pv")
 player = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head"]
+libraries = {
+&"": SubResource("AnimationLibrary_ke2ow")
+}
 
 [node name="CrouchCheck" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_fulsm")
@@ -231,6 +300,7 @@ script = ExtResource("22_ke2ow")
 player = NodePath("../..")
 weapon_holder = NodePath("../../Head/Camera")
 weapon_sfx = NodePath("../../SFX/WeaponSFX")
+weapon_sway_amount = 0.01
 weapon_rotation_amount = 0.01
 
 [node name="StairsAhead" type="RayCast3D" parent="."]
@@ -261,6 +331,9 @@ bus = &"SFX"
 [node name="WeaponSFX" type="AudioStreamPlayer" parent="SFX"]
 max_polyphony = 6
 bus = &"SFX"
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("25_ujl30")
 
 [connection signal="state_physics_processing" from="StateChart/Root/Mouvement/Grounded" to="StateMachine/Root/Mouvement/Grounded" method="_on_grounded_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Mouvement/Grounded/idle" to="StateMachine/Root/Mouvement/Grounded/Idle" method="_on_idle_state_physics_processing"]

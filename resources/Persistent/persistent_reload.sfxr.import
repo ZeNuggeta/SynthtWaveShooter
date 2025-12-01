@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://byflsb0pof0f5"
+path="res://.godot/imported/persistent_reload.sfxr-17e34263439171a5b82d5ae167add150.sample"
+
+[deps]
+
+source_file="res://resources/Persistent/persistent_reload.sfxr"
+dest_files=["res://.godot/imported/persistent_reload.sfxr-17e34263439171a5b82d5ae167add150.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

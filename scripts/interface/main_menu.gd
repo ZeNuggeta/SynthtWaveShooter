@@ -3,11 +3,14 @@ extends Control
 @onready var settings: Control = $Settings
 @onready var score_label: Label = $ScoreLabel
 
+
 func _ready() -> void:
 	Saveload._load()
 	Global.kills = Saveload.contents_to_save.kills
 	if Saveload.contents_to_save.kills > 0:
 		score_label.text = "Highscore : %d" %Saveload.contents_to_save.kills
+	else:
+		score_label.text = ""
 
 func _on_start_pressed() -> void:
 	Global.reset_stats()

@@ -5,17 +5,20 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_07li7"]
 albedo_color = Color(0, 0, 0, 1)
+metallic_specular = 1.0
+roughness = 0.0
 emission_enabled = true
-emission = Color(1, 0.83984375, 0.98644835, 1)
+emission = Color(0.875, 0.099121094, 0.5173683, 1)
 emission_operator = 1
 emission_texture = ExtResource("1_8wl7o")
 uv1_scale = Vector3(0.4, 0.4, 0.4)
 uv1_triplanar = true
+uv1_triplanar_sharpness = 150.0
 texture_filter = 2
 
 [resource]
 render_priority = 0
 next_pass = SubResource("StandardMaterial3D_07li7")
 shader = ExtResource("1_07li7")
-shader_parameter/outline_color = Color(1, 0.66015625, 0.819458, 1)
+shader_parameter/outline_color = Color(0.71484375, 0.08097839, 0.526665, 1)
 shader_parameter/outline_threshold = 0.2

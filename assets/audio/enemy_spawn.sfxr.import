@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://iirln3bf6ijd"
+path="res://.godot/imported/enemy_spawn.sfxr-5ed1b0cfd7b053cda1dc86d106ef3368.sample"
+
+[deps]
+
+source_file="res://assets/audio/enemy_spawn.sfxr"
+dest_files=["res://.godot/imported/enemy_spawn.sfxr-5ed1b0cfd7b053cda1dc86d106ef3368.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

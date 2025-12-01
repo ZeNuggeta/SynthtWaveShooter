@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cbdlkrok2didl"
-path="res://.godot/imported/G190Model.blend-924b6673a2bbca49e3a342573a104cfb.scn"
+uid="uid://ygg2ni043o6b"
+path="res://.godot/imported/HandCannonModel.blend-cb7dd15500d25da4736f2f73dff7a0f1.scn"
 
 [deps]
 
-source_file="res://resources/G190/G190Model.blend"
-dest_files=["res://.godot/imported/G190Model.blend-924b6673a2bbca49e3a342573a104cfb.scn"]
+source_file="res://resources/HandCannon/HandCannonModel.blend"
+dest_files=["res://.godot/imported/HandCannonModel.blend-cb7dd15500d25da4736f2f73dff7a0f1.scn"]
 
 [params]
 
@@ -37,15 +37,7 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={
-"materials": {
-"texture": {
-"use_external/enabled": false,
-"use_external/fallback_path": "res://textures/mats/GunPalette.tres",
-"use_external/path": "uid://cudsgkwaevwtc"
-}
-}
-}
+_subresources={}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true

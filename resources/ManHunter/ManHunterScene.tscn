@@ -1,13 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://csi4bj4g75d6a"]
 
-[ext_resource type="PackedScene" uid="uid://cr0rkyjcpp50b" path="res://resources/HuntRifle/HuntRifleModel.blend" id="1_1eagd"]
+[ext_resource type="PackedScene" uid="uid://cr0rkyjcpp50b" path="res://resources/ManHunter/ManHunterModel.blend" id="1_1eagd"]
 
 [sub_resource type="Animation" id="Animation_03djo"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HuntRifleModel/main:position")
+tracks/0/path = NodePath("ManHunterModel/main:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -19,7 +19,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HuntRifleModel/main:rotation")
+tracks/1/path = NodePath("ManHunterModel/main:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -31,7 +31,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("HuntRifleModel/main/bolt:position")
+tracks/2/path = NodePath("ManHunterModel/main/bolt:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -43,7 +43,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("HuntRifleModel/main/scope:position")
+tracks/3/path = NodePath("ManHunterModel/main/scope:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -60,7 +60,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HuntRifleModel/main/bolt:position")
+tracks/0/path = NodePath("ManHunterModel/main/bolt:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -72,7 +72,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HuntRifleModel/main/scope:position")
+tracks/1/path = NodePath("ManHunterModel/main/scope:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -84,7 +84,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("HuntRifleModel/main:rotation")
+tracks/2/path = NodePath("ManHunterModel/main:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -96,7 +96,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("HuntRifleModel/main:position")
+tracks/3/path = NodePath("ManHunterModel/main:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -113,7 +113,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HuntRifleModel/main:position")
+tracks/0/path = NodePath("ManHunterModel/main:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -125,7 +125,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HuntRifleModel/main:rotation")
+tracks/1/path = NodePath("ManHunterModel/main:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -142,21 +142,21 @@ _data = {
 &"shoot": SubResource("Animation_1eagd")
 }
 
-[node name="HuntRifleScene" type="Node3D"]
+[node name="ManHunterScene" type="Node3D"]
 
 [node name="Muzzle" type="Marker3D" parent="."]
 transform = Transform3D(0.9932276, -0.11618534, -3.5286533e-15, 0.11618534, 0.9932276, -4.1277324e-16, 3.5527137e-15, 0, 1, 0.48046434, -0.35183772, -2.0134687)
 
-[node name="HuntRifleModel" parent="." instance=ExtResource("1_1eagd")]
+[node name="ManHunterModel" parent="." instance=ExtResource("1_1eagd")]
 transform = Transform3D(0.9932276, -0.11618534, 0, 0.11618534, 0.9932276, 0, 0, 0, 1, 0.49347657, -0.44521344, -0.75998336)
 
-[node name="main" parent="HuntRifleModel" index="0"]
+[node name="main" parent="ManHunterModel" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 
-[node name="bolt" parent="HuntRifleModel/main" index="0"]
+[node name="bolt" parent="ManHunterModel/main" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 
-[node name="scope" parent="HuntRifleModel/main" index="1"]
+[node name="scope" parent="ManHunterModel/main" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
@@ -169,4 +169,4 @@ libraries = {
 &"": SubResource("AnimationLibrary_03djo")
 }
 
-[editable path="HuntRifleModel"]
+[editable path="ManHunterModel"]
