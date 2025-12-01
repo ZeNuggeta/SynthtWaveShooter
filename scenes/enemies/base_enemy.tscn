@@ -129,6 +129,7 @@ draw_pass_1 = ExtResource("6_2t7ph")
 
 [node name="SpawnSound" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_i1su5")
+bus = &"SFX"
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true

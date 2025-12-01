@@ -6,6 +6,7 @@ enum TYPES {SINGLE , AUTO , SHOTGUN , LAUNCHER}
 @export_group("Setup")
 @export var weapon_name : String = ""
 @export var weapon_type : TYPES = TYPES.SINGLE
+@export var penetration : int = 1
 @export var damage : float = 12
 @export var max_ammo : int = 12
 @export var level_to_unlock : int = 14

@@ -20,5 +20,5 @@ texture_filter = 2
 render_priority = 0
 next_pass = SubResource("StandardMaterial3D_07li7")
 shader = ExtResource("1_07li7")
-shader_parameter/outline_color = Color(0.71484375, 0.08097839, 0.526665, 1)
+shader_parameter/outline_color = Color(0.65234375, 0.13505554, 0.4987738, 1)
 shader_parameter/outline_threshold = 0.2
